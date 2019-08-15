@@ -16,7 +16,7 @@ DOCUMENTATION = '''
 module: qradar_offense_info
 short_description: Obtain information about one or many QRadar Offenses, with filter options
 description:
-  - This module allows to assign, protect, follow up, set status, and assign closing reason to QRadar Offenses
+  - This module allows to obtain information about one or many QRadar Offenses, with filter options
 version_added: "2.9"
 options:
   id:
@@ -169,19 +169,19 @@ def main():
         query_strs = []
 
         if module.params['status']:
-            query_strs.append('status={0}'.format(to_text(module.params['status'])))
+            query_strs.append(quote('status={0}'.format(to_text(module.params['status']))))
 
         if module.params['assigned_to']:
-            query_strs.append('assigned_to={0}'.format(module.params['assigned_to']))
+            query_strs.append(quote('assigned_to={0}'.format(module.params['assigned_to'])))
 
         if module.params['closing_reason_id']:
-            query_strs.append('closing_reason_id={0}'.format(module.params['closing_reason_id']))
+            query_strs.append(quote('closing_reason_id={0}'.format(module.params['closing_reason_id'])))
 
         if module.params['follow_up'] != None:
-            query_strs.append('follow_up={0}'.format(module.params['follow_up']))
+            query_strs.append(quote('follow_up={0}'.format(module.params['follow_up'])))
 
         if module.params['protected'] != None:
-            query_strs.append('protected={0}'.format(module.params['protected']))
+            query_strs.append(quote('protected={0}'.format(module.params['protected'])))
 
         if query_strs:
             offenses = qradar_request.get_by_path(
