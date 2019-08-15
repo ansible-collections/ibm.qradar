@@ -114,7 +114,7 @@ from ansible.module_utils._text import to_text
 from ansible.module_utils.urls import Request
 from ansible.module_utils.six.moves.urllib.parse import quote
 from ansible.module_utils.six.moves.urllib.error import HTTPError
-from ansible_collections.ansible_security.community.plugins.module_utils.qradar \
+from ansible_collections.ibm.qradar.plugins.module_utils.qradar \
     import QRadarRequest, find_dict_in_list, set_offense_values
 
 import copy
@@ -124,7 +124,7 @@ import json
 def main():
 
     argspec = dict(
-        id=dict(required=True, type='int'),
+        id=dict(required=False, type='int'),
         name=dict(required=False, type='str'),
         assigned_to=dict(required=False, type='str'),
         closing_reason=dict(required=False, type='str'),
@@ -144,9 +144,6 @@ def main():
 
     module = AnsibleModule(
         argument_spec=argspec,
-        #required_one_of=[
-        #    ('name', 'id',),
-        #],
         mutually_exclusive=[
             ('closing_reason', 'closing_reason_id',),
         ],
@@ -160,7 +157,7 @@ def main():
     )
 
     #if module.params['name']:
-    #    # FIXME - QUERY HERE BY NAME
+    #    # FIXME - QUERY HERE BY NAME NATIVELY VIA REST API (DOESN'T EXIST YET)
     #    found_offense = qradar_request.get_by_path('api/siem/offenses?filter={0}'.format(module.params['name']))
 
     set_offense_values(module, qradar_request)
@@ -169,7 +166,6 @@ def main():
         offenses = qradar_request.get_by_path('api/siem/offenses/{0}'.format(module.params['id']))
 
     else:
-
         query_strs = []
 
         if module.params['status']:
@@ -188,26 +184,23 @@ def main():
             query_strs.append('protected={0}'.format(module.params['protected']))
 
         if query_strs:
-            if module.check_mode:
-                module.exit_json(
-                    msg="A change would have been made but was not because of Check Mode.",
-                    changed=True
-                )
-
             offenses = qradar_request.get_by_path(
-                'api/siem/offenses/{0}?{1}'.format(module.params['id'], '&'.join(query_strs))
-            )
-            #FIXME - handle the scenario in which we can search by name and this isn't a required param anymore
-            module.exit_json(
-                msg="Successfully updated Offense ID: {0}".format(module.params['id']),
-                qradar_return_data=qradar_return_data,
-                changed=True
+                'api/siem/offenses?filter={0}'.format('&'.join(query_strs))
             )
         else:
-            module.exit_json(msg="No changes necessary. Nothing to do.", changed=False)
-    else:
-        #FIXME - handle the scenario in which we can search by name and this isn't a required param anymore
-        module.fail_json(msg='Unable to find Offense ID: {0}'.format(module.params['id']))
+            offenses = qradar_request.get_by_path('api/siem/offenses')
+
+        if module.params['name']:
+            named_offense = find_dict_in_list(offenses, 'description', module.params['name'])
+            if named_offense:
+                offenses = named_offense
+            else:
+                offenses = []
+
+        module.exit_json(
+            offenses=offenses,
+            changed=False
+        )
 
 if __name__ == '__main__':
     main()

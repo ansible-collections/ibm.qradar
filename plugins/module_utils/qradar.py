@@ -15,10 +15,20 @@ import json
 
 
 def find_dict_in_list(some_list, key, value):
+    text_type = False
+    try:
+        to_text(value)
+        text_type = True
+    except TypeError:
+        pass
     for some_dict in some_list:
         if key in some_dict:
-            if some_dict[key] == value:
-                return some_dict, some_list.index(some_dict)
+            if text_type:
+                if to_text(some_dict[key]).strip() == to_text(value).strip():
+                    return some_dict, some_list.index(some_dict)
+            else:
+                if some_dict[key] == value:
+                    return some_dict, some_list.index(some_dict)
     return None
 
 def set_offense_values(module, qradar_request):
