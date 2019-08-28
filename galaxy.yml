@@ -18,6 +18,7 @@ license:
 # list of keywords you want to associate the collection with for indexing/search systems
 tags:
   - security
+  - qradar
 # list of dependencies, other collections this collection requires to be installed for it to be usable
 #dependencies:
 
