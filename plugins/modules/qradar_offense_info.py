@@ -64,7 +64,7 @@ notes:
   - You may provide many filters and they will all be applied, except for C(id)
     as that will return only
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)
+author: "Ansible Security Automation Team (https://github.com/ansible-security)"
 '''
 
 

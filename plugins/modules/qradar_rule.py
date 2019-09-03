@@ -40,7 +40,7 @@ options:
     required: false
     type: str
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)
+author: "Ansible Security Automation Team (https://github.com/ansible-security)"
 '''
 
 

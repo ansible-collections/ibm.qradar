@@ -59,7 +59,7 @@ notes:
   - Requires one of C(name) or C(id) be provided
   - Only one of C(closing_reason) or C(closing_reason_id) can be provided
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)
+author: "Ansible Security Automation Team (https://github.com/ansible-security)"
 '''
 # FIXME - WOULD LIKE TO QUERY BY NAME BUT HOW TO ACCOMPLISH THAT IS NON-OBVIOUS
 # name:
