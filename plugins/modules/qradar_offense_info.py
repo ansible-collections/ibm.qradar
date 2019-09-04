@@ -5,13 +5,16 @@
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import absolute_import, division, print_function
+
 __metaclass__ = type
 
 
-ANSIBLE_METADATA = {'metadata_version': '1.1',
-                    'status': ['preview'],
-                    'supported_by': 'community'}
-DOCUMENTATION = '''
+ANSIBLE_METADATA = {
+    "metadata_version": "1.1",
+    "status": ["preview"],
+    "supported_by": "community",
+}
+DOCUMENTATION = """
 ---
 module: qradar_offense_info
 short_description: Obtain information about one or many QRadar Offenses, with filter options
@@ -65,11 +68,11 @@ notes:
     as that will return only
 
 author: "Ansible Security Automation Team (https://github.com/ansible-security)
-'''
+"""
 
 
 # FIXME - provide correct example here
-RETURN = '''
+RETURN = """
 offenses:
   description: Information
   returned: always
@@ -101,12 +104,11 @@ offenses:
           returned: always
           type: str
           sample: arp-ethers.service
-'''
+"""
 
 
-
-EXAMPLES = '''
-'''
+EXAMPLES = """
+"""
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils._text import to_text
@@ -114,8 +116,11 @@ from ansible.module_utils._text import to_text
 from ansible.module_utils.urls import Request
 from ansible.module_utils.six.moves.urllib.parse import quote
 from ansible.module_utils.six.moves.urllib.error import HTTPError
-from ansible_collections.ibm.qradar.plugins.module_utils.qradar \
-    import QRadarRequest, find_dict_in_list, set_offense_values
+from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
+    QRadarRequest,
+    find_dict_in_list,
+    set_offense_values,
+)
 
 import copy
 import json
@@ -124,83 +129,87 @@ import json
 def main():
 
     argspec = dict(
-        id=dict(required=False, type='int'),
-        name=dict(required=False, type='str'),
-        assigned_to=dict(required=False, type='str'),
-        closing_reason=dict(required=False, type='str'),
-        closing_reason_id=dict(required=False, type='int'),
-        follow_up=dict(required=False, type='bool', default=None),
-        protected=dict(required=False, type='bool', default=None),
+        id=dict(required=False, type="int"),
+        name=dict(required=False, type="str"),
+        assigned_to=dict(required=False, type="str"),
+        closing_reason=dict(required=False, type="str"),
+        closing_reason_id=dict(required=False, type="int"),
+        follow_up=dict(required=False, type="bool", default=None),
+        protected=dict(required=False, type="bool", default=None),
         status=dict(
             required=False,
-            choices=[
-                'open', 'OPEN',
-                'hidden', 'HIDDEN',
-                'closed', 'CLOSED'
-            ],
-            type='str'
+            choices=["open", "OPEN", "hidden", "HIDDEN", "closed", "CLOSED"],
+            type="str",
         ),
     )
 
     module = AnsibleModule(
         argument_spec=argspec,
-        mutually_exclusive=[
-            ('closing_reason', 'closing_reason_id',),
-        ],
-        supports_check_mode=True
+        mutually_exclusive=[("closing_reason", "closing_reason_id")],
+        supports_check_mode=True,
     )
 
     qradar_request = QRadarRequest(
         module,
         headers={"Content-Type": "application/json", "Version": "9.1"},
-        not_rest_data_keys=['name', 'id', 'assigned_to', 'closing_reason']
+        not_rest_data_keys=["name", "id", "assigned_to", "closing_reason"],
     )
 
-    #if module.params['name']:
+    # if module.params['name']:
     #    # FIXME - QUERY HERE BY NAME NATIVELY VIA REST API (DOESN'T EXIST YET)
     #    found_offense = qradar_request.get_by_path('api/siem/offenses?filter={0}'.format(module.params['name']))
 
     set_offense_values(module, qradar_request)
 
-    if module.params['id']:
-        offenses = qradar_request.get_by_path('api/siem/offenses/{0}'.format(module.params['id']))
+    if module.params["id"]:
+        offenses = qradar_request.get_by_path(
+            "api/siem/offenses/{0}".format(module.params["id"])
+        )
 
     else:
         query_strs = []
 
-        if module.params['status']:
-            query_strs.append(quote('status={0}'.format(to_text(module.params['status']))))
+        if module.params["status"]:
+            query_strs.append(
+                quote("status={0}".format(to_text(module.params["status"])))
+            )
 
-        if module.params['assigned_to']:
-            query_strs.append(quote('assigned_to={0}'.format(module.params['assigned_to'])))
+        if module.params["assigned_to"]:
+            query_strs.append(
+                quote("assigned_to={0}".format(module.params["assigned_to"]))
+            )
 
-        if module.params['closing_reason_id']:
-            query_strs.append(quote('closing_reason_id={0}'.format(module.params['closing_reason_id'])))
+        if module.params["closing_reason_id"]:
+            query_strs.append(
+                quote(
+                    "closing_reason_id={0}".format(module.params["closing_reason_id"])
+                )
+            )
 
-        if module.params['follow_up'] != None:
-            query_strs.append(quote('follow_up={0}'.format(module.params['follow_up'])))
+        if module.params["follow_up"] != None:
+            query_strs.append(quote("follow_up={0}".format(module.params["follow_up"])))
 
-        if module.params['protected'] != None:
-            query_strs.append(quote('protected={0}'.format(module.params['protected'])))
+        if module.params["protected"] != None:
+            query_strs.append(quote("protected={0}".format(module.params["protected"])))
 
         if query_strs:
             offenses = qradar_request.get_by_path(
-                'api/siem/offenses?filter={0}'.format('&'.join(query_strs))
+                "api/siem/offenses?filter={0}".format("&".join(query_strs))
             )
         else:
-            offenses = qradar_request.get_by_path('api/siem/offenses')
+            offenses = qradar_request.get_by_path("api/siem/offenses")
 
-        if module.params['name']:
-            named_offense = find_dict_in_list(offenses, 'description', module.params['name'])
+        if module.params["name"]:
+            named_offense = find_dict_in_list(
+                offenses, "description", module.params["name"]
+            )
             if named_offense:
                 offenses = named_offense
             else:
                 offenses = []
 
-        module.exit_json(
-            offenses=offenses,
-            changed=False
-        )
+        module.exit_json(offenses=offenses, changed=False)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

@@ -5,15 +5,18 @@
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import absolute_import, division, print_function
+
 __metaclass__ = type
 
 
-ANSIBLE_METADATA = {'metadata_version': '1.1',
-                    'status': ['preview'],
-                    'supported_by': 'community'}
+ANSIBLE_METADATA = {
+    "metadata_version": "1.1",
+    "status": ["preview"],
+    "supported_by": "community",
+}
 
 
-DOCUMENTATION = '''
+DOCUMENTATION = """
 ---
 module: qradar_deploy
 short_description: Trigger a qradar configuration deployment
@@ -34,10 +37,10 @@ notes:
   - This module does not support check mode because the QRadar REST API does not offer stateful inspection of configuration deployments
 
 author: "Ansible Security Automation Team (https://github.com/ansible-security)
-'''
+"""
 
-EXAMPLES = '''
-'''
+EXAMPLES = """
+"""
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils._text import to_text
@@ -49,37 +52,38 @@ from ansible_collections.ibm.qradar.plugins.module_utils.qradar import QRadarReq
 
 import json
 
+
 def main():
 
     argspec = dict(
-        type=dict(choices=['INCREMENTAL', 'FULL'], required=False, default='INCREMENTAL'),
+        type=dict(
+            choices=["INCREMENTAL", "FULL"], required=False, default="INCREMENTAL"
+        )
     )
 
-    module = AnsibleModule(
-        argument_spec=argspec,
-        supports_check_mode=False
-    )
+    module = AnsibleModule(argument_spec=argspec, supports_check_mode=False)
 
     qradar_request = QRadarRequest(
         module,
         headers={"Content-Type": "application/json", "Version": "9.1"},
-        not_rest_data_keys=['state', 'type_name', 'identifier']
+        not_rest_data_keys=["state", "type_name", "identifier"],
     )
 
-    qradar_return_data = qradar_request.post_by_path('api/staged_config/deploy_status')
+    qradar_return_data = qradar_request.post_by_path("api/staged_config/deploy_status")
 
-    if to_text("No changes to deploy") in to_text(qradar_return_data['message']):
+    if to_text("No changes to deploy") in to_text(qradar_return_data["message"]):
         module.exit_json(
             msg="No changes to deploy",
             qradar_return_data=qradar_return_data,
-            changed=False
+            changed=False,
         )
     else:
         module.exit_json(
-            msg="Successfully initiated {0} deployment.".format(module.params['type']),
+            msg="Successfully initiated {0} deployment.".format(module.params["type"]),
             qradar_return_data=qradar_return_data,
-            changed=True
+            changed=True,
         )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
