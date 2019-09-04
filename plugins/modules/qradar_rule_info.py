@@ -123,9 +123,6 @@ def main():
         if module.params["origin"]:
             query_strs.append(quote("origin={0}".format(module.params["origin"])))
 
-        import q
-
-        q.q(query_strs)
         if query_strs:
             rules = qradar_request.get_by_path(
                 "api/analytics/rules?filter={0}".format("&".join(query_strs))

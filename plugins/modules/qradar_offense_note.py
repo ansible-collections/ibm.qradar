@@ -22,7 +22,7 @@ description:
   - This module allows to create a QRadar Offense note
 version_added: "2.9"
 options:
-  offense_id:
+  id:
     description:
       - Offense ID to operate on
     required: true
@@ -91,7 +91,7 @@ def main():
 
     argspec = dict(
         #        state=dict(required=False, choices=["present", "absent"], type='str', default="present"),
-        offense_id=dict(required=True, type="int"),
+        id=dict(required=True, type="int"),
         note_text=dict(required=True, type="str"),
     )
 
@@ -100,7 +100,7 @@ def main():
     qradar_request = QRadarRequest(
         module,
         headers={"Content-Type": "application/json", "Version": "9.1"},
-        not_rest_data_keys=["state", "offense_id"],
+        not_rest_data_keys=["state", "id"],
     )
 
     # if module.params['name']:
@@ -110,7 +110,7 @@ def main():
 
     found_notes = qradar_request.get_by_path(
         "api/siem/offenses/{0}/notes?filter={1}".format(
-            module.params["offense_id"],
+            module.params["id"],
             quote('note_text="{0}"'.format(module.params["note_text"])),
         )
     )
@@ -132,8 +132,7 @@ def main():
 
             qradar_return_data = qradar_request.post_by_path(
                 "api/siem/offenses/{0}/notes?note_text={1}".format(
-                    module.params["offense_id"],
-                    quote("{0}".format(module.params["note_text"])),
+                    module.params["id"], quote("{0}".format(module.params["note_text"]))
                 ),
                 data=False,
             )
@@ -154,8 +153,7 @@ def main():
 
         qradar_return_data = qradar_request.post_by_path(
             "api/siem/offenses/{0}/notes?note_text={1}".format(
-                module.params["offense_id"],
-                quote("{0}".format(module.params["note_text"])),
+                module.params["id"], quote("{0}".format(module.params["note_text"]))
             ),
             data=False,
         )
