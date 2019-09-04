@@ -177,7 +177,7 @@ def main():
     #        # FIXME: fix the POST here to actually delete
     #        qradar_return_data = qradar_request.post_by_path(
     #            'api/siem/offenses/{0}/notes?note_text={1}'.format(
-    #                module.params['offense_id'],
+    #                module.params['id'],
     #                quote("{0}".format(module.params['note_text'])),
     #            ),
     #            data=False
