@@ -31,3 +31,5 @@ documentation: 'https://github.com/ansible-security/ibm_qradar'
 homepage: 'https://github.com/ansible-security/ibm_qradar'
 # issue tracker url
 issues: 'https://github.com/ansible-security/ibm_qradar/issues'
+
+readme: README.md
