@@ -1,6 +1,6 @@
 # IBM QRadar Ansible Collection
 
-## NOTE: THIS COLLECTION IS UNDER ACTIVE DEVELOPMENT AND SHOULD NOT BE CONSIDERED STABLE AT THIS TIME
+## Tech Preview
 
 This is the [Ansible
 Collection](https://docs.ansible.com/ansible/devel/collections_tech_preview.html)
