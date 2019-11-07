@@ -1,0 +1,11 @@
+---
+- name: Create Testing Snort Open Source IDS log source
+  qradar_log_source_management:
+    name: "Testing Collections PB - 192.168.1.112"
+    type_name: "Snort Open Source IDS"
+    state: present
+    description: "Testing Collection PB Description"
+    identifier: "192.168.1.112"
+  register: snort_log_source
+
+- debug: var=snort_log_source
