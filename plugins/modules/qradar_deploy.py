@@ -71,7 +71,9 @@ def main():
 
     qradar_return_data = qradar_request.post_by_path("api/staged_config/deploy_status")
 
-    if to_text("No changes to deploy") in to_text(qradar_return_data["message"]):
+    if "message" in qradar_return_data and (
+        to_text("No changes to deploy") in to_text(qradar_return_data["message"])
+    ):
         module.exit_json(
             msg="No changes to deploy",
             qradar_return_data=qradar_return_data,
