@@ -3,7 +3,7 @@
 ## Tech Preview
 
 This is the [Ansible
-Collection](https://docs.ansible.com/ansible/devel/collections_tech_preview.html)
+Collection](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html)
 provided by the [Ansible Security Automation
 Team](https://github.com/ansible-security) for automating actions in [IBM
 QRadar SIEM](https://www.ibm.com/us-en/marketplace/ibm-qradar-siem).
@@ -30,12 +30,36 @@ ansible_httpapi_use_ssl=yes
 ansible_httpapi_validate_certs=yes
 ansible_connection=httpapi
 ```
+#### Using the modules with Fully Qualified Collection Name (FQCN)
+
+With [Ansible
+Collections](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html)
+there are various ways to utilize them either by calling specific Content from
+the Collection, such as a module, by it's Fully Qualified Collection Name (FQCN)
+as we'll show in this example or by defining a Collection Search Path as the
+examples below will display.
+
+`qradar_with_collections_example.yml`
+```
+---
+- name: Testing URI manipulation of QRadar with FQCN
+  hosts: qradar
+  gather_facts: false
+  tasks:
+    - name: create log source
+      ibm.qradar.qradar_log_source_management:
+        name: "Ansible Collections Example Log Source"
+        type_name: "Linux OS"
+        state: present
+        description: "Ansible Collections Example Log Source Description"
+```
 
 #### Define your collection search path at the Play level
 
-Below we specify our collection at the Play level which allows us to use the
-`qradar_log_source_management` module without specifying the need for the
-Ansible Collection Namespace.
+Below we specify our collection at the
+[Play](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html)
+level which allows us to use the `qradar_log_source_management` module without
+the need for the FQCN for each task.
 
 `qradar_with_collections_example.yml`
 ```
@@ -46,19 +70,23 @@ Ansible Collection Namespace.
   collections:
     - ibm.qradar
   tasks:
-    - name: collection namespace block
-      block:
-        - name: create log source
-          qradar_log_source_management:
-            name: "Ansible Collections Example Log Source"
-            type_name: "Linux OS"
-            state: present
-            description: "Ansible Collections Example Log Source Description"
+    - name: create log source
+      qradar_log_source_management:
+        name: "Ansible Collections Example Log Source"
+        type_name: "Linux OS"
+        state: present
+        description: "Ansible Collections Example Log Source Description"
 ```
 
 #### Define your collection search path at the Block level
 
-Below we use the [`block`](https://docs.ansible.com/ansible/latest/user_guide/playbooks_blocks.html) level keyword, we are able to use the `qradar_log_source_management` module without the need for the Ansible Collection Namespace.
+Another option for Collection use is below. Here we use the
+[`block`](https://docs.ansible.com/ansible/latest/user_guide/playbooks_blocks.html)
+level keyword instead of [Play](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html)
+level as with the previous example. In this scenario we are able to use the
+`qradar_log_source_management` module without the need for the FQCN for each
+task but with an optionally more specific scope of Collection Search Path than
+specifying at the Play level.
 
 `qradar_with_collections_block_example.yml`
 ```
