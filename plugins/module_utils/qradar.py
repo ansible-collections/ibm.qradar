@@ -38,7 +38,7 @@ def set_offense_values(module, qradar_request):
     if module.params["closing_reason"]:
         found_closing_reason = qradar_request.get_by_path(
             "api/siem/offense_closing_reasons?filter={0}".format(
-                quote('text="{0}"'.format(module.params["closing_reason"]))
+                quote_plus('text="{0}"'.format(module.params["closing_reason"]))
             )
         )
         if found_closing_reason:
@@ -55,14 +55,17 @@ def set_offense_values(module, qradar_request):
 
 
 class QRadarRequest(object):
-    def __init__(self, module, headers=None, not_rest_data_keys=[]):
+    def __init__(self, module, headers=None, not_rest_data_keys=None):
 
         self.module = module
         self.connection = Connection(self.module._socket_path)
 
         # This allows us to exclude specific argspec keys from being included by
         # the rest data that don't follow the qradar_* naming convention
-        self.not_rest_data_keys = not_rest_data_keys
+        if not_rest_data_keys:
+            self.not_rest_data_keys = not_rest_data_keys
+        else:
+            self.not_rest_data_keys = []
         self.not_rest_data_keys.append("validate_certs")
         self.headers = headers
 

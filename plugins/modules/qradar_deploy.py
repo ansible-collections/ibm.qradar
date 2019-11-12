@@ -36,7 +36,7 @@ options:
 notes:
   - This module does not support check mode because the QRadar REST API does not offer stateful inspection of configuration deployments
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)"
+author: "Ansible Security Automation Team (@maxamillion) <https://github.com/ansible-security>"
 """
 
 EXAMPLES = """

@@ -26,12 +26,12 @@ options:
     description:
      - ID of Offense
     required: true
-    type: str
+    type: int
   status:
     description:
-      - One of "open", "hidden" or "closed"
+      - One of "open", "hidden" or "closed". (Either all lower case or all caps)
     required: true
-    choices: [ "open", "hidden", "closed" ]
+    choices: [ "open", "OPEN", "hidden", "HIDDEN", "closed", "CLOSED" ]
     type: str
   assigned_to:
     description:
@@ -63,7 +63,9 @@ notes:
   - Requires one of C(name) or C(id) be provided
   - Only one of C(closing_reason) or C(closing_reason_id) can be provided
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)"
+author: Ansible Security Automation Team (@maxamillion) <https://github.com/ansible-security>
+"""
+
 """
 # FIXME - WOULD LIKE TO QUERY BY NAME BUT HOW TO ACCOMPLISH THAT IS NON-OBVIOUS
 # name:
@@ -71,6 +73,7 @@ author: "Ansible Security Automation Team (https://github.com/ansible-security)"
 #    - Name of Offense
 #   required: true
 #   type: str
+"""
 
 EXAMPLES = """
 """

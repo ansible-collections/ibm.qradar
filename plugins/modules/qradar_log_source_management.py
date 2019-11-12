@@ -34,6 +34,7 @@ options:
       - Add or remove a log source.
     required: true
     choices: [ "present", "absent" ]
+    type: str
   type_name:
     description:
       - Type of resource by name
@@ -41,7 +42,12 @@ options:
     type: str
   type_id:
     description:
-      - Type of resource by type_id
+      - Type of resource by id, as defined in QRadar Log Source Types Documentation
+    required: false
+    type: int
+  protocol_type_id:
+    description:
+      - Type of protocol by id, as defined in QRadar Log Source Types Documentation
     required: false
     type: int
   identifier:
@@ -58,7 +64,7 @@ options:
 notes:
   - Either C(type) or C(type_id) is required
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)"
+author: Ansible Security Automation Team (@maxamillion) <https://github.com/ansible-security>
 """
 
 EXAMPLES = """
@@ -130,7 +136,7 @@ def main():
         name=dict(required=True, type="str"),
         state=dict(choices=["present", "absent"], required=True),
         type_name=dict(required=False, type="str"),
-        type_id=dict(required=False, type="str"),
+        type_id=dict(required=False, type="int"),
         identifier=dict(required=True, type="str"),
         protocol_type_id=dict(required=False, type="int"),
         description=dict(required=True, type="str"),
