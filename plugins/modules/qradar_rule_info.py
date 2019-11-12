@@ -26,7 +26,7 @@ options:
     description:
       - Obtain only information of the Rule with provided ID
     required: false
-    type: str
+    type: int
   name:
     description:
       - Obtain only information of the Rule that matches the provided name
@@ -37,6 +37,7 @@ options:
       - Obtain only information for the Rules of a certain type
     required: false
     choices: [ "EVENT", "FLOW", "COMMON", "USER"]
+    type: str
   owner:
     description:
       - Obtain only information of Rules owned by a certain user
@@ -52,7 +53,7 @@ notes:
   - You may provide many filters and they will all be applied, except for C(id)
     as that will return only the Rule identified by the unique ID provided.
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)"
+author: Ansible Security Automation Team (@maxamillion) <https://github.com/ansible-security>"
 """
 
 

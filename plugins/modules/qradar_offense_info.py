@@ -26,7 +26,7 @@ options:
     description:
       - Obtain only information of the Offense with provided ID
     required: false
-    type: str
+    type: int
   name:
     description:
       - Obtain only information of the Offense that matches the provided name
@@ -36,8 +36,9 @@ options:
     description:
       - Obtain only information of Offenses of a certain status
     required: false
-    choices: [ "open", "hidden", "closed" ]
+    choices: [ "open", "OPEN", "hidden", "HIDDEN", "closed", "CLOSED" ]
     default: "open"
+    type: str
   assigned_to:
     description:
       - Obtain only information of Offenses assigned to a certain user
@@ -47,7 +48,7 @@ options:
     description:
       - Obtain only information of Offenses that were closed by a specific closing reason
     required: false
-    type: int
+    type: str
   closing_reason_id:
     description:
       - Obtain only information of Offenses that were closed by a specific closing reason ID
@@ -67,7 +68,7 @@ notes:
   - You may provide many filters and they will all be applied, except for C(id)
     as that will return only
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)"
+author: Ansible Security Automation Team (@maxamillion) <https://github.com/ansible-security>
 """
 
 
@@ -77,7 +78,7 @@ offenses:
   description: Information
   returned: always
   type: list
-  elements: dictionaries
+  elements: dict
   contains:
     qradar_offenses:
       description: IBM QRadar Offenses found based on provided filters
@@ -97,7 +98,7 @@ offenses:
         status:
           description: State of the service. Either C(enabled), C(disabled), or C(unknown).
           returned: systemd systems or RedHat/SUSE flavored sysvinit/upstart
-          type: string
+          type: str
           sample: enabled
         name:
           description: Name of the service.
@@ -139,6 +140,7 @@ def main():
         status=dict(
             required=False,
             choices=["open", "OPEN", "hidden", "HIDDEN", "closed", "CLOSED"],
+            default="open",
             type="str",
         ),
     )

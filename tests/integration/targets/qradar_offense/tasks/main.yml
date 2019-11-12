@@ -17,4 +17,3 @@
 #  register: offense_info
 #
 #- debug: var=offense_info
-

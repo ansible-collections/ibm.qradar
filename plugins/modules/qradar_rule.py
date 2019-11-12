@@ -16,7 +16,7 @@ ANSIBLE_METADATA = {
 }
 DOCUMENTATION = """
 ---
-module: qradar_rule_info
+module: qradar_rule
 short_description: Manage state of QRadar Rules, with filter options
 description:
   - Manage state of QRadar Rules, with filter options
@@ -26,7 +26,7 @@ options:
     description:
       - Manage state of a QRadar Rule by ID
     required: false
-    type: str
+    type: int
   name:
     description:
       - Manage state of a QRadar Rule by name
@@ -37,13 +37,14 @@ options:
       - Manage state of a QRadar Rule
     required: True
     choices: [ "enabled", "disabled", "absent" ]
+    type: str
   owner:
     description:
       - Manage ownership of a QRadar Rule
     required: false
     type: str
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)"
+author: Ansible Security Automation Team (@maxamillion) <https://github.com/ansible-security>
 """
 
 
@@ -106,7 +107,7 @@ def main():
 
     elif module.params["name"]:
         rules = qradar_request.get_by_path(
-            "api/analytics/rules?filter=".format(
+            "api/analytics/rules?filter={0}".format(
                 quote('"{0}"'.format(module.params["name"]))
             )
         )

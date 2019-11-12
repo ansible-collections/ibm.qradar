@@ -32,7 +32,9 @@ options:
     required: true
     type: str
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)"
+author: Ansible Security Automation Team (@maxamillion) <https://github.com/ansible-security>
+"""
+
 """
 # FIXME - WOULD LIKE TO QUERY BY NAME BUT HOW TO ACCOMPLISH THAT IS NON-OBVIOUS
 # offense_name:
@@ -47,7 +49,7 @@ author: "Ansible Security Automation Team (https://github.com/ansible-security)"
 #   required: false
 #   choices: ["present", "absent"]
 #   default: "present"
-
+"""
 
 EXAMPLES = """
 """
@@ -140,7 +142,7 @@ def main():
                 msg="Successfully created Offense Note ID: {0}".format(
                     qradar_return_data["id"]
                 ),
-                qradar_return_data=qradar_offense_note,
+                qradar_return_data=qradar_return_data,
                 changed=False,
             )
 

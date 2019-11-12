@@ -58,4 +58,3 @@
     that:
       - snort_log_source_delete_rerun is not changed
       - snort_log_source_delete_rerun is not failed
-
