@@ -1,0 +1,61 @@
+---
+- name: Create Testing Snort Open Source IDS log source
+  qradar_log_source_management:
+    name: "Testing Collections PB - 192.168.1.112"
+    type_name: "Snort Open Source IDS"
+    state: present
+    description: "Testing Collection PB Description"
+    identifier: "192.168.1.112"
+  register: snort_log_source_create
+
+- name: Assert Create Test Snort Open Source IDS log source changed
+  assert:
+    that:
+      - snort_log_source_create is changed
+      - snort_log_source_create is not failed
+
+- name: Create Testing Snort Open Source IDS log source RERUN
+  qradar_log_source_management:
+    name: "Testing Collections PB - 192.168.1.112"
+    type_name: "Snort Open Source IDS"
+    state: present
+    description: "Testing Collection PB Description"
+    identifier: "192.168.1.112"
+  register: snort_log_source_create_rerun
+
+- name: Assert Create Test Snort Open Source IDS log source is not changed on RERUN
+  assert:
+    that:
+      - snort_log_source_create_rerun is not changed
+      - snort_log_source_create_rerun is not failed
+
+- name: Delete Testing Snort Open Source IDS log source
+  qradar_log_source_management:
+    name: "Testing Collections PB - 192.168.1.112"
+    type_name: "Snort Open Source IDS"
+    state: absent
+    description: "Testing Collection PB Description"
+    identifier: "192.168.1.112"
+  register: snort_log_source_delete
+
+- name: Assert Delete Test Snort Open Source IDS log source changed
+  assert:
+    that:
+      - snort_log_source_delete is changed
+      - snort_log_source_delete is not failed
+
+- name: Delete Testing Snort Open Source IDS log source RERUN
+  qradar_log_source_management:
+    name: "Testing Collections PB - 192.168.1.112"
+    type_name: "Snort Open Source IDS"
+    state: absent
+    description: "Testing Collection PB Description"
+    identifier: "192.168.1.112"
+  register: snort_log_source_delete_rerun
+
+- name: Assert Delete Test Snort Open Source IDS log source is not changed on RERUN
+  assert:
+    that:
+      - snort_log_source_delete_rerun is not changed
+      - snort_log_source_delete_rerun is not failed
+

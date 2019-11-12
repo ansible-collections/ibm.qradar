@@ -1,0 +1,55 @@
+---
+- name: get info about qradar offense
+  qradar_rule_info:
+    name: "Service DoS Attack Detected"
+  register: rule_info
+
+- debug: var=rule_info
+
+- name: enable rule by id
+  qradar_rule:
+    state: enabled
+    id: "{{ rule_info['rules'][0]['id']|int }}"
+  register: enable_rule_by_id
+
+- name: ensure enable rule by id
+  assert:
+    that:
+      - enable_rule_by_id is changed
+      - enable_rule_by_id is not failed
+
+- name: enable rule by id again
+  qradar_rule:
+    state: enabled
+    id: "{{ rule_info['rules'][0]['id']|int }}"
+  register: enable_rule_by_id_again
+
+- name: ensure enable rule by id again
+  assert:
+    that:
+      - enable_rule_by_id_again is not changed
+      - enable_rule_by_id_again is not failed
+
+- name: disable rule by id
+  qradar_rule:
+    state: disabled
+    id: "{{ rule_info['rules'][0]['id']|int }}"
+  register: disable_rule_by_id
+
+- name: ensure disable rule by id
+  assert:
+    that:
+      - disable_rule_by_id is changed
+      - disable_rule_by_id is not failed
+
+- name: disable rule by id again
+  qradar_rule:
+    state: disabled
+    id: "{{ rule_info['rules'][0]['id']|int }}"
+  register: disable_rule_by_id_again
+
+- name: ensure disable rule by id again
+  assert:
+    that:
+      - disable_rule_by_id_again is not changed
+      - disable_rule_by_id_again is not failed

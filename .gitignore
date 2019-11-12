@@ -107,3 +107,5 @@ venv.bak/
 releases/
 
 *.tar.gz
+
+tests/output*
