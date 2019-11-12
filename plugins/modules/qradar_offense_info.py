@@ -67,7 +67,7 @@ notes:
   - You may provide many filters and they will all be applied, except for C(id)
     as that will return only
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)
+author: "Ansible Security Automation Team (https://github.com/ansible-security)"
 """
 
 
@@ -186,10 +186,10 @@ def main():
                 )
             )
 
-        if module.params["follow_up"] != None:
+        if module.params["follow_up"] is not None:
             query_strs.append(quote("follow_up={0}".format(module.params["follow_up"])))
 
-        if module.params["protected"] != None:
+        if module.params["protected"] is not None:
             query_strs.append(quote("protected={0}".format(module.params["protected"])))
 
         if query_strs:

@@ -32,7 +32,7 @@ options:
     required: true
     type: str
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)
+author: "Ansible Security Automation Team (https://github.com/ansible-security)"
 """
 # FIXME - WOULD LIKE TO QUERY BY NAME BUT HOW TO ACCOMPLISH THAT IS NON-OBVIOUS
 # offense_name:
