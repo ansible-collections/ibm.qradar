@@ -58,7 +58,7 @@ options:
 notes:
   - Either C(type) or C(type_id) is required
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)
+author: "Ansible Security Automation Team (https://github.com/ansible-security)"
 """
 
 EXAMPLES = """

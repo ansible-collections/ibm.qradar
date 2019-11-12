@@ -1,9 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # (c) 2019, Adam Miller (admiller@redhat.com)
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
 from ansible.module_utils.urls import CertificateError
 from ansible.module_utils.six.moves.urllib.parse import urlencode, quote_plus
 from ansible.module_utils.connection import ConnectionError
@@ -134,7 +136,7 @@ class QRadarRequest(object):
         try:
             qradar_data = {}
             for param in self.module.params:
-                if (self.module.params[param]) != None and (
+                if (self.module.params[param]) is not None and (
                     param not in self.not_rest_data_keys
                 ):
                     qradar_data[param] = self.module.params[param]
@@ -163,9 +165,9 @@ class QRadarRequest(object):
         """
         POST with data to path
         """
-        if data == None:
+        if data is None:
             data = json.dumps(self.get_data())
-        elif data == False:
+        elif data is False:
             # Because for some reason some QRadar REST API endpoint use the
             # query string to modify state
             return self.post("/{0}".format(rest_path))
@@ -175,7 +177,7 @@ class QRadarRequest(object):
         """
         Create or Update a file/directory monitor data input in qradar
         """
-        if data == None:
+        if data is None:
             data = json.dumps(self.get_data())
         # return self.post("/{0}".format(rest_path), payload=data)
         return self.patch("/{0}".format(rest_path), payload=data)  # PATCH

@@ -43,7 +43,7 @@ options:
     required: false
     type: str
 
-author: "Ansible Security Automation Team (https://github.com/ansible-security)
+author: "Ansible Security Automation Team (https://github.com/ansible-security)"
 """
 
 
@@ -116,7 +116,7 @@ def main():
 
     if module.params["state"] == "enabled":
         if module.params["rule"]:
-            if module.params["rule"]["enabled"] == True:
+            if module.params["rule"]["enabled"] is True:
                 # Already enabled
                 if module.params["id"]:
                     module.exit_json(
@@ -170,7 +170,7 @@ def main():
 
     elif module.params["state"] == "disabled":
         if module.params["rule"]:
-            if module.params["rule"]["enabled"] == False:
+            if module.params["rule"]["enabled"] is False:
                 # Already disabled
                 if module.params["id"]:
                     module.exit_json(
