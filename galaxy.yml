@@ -1,20 +1,20 @@
+---
 ### requried
 # this can be a company/brand or product namespace under which all content lives
 namespace: ibm
 # the designation of this specific collection
 name: qradar
-# semantic versioning compliant version designation
-version: 0.0.5
 # a list of the collection's content authors: 'Full Name <email> (http://site) @nicks:irc/im/site#channel'
 authors:
-  - 'Ansible Security Automation Team (https://github.com/ansible-security)'
+  - Ansible Security Automation Team (https://github.com/ansible-security)
 
 ### optional but strongly advised
 # short summary of the collection
-description: Ansible Collection of content aiming to automate common tasks of Information Security Professionals using IBM Qradar SIEM
+description: |
+  Ansible Collection of content aiming to automate common tasks of Information Security Professionals using IBM Qradar SIEM
 # a valid SPDX license identifier https://spdx.org/licenses/
 license:
-  - 'GPL-3.0-or-later'
+  - GPL-3.0-or-later
 # list of keywords you want to associate the collection with for indexing/search systems
 tags:
   - security
@@ -24,12 +24,12 @@ tags:
 
 ### urls
 # url of originating SCM repository
-repository: 'https://github.com/ansible-security/ansible_collections.ibm.qradar'
+repository: https://github.com/ansible-security/ansible_collections.ibm.qradar
 # url to online docs
-documentation: 'https://github.com/ansible-security/ansible_collections.ibm.qradar'
+documentation: https://github.com/ansible-security/ansible_collections.ibm.qradar
 # homepage of the collection/project
-homepage: 'https://github.com/ansible-security/ansible_collections.ibm.qradar'
+homepage: https://github.com/ansible-security/ansible_collections.ibm.qradar
 # issue tracker url
-issues: 'https://github.com/ansible-security/ansible_collections.ibm.qradar/issues'
+issues: https://github.com/ansible-security/ansible_collections.ibm.qradar/issues
 
 readme: README.md
