@@ -13,7 +13,7 @@ short_description: HttpApi Plugin for IBM QRadar
 description:
   - This HttpApi plugin provides methods to connect to IBM QRadar over a
     HTTP(S)-based api.
-version_added: "2.9"
+version_added: "1.0"
 """
 
 import json
@@ -23,9 +23,7 @@ from ansible.errors import AnsibleConnectionFailure
 from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible.plugins.httpapi import HttpApiBase
 from ansible.module_utils.connection import ConnectionError
-
-BASE_HEADERS = {"Content-Type": "application/json"}
-
+from ansible_collections.ibm.qradar.plugins.module_utils.qradar import BASE_HEADERS
 
 class HttpApi(HttpApiBase):
     def send_request(self, request_method, path, payload=None, headers=None):

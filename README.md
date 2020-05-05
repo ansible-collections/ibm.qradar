@@ -39,6 +39,9 @@ the Collection, such as a module, by it's Fully Qualified Collection Name (FQCN)
 as we'll show in this example or by defining a Collection Search Path as the
 examples below will display.
 
+I should be noted that the FQCN method is the recommended method but the
+shorthand options listed below exist for convenience.
+
 `qradar_with_collections_example.yml`
 ```
 ---
@@ -47,7 +50,7 @@ examples below will display.
   gather_facts: false
   tasks:
     - name: create log source
-      ibm.qradar.qradar_log_source_management:
+      ibm.qradar.log_source_management:
         name: "Ansible Collections Example Log Source"
         type_name: "Linux OS"
         state: present
@@ -58,7 +61,7 @@ examples below will display.
 
 Below we specify our collection at the
 [Play](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html)
-level which allows us to use the `qradar_log_source_management` module without
+level which allows us to use the `log_source_management` module without
 the need for the FQCN for each task.
 
 `qradar_with_collections_example.yml`
@@ -71,7 +74,7 @@ the need for the FQCN for each task.
     - ibm.qradar
   tasks:
     - name: create log source
-      qradar_log_source_management:
+      log_source_management:
         name: "Ansible Collections Example Log Source"
         type_name: "Linux OS"
         state: present
@@ -84,7 +87,7 @@ Another option for Collection use is below. Here we use the
 [`block`](https://docs.ansible.com/ansible/latest/user_guide/playbooks_blocks.html)
 level keyword instead of [Play](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html)
 level as with the previous example. In this scenario we are able to use the
-`qradar_log_source_management` module without the need for the FQCN for each
+`log_source_management` module without the need for the FQCN for each
 task but with an optionally more specific scope of Collection Search Path than
 specifying at the Play level.
 
@@ -98,7 +101,7 @@ specifying at the Play level.
     - name: collection namespace block
       block:
         - name: create log source
-          qradar_log_source_management:
+          log_source_management:
             name: "Ansible Collections Example Log Source"
             type_name: "Linux OS"
             state: present
