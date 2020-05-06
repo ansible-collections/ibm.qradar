@@ -1,0 +1,6 @@
+- project:
+    name: github.com/ansible-collections/ibm.qradar
+    templates:
+      - system-required
+      - publish-to-galaxy
+      - ansible-collections-security-ibm-qradar

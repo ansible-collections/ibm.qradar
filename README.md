@@ -35,7 +35,7 @@ ansible_connection=httpapi
 With [Ansible
 Collections](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html)
 there are various ways to utilize them either by calling specific Content from
-the Collection, such as a module, by it's Fully Qualified Collection Name (FQCN)
+the Collection, such as a module, by its Fully Qualified Collection Name (FQCN)
 as we'll show in this example or by defining a Collection Search Path as the
 examples below will display.
 
