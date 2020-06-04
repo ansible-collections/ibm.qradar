@@ -15,6 +15,7 @@ from ansible.module_utils._text import to_text
 
 import json
 
+BASE_HEADERS = {"Content-Type": "application/json", "Version": "9.1"}
 
 def find_dict_in_list(some_list, key, value):
     text_type = False
@@ -67,7 +68,7 @@ class QRadarRequest(object):
         else:
             self.not_rest_data_keys = []
         self.not_rest_data_keys.append("validate_certs")
-        self.headers = headers
+        self.headers = headers if headers else BASE_HEADERS
 
     def _httpapi_error_handle(self, method, uri, payload=None):
         # FIXME - make use of handle_httperror(self, exception) where applicable
@@ -147,22 +148,6 @@ class QRadarRequest(object):
 
         except TypeError as e:
             self.module.fail_json(msg="invalid data type provided: {0}".format(e))
-
-    def get_urlencoded_data(self):
-        return urlencode(self.get_data())
-
-    def get_by_path(self, rest_path):
-        """
-        GET attributes of a monitor by rest path
-        """
-        return self.get("/{0}".format(rest_path))
-
-    def delete_by_path(self, rest_path):
-        """
-        DELETE attributes of a monitor by rest path
-        """
-
-        return self.delete("/{0}".format(rest_path))
 
     def post_by_path(self, rest_path, data=None):
         """

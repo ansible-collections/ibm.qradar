@@ -1,6 +1,6 @@
 ---
 - name: Create Testing Snort Open Source IDS log source
-  qradar_log_source_management:
+  log_source_management:
     name: "Testing Collections PB - 192.168.1.112"
     type_name: "Snort Open Source IDS"
     state: present
@@ -15,7 +15,7 @@
       - snort_log_source_create is not failed
 
 - name: Create Testing Snort Open Source IDS log source RERUN
-  qradar_log_source_management:
+  log_source_management:
     name: "Testing Collections PB - 192.168.1.112"
     type_name: "Snort Open Source IDS"
     state: present
@@ -30,7 +30,7 @@
       - snort_log_source_create_rerun is not failed
 
 - name: Delete Testing Snort Open Source IDS log source
-  qradar_log_source_management:
+  log_source_management:
     name: "Testing Collections PB - 192.168.1.112"
     type_name: "Snort Open Source IDS"
     state: absent
@@ -45,7 +45,7 @@
       - snort_log_source_delete is not failed
 
 - name: Delete Testing Snort Open Source IDS log source RERUN
-  qradar_log_source_management:
+  log_source_management:
     name: "Testing Collections PB - 192.168.1.112"
     type_name: "Snort Open Source IDS"
     state: absent
