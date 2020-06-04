@@ -20,7 +20,7 @@ module: offense_action
 short_description: Take action on a QRadar Offense
 description:
   - This module allows to assign, protect, follow up, set status, and assign closing reason to QRadar Offenses
-version_added: "1.0"
+version_added: "1.0.0"
 options:
   id:
     description:
@@ -30,7 +30,7 @@ options:
   status:
     description:
       - One of "open", "hidden" or "closed". (Either all lower case or all caps)
-    required: true
+    required: false
     choices: [ "open", "OPEN", "hidden", "HIDDEN", "closed", "CLOSED" ]
     type: str
   assigned_to:
@@ -122,8 +122,7 @@ def main():
     )
 
     qradar_request = QRadarRequest(
-        module,
-        not_rest_data_keys=["name", "id", "assigned_to", "closing_reason"],
+        module, not_rest_data_keys=["name", "id", "assigned_to", "closing_reason"],
     )
 
     # if module.params['name']:

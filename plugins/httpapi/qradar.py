@@ -25,6 +25,7 @@ from ansible.plugins.httpapi import HttpApiBase
 from ansible.module_utils.connection import ConnectionError
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import BASE_HEADERS
 
+
 class HttpApi(HttpApiBase):
     def send_request(self, request_method, path, payload=None, headers=None):
         headers = headers if headers else BASE_HEADERS

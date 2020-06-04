@@ -20,7 +20,7 @@ module: rule_info
 short_description: Obtain information about one or many QRadar Rules, with filter options
 description:
   - This module obtains information about one or many QRadar Rules, with filter options
-version_added: "1.0"
+version_added: "1.0.0"
 options:
   id:
     description:
@@ -30,7 +30,7 @@ options:
   name:
     description:
       - Obtain only information of the Rule that matches the provided name
-    required: true
+    required: false
     type: str
   type:
     description:

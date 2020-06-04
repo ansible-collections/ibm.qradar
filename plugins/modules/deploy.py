@@ -22,7 +22,7 @@ module: deploy
 short_description: Trigger a qradar configuration deployment
 description:
   - This module allows for INCREMENTAL or FULL deployments
-version_added: "1.0"
+version_added: "1.0.0"
 options:
   type:
     description:
@@ -64,8 +64,7 @@ def main():
     module = AnsibleModule(argument_spec=argspec, supports_check_mode=False)
 
     qradar_request = QRadarRequest(
-        module,
-        not_rest_data_keys=["state", "type_name", "identifier"],
+        module, not_rest_data_keys=["state", "type_name", "identifier"],
     )
 
     qradar_return_data = qradar_request.post_by_path("api/staged_config/deploy_status")

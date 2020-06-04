@@ -20,7 +20,7 @@ module: rule
 short_description: Manage state of QRadar Rules, with filter options
 description:
   - Manage state of QRadar Rules, with filter options
-version_added: "1.0"
+version_added: "1.0.0"
 options:
   id:
     description:
@@ -90,8 +90,7 @@ def main():
     )
 
     qradar_request = QRadarRequest(
-        module,
-        not_rest_data_keys=["id", "name", "state", "owner"],
+        module, not_rest_data_keys=["id", "name", "state", "owner"],
     )
 
     # if module.params['name']:

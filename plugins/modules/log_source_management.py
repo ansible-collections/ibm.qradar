@@ -22,7 +22,7 @@ module: log_source_management
 short_description: Manage Log Sources in QRadar
 description:
   - This module allows for addition, deletion, or modification of Log Sources in QRadar
-version_added: "1.0"
+version_added: "1.0.0"
 options:
   name:
     description:
@@ -150,8 +150,7 @@ def main():
     )
 
     qradar_request = QRadarRequest(
-        module,
-        not_rest_data_keys=["state", "type_name", "identifier"],
+        module, not_rest_data_keys=["state", "type_name", "identifier"],
     )
 
     log_source_exists = qradar_request.get(
