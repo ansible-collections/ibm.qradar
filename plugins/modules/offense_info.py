@@ -20,7 +20,7 @@ module: offense_info
 short_description: Obtain information about one or many QRadar Offenses, with filter options
 description:
   - This module allows to obtain information about one or many QRadar Offenses, with filter options
-version_added: "1.0"
+version_added: "1.0.0"
 options:
   id:
     description:
@@ -30,7 +30,7 @@ options:
   name:
     description:
       - Obtain only information of the Offense that matches the provided name
-    required: true
+    required: false
     type: str
   status:
     description:

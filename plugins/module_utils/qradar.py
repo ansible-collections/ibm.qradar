@@ -4,7 +4,8 @@
 # (c) 2019, Adam Miller (admiller@redhat.com)
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
-from __future__ import (absolute_import, division, print_function)
+from __future__ import absolute_import, division, print_function
+
 __metaclass__ = type
 from ansible.module_utils.urls import CertificateError
 from ansible.module_utils.six.moves.urllib.parse import urlencode, quote_plus
@@ -16,6 +17,7 @@ from ansible.module_utils._text import to_text
 import json
 
 BASE_HEADERS = {"Content-Type": "application/json", "Version": "9.1"}
+
 
 def find_dict_in_list(some_list, key, value):
     text_type = False

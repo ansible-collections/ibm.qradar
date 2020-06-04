@@ -20,7 +20,7 @@ module: offense_note
 short_description: Create or update a QRadar Offense Note
 description:
   - This module allows to create a QRadar Offense note
-version_added: "1.0"
+version_added: "1.0.0"
 options:
   id:
     description:
@@ -99,10 +99,7 @@ def main():
 
     module = AnsibleModule(argument_spec=argspec, supports_check_mode=True)
 
-    qradar_request = QRadarRequest(
-        module,
-        not_rest_data_keys=["state", "id"],
-    )
+    qradar_request = QRadarRequest(module, not_rest_data_keys=["state", "id"],)
 
     # if module.params['name']:
     #    # FIXME - QUERY HERE BY NAME
