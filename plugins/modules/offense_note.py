@@ -52,6 +52,10 @@ author: Ansible Security Automation Team (@maxamillion) <https://github.com/ansi
 """
 
 EXAMPLES = """
+- name: Add a note to QRadar Offense ID 1
+  ibm.qradar.offense_note:
+    id: 1
+    note_text: This an example note entry that should be made on offense id 1
 """
 
 from ansible.module_utils.basic import AnsibleModule

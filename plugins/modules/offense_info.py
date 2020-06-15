@@ -109,6 +109,14 @@ offenses:
 
 
 EXAMPLES = """
+- name: Get list of all currently OPEN IBM QRadar Offenses
+  ibm.qradar.offense_info:
+    status: OPEN
+  register: offense_list
+
+- name: display offense information for debug purposes
+  debug:
+    var: offense_list
 """
 
 from ansible.module_utils.basic import AnsibleModule
