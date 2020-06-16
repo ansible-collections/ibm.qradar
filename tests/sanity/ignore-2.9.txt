@@ -1,0 +1,7 @@
+plugins/modules/qradar_deploy.py validate-modules!skip # https://github.com/ansible/ansible/issues/69953
+plugins/modules/qradar_log_source_management.py validate-modules!skip # https://github.com/ansible/ansible/issues/69953
+plugins/modules/qradar_offense_action.py validate-modules!skip # https://github.com/ansible/ansible/issues/69953
+plugins/modules/qradar_offense_info.py validate-modules!skip # https://github.com/ansible/ansible/issues/69953
+plugins/modules/qradar_offense_note.py validate-modules!skip # https://github.com/ansible/ansible/issues/69953
+plugins/modules/qradar_rule.py validate-modules!skip # https://github.com/ansible/ansible/issues/69953
+plugins/modules/qradar_rule_info.py validate-modules!skip # https://github.com/ansible/ansible/issues/69953
