@@ -43,6 +43,9 @@ author: "Ansible Security Automation Team (@maxamillion) <https://github.com/ans
 """
 
 EXAMPLES = """
+- name: run an incremental deploy
+  ibm.qradar.deploy:
+    type: INCREMENTAL
 """
 
 from ansible.module_utils.basic import AnsibleModule

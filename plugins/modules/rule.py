@@ -56,6 +56,10 @@ RETURN = """
 """
 
 EXAMPLES = """
+- name: Enable Rule 'Ansible Example DDoS Rule'
+  qradar_rule:
+    name: 'Ansible Example DDOS Rule'
+    state: enabled
 """
 
 from ansible.module_utils.basic import AnsibleModule

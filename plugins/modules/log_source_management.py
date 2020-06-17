@@ -71,6 +71,13 @@ author: Ansible Security Automation Team (@maxamillion) <https://github.com/ansi
 """
 
 EXAMPLES = """
+- name: Add a snort log source to IBM QRadar
+  ibm.qradar.log_source_management:
+    name: "Snort logs"
+    type_name: "Snort Open Source IDS"
+    state: present
+    description: "Snort IDS remote logs from rsyslog"
+    identifier: "192.168.1.101"
 """
 
 from ansible.module_utils.basic import AnsibleModule

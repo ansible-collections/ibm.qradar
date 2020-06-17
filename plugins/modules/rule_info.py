@@ -65,6 +65,14 @@ RETURN = """
 """
 
 EXAMPLES = """
+- name: Get information about the Rule named "Custom Company DDoS Rule"
+  ibm.qradar.rule_info:
+    name: "Custom Company DDoS Rule"
+  register: custom_ddos_rule_info
+
+- name: debugging output of the custom_ddos_rule_info registered variable
+  debug:
+    var: custom_ddos_rule_info
 """
 
 from ansible.module_utils.basic import AnsibleModule
