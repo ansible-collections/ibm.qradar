@@ -1,5 +1,7 @@
 # IBM QRadar Ansible Collection
 
+[![CI](https://zuul-ci.org/gated.svg)](https://dashboard.zuul.ansible.com/t/ansible/project/github.com/ansible-collections/ibm.qradar) <!--[![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/ibm.qradar)](https://codecov.io/gh/ansible-collections/ibm.qradar)-->
+
 ## Tech Preview
 
 This is the [Ansible
@@ -8,12 +10,26 @@ provided by the [Ansible Security Automation
 Team](https://github.com/ansible-security) for automating actions in [IBM
 QRadar SIEM](https://www.ibm.com/us-en/marketplace/ibm-qradar-siem).
 
-This Collection is meant for distribution via
+This Collection is meant for distribution through
 [Ansible Galaxy](https://galaxy.ansible.com/) as is available for all
 [Ansible](https://github.com/ansible/ansible) users to utilize, contribute to,
 and provide feedback about.
 
-### Using IBM QRadar Ansible Collection
+## Installing this collection
+
+You can install the IBM qradar collection with the Ansible Galaxy CLI:
+
+    ansible-galaxy collection install ibm.qradar
+
+You can also include it in a `requirements.yml` file and install it with `ansible-galaxy collection install -r requirements.yml`, using the format:
+
+```yaml
+---
+collections:
+  - name: ibm.qradar
+```
+
+## Using the IBM QRadar Ansible Collection
 
 An example for using this collection to manage a log source with [IBM QRadar](https://www.ibm.com/security/security-intelligence/qradar) is as follows.
 
@@ -30,7 +46,10 @@ ansible_httpapi_use_ssl=yes
 ansible_httpapi_validate_certs=yes
 ansible_connection=httpapi
 ```
-#### Using the modules with Fully Qualified Collection Name (FQCN)
+
+**NOTE**: For Ansible 2.9, you may not see deprecation warnings when you run your playbooks with this collection. Use this documentation to track when a module is deprecated.
+
+### Using the modules with Fully Qualified Collection Name (FQCN)
 
 With [Ansible
 Collections](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html)
@@ -57,7 +76,7 @@ shorthand options listed below exist for convenience.
         description: "Ansible Collections Example Log Source Description"
 ```
 
-#### Define your collection search path at the Play level
+### Define your collection search path at the Play level
 
 Below we specify our collection at the
 [Play](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html)
@@ -81,7 +100,7 @@ the need for the FQCN for each task.
         description: "Ansible Collections Example Log Source Description"
 ```
 
-#### Define your collection search path at the Block level
+### Define your collection search path at the Block level
 
 Another option for Collection use is below. Here we use the
 [`block`](https://docs.ansible.com/ansible/latest/user_guide/playbooks_blocks.html)
@@ -125,3 +144,35 @@ specifying at the Play level.
 * `README.md`: information file (this file)
 * `roles/`: directory for ansible roles
 * `tests/`: tests for the collection's content
+
+## Contributing to this collection
+
+We welcome community contributions to this collection. If you find problems, please open an issue or create a PR against the [IBM QRadar collection repository](https://github.com/ansible-collections/ibm.qradar). See [Contributing to Ansible-maintained collections](https://docs.ansible.com/ansible/devel/community/contributing_maintained_collections.html#contributing-maintained-collections) for complete details.
+
+
+See the [Ansible Community Guide](https://docs.ansible.com/ansible/latest/community/index.html) for details on contributing to Ansible.
+
+### Code of Conduct
+This collection follows the Ansible project's
+[Code of Conduct](https://docs.ansible.com/ansible/devel/community/code_of_conduct.html).
+Please read and familiarize yourself with this document.
+
+## Changelogs
+<!--Add a link to a changelog.md file or an external docsite to cover this information. -->
+
+## Roadmap
+
+<!-- Optional. Include the roadmap for this collection, and the proposed release/versioning strategy so users can anticipate the upgrade/update cycle. -->
+
+## More information
+
+- [Ansible Collection overview](https://github.com/ansible-collections/overview)
+- [Ansible User guide](https://docs.ansible.com/ansible/latest/user_guide/index.html)
+- [Ansible Developer guide](https://docs.ansible.com/ansible/latest/dev_guide/index.html)
+- [Ansible Community code of conduct](https://docs.ansible.com/ansible/latest/community/code_of_conduct.html)
+
+## Licensing
+
+GNU General Public License v3.0 or later.
+
+See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) to see the full text.
