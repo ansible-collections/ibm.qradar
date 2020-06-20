@@ -20,8 +20,8 @@ and provide feedback about.
 
 This collection has been tested against following Ansible versions: **>=2.9,<2.11**.
 
-Plugins and modules within a collection may be tested with only specific Ansible versions. 
-A collection may contain metadata that identifies these versions. 
+Plugins and modules within a collection may be tested with only specific Ansible versions.
+A collection may contain metadata that identifies these versions.
 PEP440 is the schema used to describe the versions of Ansible.
 <!--end requires_ansible-->
 
@@ -31,6 +31,7 @@ PEP440 is the schema used to describe the versions of Ansible.
 Name | Description
 --- | ---
 [ibm.qradar.qradar](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.qradar_httpapi.rst)|HttpApi Plugin for IBM QRadar
+
 ### Modules
 Name | Description
 --- | ---
@@ -41,6 +42,7 @@ Name | Description
 [ibm.qradar.offense_note](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.offense_note_module.rst)|Create or update a QRadar Offense Note
 [ibm.qradar.rule](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.rule_module.rst)|Manage state of QRadar Rules, with filter options
 [ibm.qradar.rule_info](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.rule_info_module.rst)|Obtain information about one or many QRadar Rules, with filter options
+
 <!--end collection content-->
 
 ## Installing this collection

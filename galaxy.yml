@@ -8,13 +8,15 @@ name: qradar
 authors:
   - Ansible Security Automation Team (https://github.com/ansible-security)
 
+version: 1.0.0
+
 ### optional but strongly advised
 # short summary of the collection
 description: |
   Ansible Collection of content aiming to automate common tasks of Information Security Professionals using IBM Qradar SIEM
 # a valid SPDX license identifier https://spdx.org/licenses/
 license:
-  - GPL-3.0-or-later
+  - 'GPL-3.0-or-later'
 # list of keywords you want to associate the collection with for indexing/search systems
 tags:
   - security

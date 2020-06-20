@@ -1,4 +1,3 @@
-
 .. _ibm.qradar.qradar_httpapi:
 
 
