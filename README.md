@@ -15,6 +15,36 @@ This Collection is meant for distribution through
 [Ansible](https://github.com/ansible/ansible) users to utilize, contribute to,
 and provide feedback about.
 
+<!--start requires_ansible-->
+## Ansible version compatibility
+
+This collection has been tested against following Ansible versions: **>=2.9,<2.11**.
+
+Plugins and modules within a collection may be tested with only specific Ansible versions.
+A collection may contain metadata that identifies these versions.
+PEP440 is the schema used to describe the versions of Ansible.
+<!--end requires_ansible-->
+
+## Collection Content
+<!--start collection content-->
+### Httpapi plugins
+Name | Description
+--- | ---
+[ibm.qradar.qradar](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.qradar_httpapi.rst)|HttpApi Plugin for IBM QRadar
+
+### Modules
+Name | Description
+--- | ---
+[ibm.qradar.deploy](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.deploy_module.rst)|Trigger a qradar configuration deployment
+[ibm.qradar.log_source_management](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.log_source_management_module.rst)|Manage Log Sources in QRadar
+[ibm.qradar.offense_action](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.offense_action_module.rst)|Take action on a QRadar Offense
+[ibm.qradar.offense_info](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.offense_info_module.rst)|Obtain information about one or many QRadar Offenses, with filter options
+[ibm.qradar.offense_note](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.offense_note_module.rst)|Create or update a QRadar Offense Note
+[ibm.qradar.rule](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.rule_module.rst)|Manage state of QRadar Rules, with filter options
+[ibm.qradar.rule_info](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.rule_info_module.rst)|Obtain information about one or many QRadar Rules, with filter options
+
+<!--end collection content-->
+
 ## Installing this collection
 
 You can install the IBM qradar collection with the Ansible Galaxy CLI:
