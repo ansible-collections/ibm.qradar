@@ -2,8 +2,6 @@
 
 [![CI](https://zuul-ci.org/gated.svg)](https://dashboard.zuul.ansible.com/t/ansible/project/github.com/ansible-collections/ibm.qradar) <!--[![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/ibm.qradar)](https://codecov.io/gh/ansible-collections/ibm.qradar)-->
 
-## Tech Preview
-
 This is the [Ansible
 Collection](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html)
 provided by the [Ansible Security Automation
