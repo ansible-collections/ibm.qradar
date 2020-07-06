@@ -28,18 +28,18 @@ PEP440 is the schema used to describe the versions of Ansible.
 ### Httpapi plugins
 Name | Description
 --- | ---
-[ibm.qradar.qradar](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.qradar_httpapi.rst)|HttpApi Plugin for IBM QRadar
+[ibm.qradar.qradar](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.qradar_httpapi.rst)|HttpApi Plugin for IBM QRadar
 
 ### Modules
 Name | Description
 --- | ---
-[ibm.qradar.deploy](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.deploy_module.rst)|Trigger a qradar configuration deployment
-[ibm.qradar.log_source_management](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.log_source_management_module.rst)|Manage Log Sources in QRadar
-[ibm.qradar.offense_action](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.offense_action_module.rst)|Take action on a QRadar Offense
-[ibm.qradar.offense_info](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.offense_info_module.rst)|Obtain information about one or many QRadar Offenses, with filter options
-[ibm.qradar.offense_note](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.offense_note_module.rst)|Create or update a QRadar Offense Note
-[ibm.qradar.rule](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.rule_module.rst)|Manage state of QRadar Rules, with filter options
-[ibm.qradar.rule_info](https://github.com/ansible-collections/ibm.qradar/blob/master/docs/ibm.qradar.rule_info_module.rst)|Obtain information about one or many QRadar Rules, with filter options
+[ibm.qradar.deploy](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.deploy_module.rst)|Trigger a qradar configuration deployment
+[ibm.qradar.log_source_management](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.log_source_management_module.rst)|Manage Log Sources in QRadar
+[ibm.qradar.offense_action](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.offense_action_module.rst)|Take action on a QRadar Offense
+[ibm.qradar.offense_info](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.offense_info_module.rst)|Obtain information about one or many QRadar Offenses, with filter options
+[ibm.qradar.offense_note](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.offense_note_module.rst)|Create or update a QRadar Offense Note
+[ibm.qradar.rule](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.rule_module.rst)|Manage state of QRadar Rules, with filter options
+[ibm.qradar.rule_info](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.rule_info_module.rst)|Obtain information about one or many QRadar Rules, with filter options
 
 <!--end collection content-->
 
