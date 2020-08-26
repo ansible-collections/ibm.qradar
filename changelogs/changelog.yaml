@@ -1,0 +1,36 @@
+ancestor: null
+releases:
+  1.0.0:
+    modules:
+    - description: Trigger a qradar configuration deployment
+      name: ibm.qradar.deploy
+      namespace: ''
+    - description: Manage Log Sources in QRadar
+      name: ibm.qradar.log_source_management
+      namespace: ''
+    - description: Take action on a QRadar Offense
+      name: ibm.qradar.offense_action
+      namespace: ''
+    - description: Obtain information about one or many QRadar Offenses, with filter options
+      name: ibm.qradar.offense_info
+      namespace: ''
+    - description: Create or update a QRadar Offense Note
+      name: ibm.qradar.offense_note
+      namespace: ''
+    - description: Manage state of QRadar Rules, with filter options
+      name: ibm.qradar.rule
+      namespace: ''
+    - description: Obtain information about one or many QRadar Rules, with filter options
+      name: ibm.qradar.rule_info
+      namespace: ''
+    release_date: '2020-06-22'
+  1.0.1:
+    changes:
+      release_summary:
+      - Removed tech preview from collection Readme file.
+    release_date: '2020-06-23'
+  1.0.2:
+    changes:
+      release_summary:
+      - Releasing 1.0.2 with updated changelog.
+    release_date: '2020-08-27'
