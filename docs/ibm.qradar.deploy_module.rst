@@ -31,28 +31,28 @@ Parameters
         <tr>
             <th colspan="1">Parameter</th>
             <th>Choices/<font color="blue">Defaults</font></th>
-                        <th width="100%">Comments</th>
+            <th width="100%">Comments</th>
         </tr>
-                    <tr>
-                                                                <td colspan="1">
+            <tr>
+                <td colspan="1">
                     <div class="ansibleOptionAnchor" id="parameter-"></div>
                     <b>type</b>
                     <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
                     <div style="font-size: small">
                         <span style="color: purple">string</span>
-                                                                    </div>
-                                    </td>
-                                <td>
-                                                                                                                            <ul style="margin: 0; padding: 0"><b>Choices:</b>
-                                                                                                                                                                <li><div style="color: blue"><b>INCREMENTAL</b>&nbsp;&larr;</div></li>
-                                                                                                                                                                                                <li>FULL</li>
-                                                                                    </ul>
-                                                                            </td>
-                                                                <td>
-                                            <div>Type of deployment</div>
-                                                        </td>
+                    </div>
+                </td>
+                <td>
+                        <ul style="margin: 0; padding: 0"><b>Choices:</b>
+                                    <li><div style="color: blue"><b>INCREMENTAL</b>&nbsp;&larr;</div></li>
+                                    <li>FULL</li>
+                        </ul>
+                </td>
+                <td>
+                        <div>Type of deployment</div>
+                </td>
             </tr>
-                        </table>
+    </table>
     <br/>
 
 
@@ -69,11 +69,9 @@ Examples
 
 .. code-block:: yaml+jinja
 
-    
     - name: run an incremental deploy
       ibm.qradar.deploy:
         type: INCREMENTAL
-
 
 
 
@@ -86,5 +84,3 @@ Authors
 ~~~~~~~
 
 - Ansible Security Automation Team (@maxamillion) <https://github.com/ansible-security>
-
-
