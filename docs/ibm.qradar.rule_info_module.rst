@@ -31,95 +31,95 @@ Parameters
         <tr>
             <th colspan="1">Parameter</th>
             <th>Choices/<font color="blue">Defaults</font></th>
-                        <th width="100%">Comments</th>
+            <th width="100%">Comments</th>
         </tr>
-                    <tr>
-                                                                <td colspan="1">
+            <tr>
+                <td colspan="1">
                     <div class="ansibleOptionAnchor" id="parameter-"></div>
                     <b>id</b>
                     <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
                     <div style="font-size: small">
                         <span style="color: purple">integer</span>
-                                                                    </div>
-                                    </td>
-                                <td>
-                                                                                                                                                            </td>
-                                                                <td>
-                                            <div>Obtain only information of the Rule with provided ID</div>
-                                                        </td>
+                    </div>
+                </td>
+                <td>
+                </td>
+                <td>
+                        <div>Obtain only information of the Rule with provided ID</div>
+                </td>
             </tr>
-                                <tr>
-                                                                <td colspan="1">
+            <tr>
+                <td colspan="1">
                     <div class="ansibleOptionAnchor" id="parameter-"></div>
                     <b>name</b>
                     <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
                     <div style="font-size: small">
                         <span style="color: purple">string</span>
-                                                                    </div>
-                                    </td>
-                                <td>
-                                                                                                                                                            </td>
-                                                                <td>
-                                            <div>Obtain only information of the Rule that matches the provided name</div>
-                                                        </td>
+                    </div>
+                </td>
+                <td>
+                </td>
+                <td>
+                        <div>Obtain only information of the Rule that matches the provided name</div>
+                </td>
             </tr>
-                                <tr>
-                                                                <td colspan="1">
+            <tr>
+                <td colspan="1">
                     <div class="ansibleOptionAnchor" id="parameter-"></div>
                     <b>origin</b>
                     <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
                     <div style="font-size: small">
                         <span style="color: purple">string</span>
-                                                                    </div>
-                                    </td>
-                                <td>
-                                                                                                                            <ul style="margin: 0; padding: 0"><b>Choices:</b>
-                                                                                                                                                                <li>SYSTEM</li>
-                                                                                                                                                                                                <li>OVERRIDE</li>
-                                                                                                                                                                                                <li>USER</li>
-                                                                                    </ul>
-                                                                            </td>
-                                                                <td>
-                                            <div>Obtain only information of Rules that are of a certain origin</div>
-                                                        </td>
+                    </div>
+                </td>
+                <td>
+                        <ul style="margin: 0; padding: 0"><b>Choices:</b>
+                                    <li>SYSTEM</li>
+                                    <li>OVERRIDE</li>
+                                    <li>USER</li>
+                        </ul>
+                </td>
+                <td>
+                        <div>Obtain only information of Rules that are of a certain origin</div>
+                </td>
             </tr>
-                                <tr>
-                                                                <td colspan="1">
+            <tr>
+                <td colspan="1">
                     <div class="ansibleOptionAnchor" id="parameter-"></div>
                     <b>owner</b>
                     <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
                     <div style="font-size: small">
                         <span style="color: purple">string</span>
-                                                                    </div>
-                                    </td>
-                                <td>
-                                                                                                                                                            </td>
-                                                                <td>
-                                            <div>Obtain only information of Rules owned by a certain user</div>
-                                                        </td>
+                    </div>
+                </td>
+                <td>
+                </td>
+                <td>
+                        <div>Obtain only information of Rules owned by a certain user</div>
+                </td>
             </tr>
-                                <tr>
-                                                                <td colspan="1">
+            <tr>
+                <td colspan="1">
                     <div class="ansibleOptionAnchor" id="parameter-"></div>
                     <b>type</b>
                     <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
                     <div style="font-size: small">
                         <span style="color: purple">string</span>
-                                                                    </div>
-                                    </td>
-                                <td>
-                                                                                                                            <ul style="margin: 0; padding: 0"><b>Choices:</b>
-                                                                                                                                                                <li>EVENT</li>
-                                                                                                                                                                                                <li>FLOW</li>
-                                                                                                                                                                                                <li>COMMON</li>
-                                                                                                                                                                                                <li>USER</li>
-                                                                                    </ul>
-                                                                            </td>
-                                                                <td>
-                                            <div>Obtain only information for the Rules of a certain type</div>
-                                                        </td>
+                    </div>
+                </td>
+                <td>
+                        <ul style="margin: 0; padding: 0"><b>Choices:</b>
+                                    <li>EVENT</li>
+                                    <li>FLOW</li>
+                                    <li>COMMON</li>
+                                    <li>USER</li>
+                        </ul>
+                </td>
+                <td>
+                        <div>Obtain only information for the Rules of a certain type</div>
+                </td>
             </tr>
-                        </table>
+    </table>
     <br/>
 
 
@@ -136,7 +136,6 @@ Examples
 
 .. code-block:: yaml+jinja
 
-    
     - name: Get information about the Rule named "Custom Company DDoS Rule"
       ibm.qradar.rule_info:
         name: "Custom Company DDoS Rule"
@@ -149,7 +148,6 @@ Examples
 
 
 
-
 Status
 ------
 
@@ -158,5 +156,3 @@ Authors
 ~~~~~~~
 
 - Ansible Security Automation Team (@maxamillion) <https://github.com/ansible-security>"
-
-
