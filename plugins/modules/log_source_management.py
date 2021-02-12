@@ -15,6 +15,7 @@ short_description: Manage Log Sources in QRadar
 description:
   - This module allows for addition, deletion, or modification of Log Sources in QRadar
 version_added: "1.0.0"
+author: Ansible Security Automation Team (@maxamillion) <https://github.com/ansible-security>
 options:
   name:
     description:
@@ -56,7 +57,6 @@ options:
 notes:
   - Either C(type) or C(type_id) is required
 
-author: Ansible Security Automation Team (@maxamillion) <https://github.com/ansible-security>
 """
 
 EXAMPLES = """
