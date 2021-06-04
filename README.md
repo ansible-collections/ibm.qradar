@@ -177,6 +177,9 @@ specifying at the Play level.
 
 We welcome community contributions to this collection. If you find problems, please open an issue or create a PR against the [IBM QRadar collection repository](https://github.com/ansible-collections/ibm.qradar). See [Contributing to Ansible-maintained collections](https://docs.ansible.com/ansible/devel/community/contributing_maintained_collections.html#contributing-maintained-collections) for complete details.
 
+You can also join us on:
+
+- IRC - the ``#ansible-community`` [irc.libera.chat](https://libera.chat/) channel
 
 See the [Ansible Community Guide](https://docs.ansible.com/ansible/latest/community/index.html) for details on contributing to Ansible.
 
