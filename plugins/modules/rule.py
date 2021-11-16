@@ -88,7 +88,8 @@ def main():
     )
 
     qradar_request = QRadarRequest(
-        module, not_rest_data_keys=["id", "name", "state", "owner"],
+        module,
+        not_rest_data_keys=["id", "name", "state", "owner"],
     )
 
     # if module.params['name']:

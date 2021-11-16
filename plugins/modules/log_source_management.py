@@ -149,7 +149,8 @@ def main():
     )
 
     qradar_request = QRadarRequest(
-        module, not_rest_data_keys=["state", "type_name", "identifier"],
+        module,
+        not_rest_data_keys=["state", "type_name", "identifier"],
     )
 
     log_source_exists = qradar_request.get(

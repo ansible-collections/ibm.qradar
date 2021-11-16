@@ -116,7 +116,8 @@ def main():
     )
 
     qradar_request = QRadarRequest(
-        module, not_rest_data_keys=["name", "id", "assigned_to", "closing_reason"],
+        module,
+        not_rest_data_keys=["name", "id", "assigned_to", "closing_reason"],
     )
 
     # if module.params['name']:

@@ -97,7 +97,10 @@ def main():
 
     module = AnsibleModule(argument_spec=argspec, supports_check_mode=True)
 
-    qradar_request = QRadarRequest(module, not_rest_data_keys=["state", "id"],)
+    qradar_request = QRadarRequest(
+        module,
+        not_rest_data_keys=["state", "id"],
+    )
 
     # if module.params['name']:
     #    # FIXME - QUERY HERE BY NAME
