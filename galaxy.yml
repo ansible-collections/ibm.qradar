@@ -7,7 +7,8 @@ name: qradar
 # a list of the collection's content authors: 'Full Name <email> (http://site) @nicks:irc/im/site#channel'
 authors:
   - Ansible Security Team (https://github.com/ansible-security)
-
+dependencies:
+  "ansible.netcommon": ">=2.5.0"
 ### optional but strongly advised
 # short summary of the collection
 description: Ansible Security Collection for IBM Qradar SIEM
