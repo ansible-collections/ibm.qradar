@@ -8,7 +8,7 @@ name: qradar
 authors:
   - Ansible Security Team (https://github.com/ansible-security)
 dependencies:
-  "ansible.netcommon": ">=2.5.0"
+  "ansible.netcommon": ">=2.5.1"
 ### optional but strongly advised
 # short summary of the collection
 description: Ansible Security Collection for IBM Qradar SIEM
