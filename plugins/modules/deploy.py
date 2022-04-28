@@ -40,14 +40,9 @@ EXAMPLES = """
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils._text import to_text
 
-from ansible.module_utils.urls import Request
-from ansible.module_utils.six.moves.urllib.parse import quote
-from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
     QRadarRequest,
 )
-
-import json
 
 
 def main():

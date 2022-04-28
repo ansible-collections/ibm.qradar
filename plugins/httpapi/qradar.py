@@ -19,7 +19,6 @@ version_added: "1.0"
 import json
 
 from ansible.module_utils.basic import to_text
-from ansible.errors import AnsibleConnectionFailure
 from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible.plugins.httpapi import HttpApiBase
 from ansible.module_utils.connection import ConnectionError
