@@ -54,18 +54,11 @@ EXAMPLES = """
 """
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils._text import to_text
 
-from ansible.module_utils.urls import Request
 from ansible.module_utils.six.moves.urllib.parse import quote
-from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
     QRadarRequest,
-    find_dict_in_list,
-    set_offense_values,
 )
-
-import copy
 import json
 
 
@@ -75,7 +68,9 @@ def main():
         id=dict(required=False, type="int"),
         name=dict(required=False, type="str"),
         state=dict(
-            required=True, choices=["enabled", "disabled", "absent"], type="str"
+            required=True,
+            choices=["enabled", "disabled", "absent"],
+            type="str",
         ),
         owner=dict(required=False, type="str"),
     )
@@ -88,7 +83,8 @@ def main():
     )
 
     qradar_request = QRadarRequest(
-        module, not_rest_data_keys=["id", "name", "state", "owner"],
+        module,
+        not_rest_data_keys=["id", "name", "state", "owner"],
     )
 
     # if module.params['name']:
@@ -136,7 +132,9 @@ def main():
                 module.params["rule"]["enabled"] = True
 
                 qradar_return_data = qradar_request.post_by_path(
-                    "api/analytics/rules/{0}".format(module.params["rule"]["id"]),
+                    "api/analytics/rules/{0}".format(
+                        module.params["rule"]["id"]
+                    ),
                     data=json.dumps(module.params["rule"]),
                 )
                 if module.params["id"]:
@@ -158,11 +156,15 @@ def main():
         else:
             if module.params["id"]:
                 module.fail_json(
-                    msg="Unable to find rule ID: {0}".format(module.params["id"])
+                    msg="Unable to find rule ID: {0}".format(
+                        module.params["id"]
+                    )
                 )
             if module.params["name"]:
                 module.fail_json(
-                    msg='Unable to find rule named: "{0}"'.format(module.params["name"])
+                    msg='Unable to find rule named: "{0}"'.format(
+                        module.params["name"]
+                    )
                 )
 
     elif module.params["state"] == "disabled":
@@ -190,7 +192,9 @@ def main():
                 module.params["rule"]["enabled"] = False
 
                 qradar_return_data = qradar_request.post_by_path(
-                    "api/analytics/rules/{0}".format(module.params["rule"]["id"]),
+                    "api/analytics/rules/{0}".format(
+                        module.params["rule"]["id"]
+                    ),
                     data=json.dumps(module.params["rule"]),
                 )
                 if module.params["id"]:
@@ -212,11 +216,15 @@ def main():
         else:
             if module.params["id"]:
                 module.fail_json(
-                    msg="Unable to find rule ID: {0}".format(module.params["id"])
+                    msg="Unable to find rule ID: {0}".format(
+                        module.params["id"]
+                    )
                 )
             if module.params["name"]:
                 module.fail_json(
-                    msg='Unable to find rule named: "{0}"'.format(module.params["name"])
+                    msg='Unable to find rule named: "{0}"'.format(
+                        module.params["name"]
+                    )
                 )
 
     elif module.params["state"] == "absent":
@@ -226,7 +234,9 @@ def main():
             )
             if module.params["id"]:
                 module.exit_json(
-                    msg="Successfully deleted rule ID: {0}".format(module.params["id"]),
+                    msg="Successfully deleted rule ID: {0}".format(
+                        module.params["id"]
+                    ),
                     qradar_return_data=qradar_return_data,
                     changed=True,
                 )

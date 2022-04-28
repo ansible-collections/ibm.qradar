@@ -116,17 +116,12 @@ EXAMPLES = """
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils._text import to_text
 
-from ansible.module_utils.urls import Request
 from ansible.module_utils.six.moves.urllib.parse import quote
-from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
     QRadarRequest,
     find_dict_in_list,
     set_offense_values,
 )
-
-import copy
-import json
 
 
 def main():
@@ -182,15 +177,21 @@ def main():
         if module.params["closing_reason_id"]:
             query_strs.append(
                 quote(
-                    "closing_reason_id={0}".format(module.params["closing_reason_id"])
+                    "closing_reason_id={0}".format(
+                        module.params["closing_reason_id"]
+                    )
                 )
             )
 
         if module.params["follow_up"] is not None:
-            query_strs.append(quote("follow_up={0}".format(module.params["follow_up"])))
+            query_strs.append(
+                quote("follow_up={0}".format(module.params["follow_up"]))
+            )
 
         if module.params["protected"] is not None:
-            query_strs.append(quote("protected={0}".format(module.params["protected"])))
+            query_strs.append(
+                quote("protected={0}".format(module.params["protected"]))
+            )
 
         if query_strs:
             offenses = qradar_request.get(

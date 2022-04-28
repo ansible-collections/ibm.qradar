@@ -53,18 +53,11 @@ EXAMPLES = """
 """
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils._text import to_text
 
-from ansible.module_utils.urls import Request
 from ansible.module_utils.six.moves.urllib.parse import quote
-from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
     QRadarRequest,
-    find_dict_in_list,
 )
-
-import copy
-import json
 
 
 def set_offense_values(module, qradar_request):
@@ -97,7 +90,10 @@ def main():
 
     module = AnsibleModule(argument_spec=argspec, supports_check_mode=True)
 
-    qradar_request = QRadarRequest(module, not_rest_data_keys=["state", "id"],)
+    qradar_request = QRadarRequest(
+        module,
+        not_rest_data_keys=["state", "id"],
+    )
 
     # if module.params['name']:
     #    # FIXME - QUERY HERE BY NAME
@@ -118,7 +114,9 @@ def main():
 
         note = found_notes[0]
         if note["note_text"] == module.params["note_text"]:
-            module.exit_json(msg="No changes necessary. Nothing to do.", changed=False)
+            module.exit_json(
+                msg="No changes necessary. Nothing to do.", changed=False
+            )
         else:
             if module.check_mode:
                 module.exit_json(
@@ -128,7 +126,8 @@ def main():
 
             qradar_return_data = qradar_request.post_by_path(
                 "api/siem/offenses/{0}/notes?note_text={1}".format(
-                    module.params["id"], quote("{0}".format(module.params["note_text"]))
+                    module.params["id"],
+                    quote("{0}".format(module.params["note_text"])),
                 ),
                 data=False,
             )
@@ -149,7 +148,8 @@ def main():
 
         qradar_return_data = qradar_request.post_by_path(
             "api/siem/offenses/{0}/notes?note_text={1}".format(
-                module.params["id"], quote("{0}".format(module.params["note_text"]))
+                module.params["id"],
+                quote("{0}".format(module.params["note_text"])),
             ),
             data=False,
         )

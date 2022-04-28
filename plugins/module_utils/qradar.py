@@ -8,9 +8,8 @@ from __future__ import absolute_import, division, print_function
 
 __metaclass__ = type
 from ansible.module_utils.urls import CertificateError
-from ansible.module_utils.six.moves.urllib.parse import urlencode, quote_plus
+from ansible.module_utils.six.moves.urllib.parse import quote_plus
 from ansible.module_utils.connection import ConnectionError
-from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible.module_utils.connection import Connection
 from ansible.module_utils._text import to_text
 
@@ -41,7 +40,9 @@ def set_offense_values(module, qradar_request):
     if module.params["closing_reason"]:
         found_closing_reason = qradar_request.get_by_path(
             "api/siem/offense_closing_reasons?filter={0}".format(
-                quote_plus('text="{0}"'.format(module.params["closing_reason"]))
+                quote_plus(
+                    'text="{0}"'.format(module.params["closing_reason"])
+                )
             )
         )
         if found_closing_reason:
@@ -81,9 +82,13 @@ class QRadarRequest(object):
                 method, uri, payload=payload, headers=self.headers
             )
         except ConnectionError as e:
-            self.module.fail_json(msg="connection error occurred: {0}".format(e))
+            self.module.fail_json(
+                msg="connection error occurred: {0}".format(e)
+            )
         except CertificateError as e:
-            self.module.fail_json(msg="certificate error occurred: {0}".format(e))
+            self.module.fail_json(
+                msg="certificate error occurred: {0}".format(e)
+            )
         except ValueError as e:
             self.module.fail_json(msg="certificate not found: {0}".format(e))
 
@@ -149,7 +154,9 @@ class QRadarRequest(object):
             return qradar_data
 
         except TypeError as e:
-            self.module.fail_json(msg="invalid data type provided: {0}".format(e))
+            self.module.fail_json(
+                msg="invalid data type provided: {0}".format(e)
+            )
 
     def post_by_path(self, rest_path, data=None):
         """

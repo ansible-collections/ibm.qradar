@@ -72,9 +72,7 @@ EXAMPLES = """
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils._text import to_text
 
-from ansible.module_utils.urls import Request
 from ansible.module_utils.six.moves.urllib.parse import quote
-from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
     QRadarRequest,
     find_dict_in_list,
@@ -116,9 +114,9 @@ def set_log_source_values(module, qradar_request):
             )
     else:
         # Set it to the default as provided by the QRadar Instance
-        module.params["protocol_type_id"] = log_source_type_found["protocol_types"][0][
-            "protocol_id"
-        ]
+        module.params["protocol_type_id"] = log_source_type_found[
+            "protocol_types"
+        ][0]["protocol_id"]
 
     module.params["protocol_parameters"] = [
         {
@@ -149,7 +147,8 @@ def main():
     )
 
     qradar_request = QRadarRequest(
-        module, not_rest_data_keys=["state", "type_name", "identifier"],
+        module,
+        not_rest_data_keys=["state", "type_name", "identifier"],
     )
 
     log_source_exists = qradar_request.get(
@@ -161,8 +160,13 @@ def main():
     if log_source_exists:
 
         if module.params["state"] == "present":
-            existing_log_source_protocol_identifier, _elspi_index = find_dict_in_list(
-                log_source_exists[0]["protocol_parameters"], "name", "identifier"
+            (
+                existing_log_source_protocol_identifier,
+                _elspi_index,
+            ) = find_dict_in_list(
+                log_source_exists[0]["protocol_parameters"],
+                "name",
+                "identifier",
             )
 
             set_log_source_values(module, qradar_request)
@@ -184,7 +188,9 @@ def main():
                 ] = module.params["protocol_parameters"][0]
                 log_source_exists[0]["name"] = module.params["name"]
                 log_source_exists[0]["type_id"] = module.params["type_id"]
-                log_source_exists[0]["description"] = module.params["description"]
+                log_source_exists[0]["description"] = module.params[
+                    "description"
+                ]
                 if module.check_mode:
                     qradar_return_data = {
                         "EMPTY": "IN CHECK MODE, NO TRANSACTION TOOK PLACE"
