@@ -182,15 +182,21 @@ def main():
         if module.params["closing_reason_id"]:
             query_strs.append(
                 quote(
-                    "closing_reason_id={0}".format(module.params["closing_reason_id"])
+                    "closing_reason_id={0}".format(
+                        module.params["closing_reason_id"]
+                    )
                 )
             )
 
         if module.params["follow_up"] is not None:
-            query_strs.append(quote("follow_up={0}".format(module.params["follow_up"])))
+            query_strs.append(
+                quote("follow_up={0}".format(module.params["follow_up"]))
+            )
 
         if module.params["protected"] is not None:
-            query_strs.append(quote("protected={0}".format(module.params["protected"])))
+            query_strs.append(
+                quote("protected={0}".format(module.params["protected"]))
+            )
 
         if query_strs:
             offenses = qradar_request.get(

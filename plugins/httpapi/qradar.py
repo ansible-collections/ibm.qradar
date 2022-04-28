@@ -23,7 +23,9 @@ from ansible.errors import AnsibleConnectionFailure
 from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible.plugins.httpapi import HttpApiBase
 from ansible.module_utils.connection import ConnectionError
-from ansible_collections.ibm.qradar.plugins.module_utils.qradar import BASE_HEADERS
+from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
+    BASE_HEADERS,
+)
 
 
 class HttpApi(HttpApiBase):
@@ -44,7 +46,8 @@ class HttpApi(HttpApiBase):
 
     def _display_request(self, request_method):
         self.connection.queue_message(
-            "vvvv", "Web Services: %s %s" % (request_method, self.connection._url)
+            "vvvv",
+            "Web Services: %s %s" % (request_method, self.connection._url),
         )
 
     def _get_response_value(self, response_data):

@@ -116,7 +116,8 @@ def main():
     )
 
     qradar_request = QRadarRequest(
-        module, not_rest_data_keys=["name", "id", "assigned_to", "closing_reason"],
+        module,
+        not_rest_data_keys=["name", "id", "assigned_to", "closing_reason"],
     )
 
     # if module.params['name']:
@@ -133,32 +134,44 @@ def main():
         post_strs = []
 
         if module.params["status"] and (
-            to_text(found_offense["status"]) != to_text(module.params["status"])
+            to_text(found_offense["status"])
+            != to_text(module.params["status"])
         ):
-            post_strs.append("status={0}".format(to_text(module.params["status"])))
+            post_strs.append(
+                "status={0}".format(to_text(module.params["status"]))
+            )
 
         if module.params["assigned_to"] and (
             to_text(found_offense["assigned_to"])
             != to_text(module.params["assigned_to"])
         ):
-            post_strs.append("assigned_to={0}".format(module.params["assigned_to"]))
+            post_strs.append(
+                "assigned_to={0}".format(module.params["assigned_to"])
+            )
 
         if module.params["closing_reason_id"] and (
-            found_offense["closing_reason_id"] != module.params["closing_reason_id"]
+            found_offense["closing_reason_id"]
+            != module.params["closing_reason_id"]
         ):
             post_strs.append(
-                "closing_reason_id={0}".format(module.params["closing_reason_id"])
+                "closing_reason_id={0}".format(
+                    module.params["closing_reason_id"]
+                )
             )
 
         if module.params["follow_up"] and (
             found_offense["follow_up"] != module.params["follow_up"]
         ):
-            post_strs.append("follow_up={0}".format(module.params["follow_up"]))
+            post_strs.append(
+                "follow_up={0}".format(module.params["follow_up"])
+            )
 
         if module.params["protected"] and (
             found_offense["protected"] != module.params["protected"]
         ):
-            post_strs.append("protected={0}".format(module.params["protected"]))
+            post_strs.append(
+                "protected={0}".format(module.params["protected"])
+            )
 
         if post_strs:
             if module.check_mode:
@@ -174,12 +187,16 @@ def main():
             )
             # FIXME - handle the scenario in which we can search by name and this isn't a required param anymore
             module.exit_json(
-                msg="Successfully updated Offense ID: {0}".format(module.params["id"]),
+                msg="Successfully updated Offense ID: {0}".format(
+                    module.params["id"]
+                ),
                 qradar_return_data=qradar_return_data,
                 changed=True,
             )
         else:
-            module.exit_json(msg="No changes necessary. Nothing to do.", changed=False)
+            module.exit_json(
+                msg="No changes necessary. Nothing to do.", changed=False
+            )
     else:
         # FIXME - handle the scenario in which we can search by name and this isn't a required param anymore
         module.fail_json(
