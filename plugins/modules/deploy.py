@@ -43,7 +43,9 @@ from ansible.module_utils._text import to_text
 from ansible.module_utils.urls import Request
 from ansible.module_utils.six.moves.urllib.parse import quote
 from ansible.module_utils.six.moves.urllib.error import HTTPError
-from ansible_collections.ibm.qradar.plugins.module_utils.qradar import QRadarRequest
+from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
+    QRadarRequest,
+)
 
 import json
 
@@ -52,20 +54,26 @@ def main():
 
     argspec = dict(
         type=dict(
-            choices=["INCREMENTAL", "FULL"], required=False, default="INCREMENTAL"
+            choices=["INCREMENTAL", "FULL"],
+            required=False,
+            default="INCREMENTAL",
         )
     )
 
     module = AnsibleModule(argument_spec=argspec, supports_check_mode=False)
 
     qradar_request = QRadarRequest(
-        module, not_rest_data_keys=["state", "type_name", "identifier"],
+        module,
+        not_rest_data_keys=["state", "type_name", "identifier"],
     )
 
-    qradar_return_data = qradar_request.post_by_path("api/staged_config/deploy_status")
+    qradar_return_data = qradar_request.post_by_path(
+        "api/staged_config/deploy_status"
+    )
 
     if "message" in qradar_return_data and (
-        to_text("No changes to deploy") in to_text(qradar_return_data["message"])
+        to_text("No changes to deploy")
+        in to_text(qradar_return_data["message"])
     ):
         module.exit_json(
             msg="No changes to deploy",
@@ -74,7 +82,9 @@ def main():
         )
     else:
         module.exit_json(
-            msg="Successfully initiated {0} deployment.".format(module.params["type"]),
+            msg="Successfully initiated {0} deployment.".format(
+                module.params["type"]
+            ),
             qradar_return_data=qradar_return_data,
             changed=True,
         )

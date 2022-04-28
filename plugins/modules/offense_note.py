@@ -97,7 +97,10 @@ def main():
 
     module = AnsibleModule(argument_spec=argspec, supports_check_mode=True)
 
-    qradar_request = QRadarRequest(module, not_rest_data_keys=["state", "id"],)
+    qradar_request = QRadarRequest(
+        module,
+        not_rest_data_keys=["state", "id"],
+    )
 
     # if module.params['name']:
     #    # FIXME - QUERY HERE BY NAME
@@ -118,7 +121,9 @@ def main():
 
         note = found_notes[0]
         if note["note_text"] == module.params["note_text"]:
-            module.exit_json(msg="No changes necessary. Nothing to do.", changed=False)
+            module.exit_json(
+                msg="No changes necessary. Nothing to do.", changed=False
+            )
         else:
             if module.check_mode:
                 module.exit_json(
@@ -128,7 +133,8 @@ def main():
 
             qradar_return_data = qradar_request.post_by_path(
                 "api/siem/offenses/{0}/notes?note_text={1}".format(
-                    module.params["id"], quote("{0}".format(module.params["note_text"]))
+                    module.params["id"],
+                    quote("{0}".format(module.params["note_text"])),
                 ),
                 data=False,
             )
@@ -149,7 +155,8 @@ def main():
 
         qradar_return_data = qradar_request.post_by_path(
             "api/siem/offenses/{0}/notes?note_text={1}".format(
-                module.params["id"], quote("{0}".format(module.params["note_text"]))
+                module.params["id"],
+                quote("{0}".format(module.params["note_text"])),
             ),
             data=False,
         )

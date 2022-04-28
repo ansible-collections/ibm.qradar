@@ -89,9 +89,13 @@ def main():
         name=dict(required=False, type="str"),
         owner=dict(required=False, type="str"),
         type=dict(
-            required=False, choices=["EVENT", "FLOW", "COMMON", "USER"], type="str"
+            required=False,
+            choices=["EVENT", "FLOW", "COMMON", "USER"],
+            type="str",
         ),
-        origin=dict(required=False, choices=["SYSTEM", "OVERRIDE", "USER"], type="str"),
+        origin=dict(
+            required=False, choices=["SYSTEM", "OVERRIDE", "USER"], type="str"
+        ),
     )
 
     module = AnsibleModule(argument_spec=argspec, supports_check_mode=True)
@@ -116,13 +120,17 @@ def main():
             )
 
         if module.params["owner"]:
-            query_strs.append(quote("owner={0}".format(module.params["owner"])))
+            query_strs.append(
+                quote("owner={0}".format(module.params["owner"]))
+            )
 
         if module.params["type"]:
             query_strs.append(quote("type={0}".format(module.params["type"])))
 
         if module.params["origin"]:
-            query_strs.append(quote("origin={0}".format(module.params["origin"])))
+            query_strs.append(
+                quote("origin={0}".format(module.params["origin"]))
+            )
 
         if query_strs:
             rules = qradar_request.get(
