@@ -161,7 +161,7 @@ Notes
 Examples
 --------
 
-.. code-block:: yaml+jinja
+.. code-block:: yaml
 
     - name: Add a snort log source to IBM QRadar
       ibm.qradar.log_source_management:

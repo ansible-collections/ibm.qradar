@@ -74,7 +74,7 @@ Parameters
 Examples
 --------
 
-.. code-block:: yaml+jinja
+.. code-block:: yaml
 
     - name: Add a note to QRadar Offense ID 1
       ibm.qradar.offense_note:

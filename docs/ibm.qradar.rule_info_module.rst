@@ -134,7 +134,7 @@ Notes
 Examples
 --------
 
-.. code-block:: yaml+jinja
+.. code-block:: yaml
 
     - name: Get information about the Rule named "Custom Company DDoS Rule"
       ibm.qradar.rule_info:

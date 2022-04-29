@@ -11,7 +11,8 @@ releases:
     - description: Take action on a QRadar Offense
       name: ibm.qradar.offense_action
       namespace: ''
-    - description: Obtain information about one or many QRadar Offenses, with filter options
+    - description: Obtain information about one or many QRadar Offenses, with filter
+        options
       name: ibm.qradar.offense_info
       namespace: ''
     - description: Create or update a QRadar Offense Note
@@ -20,7 +21,8 @@ releases:
     - description: Manage state of QRadar Rules, with filter options
       name: ibm.qradar.rule
       namespace: ''
-    - description: Obtain information about one or many QRadar Rules, with filter options
+    - description: Obtain information about one or many QRadar Rules, with filter
+        options
       name: ibm.qradar.rule_info
       namespace: ''
     release_date: '2020-06-22'
@@ -39,3 +41,12 @@ releases:
       release_summary:
       - Re-releasing 1.0.2 with updated galaxy file.
     release_date: '2020-09-1'
+  2.0.0:
+    changes:
+      major_changes:
+      - Minimum required ansible.netcommon version is 2.5.1.
+      - Updated base plugin references to ansible.netcommon.
+    fragments:
+    - netcommon_ref_update.yaml
+    - update_tests_unit_black_requirements.yaml
+    release_date: '2022-04-29'

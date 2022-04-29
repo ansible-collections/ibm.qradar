@@ -108,7 +108,7 @@ Parameters
 Examples
 --------
 
-.. code-block:: yaml+jinja
+.. code-block:: yaml
 
     - name: Enable Rule 'Ansible Example DDoS Rule'
       qradar_rule:
