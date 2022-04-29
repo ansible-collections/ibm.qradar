@@ -67,7 +67,7 @@ Notes
 Examples
 --------
 
-.. code-block:: yaml+jinja
+.. code-block:: yaml
 
     - name: run an incremental deploy
       ibm.qradar.deploy:

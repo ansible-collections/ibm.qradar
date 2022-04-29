@@ -184,7 +184,7 @@ Notes
 Examples
 --------
 
-.. code-block:: yaml+jinja
+.. code-block:: yaml
 
     - name: Get list of all currently OPEN IBM QRadar Offenses
       ibm.qradar.offense_info:
