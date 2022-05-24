@@ -7,8 +7,8 @@ __metaclass__ = type
 
 DOCUMENTATION = """
 ---
-author: Ansible Security Automation Team
-httpapi : qradar
+author: Ansible Security Team (@ansible-security)
+name: qradar
 short_description: HttpApi Plugin for IBM QRadar
 description:
   - This HttpApi plugin provides methods to connect to IBM QRadar over a
