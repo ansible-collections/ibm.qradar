@@ -13,7 +13,7 @@ short_description: HttpApi Plugin for IBM QRadar
 description:
   - This HttpApi plugin provides methods to connect to IBM QRadar over a
     HTTP(S)-based api.
-version_added: "1.0"
+version_added: "1.0.0"
 """
 
 import json
