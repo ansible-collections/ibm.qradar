@@ -1,4 +1,4 @@
-name: Test TM Deepsec collection
+name: Test IBM Qradar collection
 on:
   pull_request:
     branches: [main]
