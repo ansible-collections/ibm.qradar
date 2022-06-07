@@ -100,7 +100,7 @@ def main():
     #    found_offense = qradar_request.get('/api/analytics/rules?filter={0}'.format(module.params['name']))
 
     if module.params["id"]:
-        rules = qradar_request.get(
+        code, rules = qradar_request.get(
             "/api/analytics/rules/{0}".format(module.params["id"])
         )
 
@@ -126,11 +126,11 @@ def main():
             )
 
         if query_strs:
-            rules = qradar_request.get(
+            code, rules = qradar_request.get(
                 "/api/analytics/rules?filter={0}".format("&".join(query_strs))
             )
         else:
-            rules = qradar_request.get("/api/analytics/rules")
+            code, rules = qradar_request.get("/api/analytics/rules")
 
         module.exit_json(rules=rules, changed=False)
 

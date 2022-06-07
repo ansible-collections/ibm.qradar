@@ -117,7 +117,7 @@ def main():
     #    # FIXME - QUERY HERE BY NAME
     #    found_offense = qradar_request.get('/api/siem/offenses?filter={0}'.format(module.params['name']))
 
-    found_offense = qradar_request.get(
+    code, found_offense = qradar_request.get(
         "/api/siem/offenses/{0}".format(module.params["id"])
     )
 
@@ -173,7 +173,7 @@ def main():
                     changed=True,
                 )
 
-            qradar_return_data = qradar_request.post_by_path(
+            code, qradar_return_data = qradar_request.post_by_path(
                 "api/siem/offenses/{0}?{1}".format(
                     module.params["id"], "&".join(post_strs)
                 )

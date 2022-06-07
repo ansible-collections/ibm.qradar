@@ -12,8 +12,10 @@ from ansible.module_utils.six.moves.urllib.parse import quote_plus
 from ansible.module_utils.connection import ConnectionError
 from ansible.module_utils.connection import Connection
 from ansible.module_utils._text import to_text
-
+from ansible.module_utils.six import iteritems
+from copy import copy
 import json
+import q
 
 BASE_HEADERS = {"Content-Type": "application/json", "Version": "9.1"}
 
@@ -58,12 +60,74 @@ def set_offense_values(module, qradar_request):
         module.params["status"] = module.params["status"].upper()
 
 
+def remove_unsupported_keys_from_payload_dict(payload, supported_key_list):
+    temp_payload = []
+    for each in payload:
+        temp_dict = copy(each)
+        if isinstance(each, dict):
+            for every_key in each.keys():
+                if every_key not in supported_key_list:
+                    temp_dict.pop(every_key)
+            temp_payload.append(temp_dict)
+    if temp_payload:
+        q(temp_payload)
+        return temp_payload
+    return payload
+
+
+def list_to_dict(input_dict):
+    if isinstance(input_dict, dict):
+        for k, v in iteritems(input_dict):
+            if isinstance(v, dict):
+                list_to_dict(v)
+            elif isinstance(v, list):
+                temp_dict = {}
+                for each in v:
+                    if isinstance(each, dict):
+                        if each.get("id") or each.get("id") == 0:
+                            each.pop("id")
+                        each_key_values = "_".join(
+                            [str(x) for x in each.values()]
+                        )
+                        temp_dict.update({each_key_values: each})
+                        input_dict[k] = temp_dict
+
+
 class QRadarRequest(object):
-    def __init__(self, module, headers=None, not_rest_data_keys=None):
+    # def __init__(self, module, headers=None, not_rest_data_keys=None):
 
+    #     self.module = module
+    #     self.connection = Connection(self.module._socket_path)
+
+    #     # This allows us to exclude specific argspec keys from being included by
+    #     # the rest data that don't follow the qradar_* naming convention
+    #     if not_rest_data_keys:
+    #         self.not_rest_data_keys = not_rest_data_keys
+    #     else:
+    #         self.not_rest_data_keys = []
+    #     self.not_rest_data_keys.append("validate_certs")
+    #     self.headers = headers if headers else BASE_HEADERS
+    def __init__(
+        self,
+        module=None,
+        connection=None,
+        headers=None,
+        not_rest_data_keys=None,
+        task_vars=None,
+    ):
         self.module = module
-        self.connection = Connection(self.module._socket_path)
-
+        if module:
+            # This will be removed, once all of the available modules
+            # are moved to use action plugin design, as otherwise test
+            # would start to complain without the implementation.
+            self.connection = Connection(self.module._socket_path)
+        elif connection:
+            self.connection = connection
+            try:
+                self.connection.load_platform_plugins("ibm.qradar.qradar")
+                self.connection.set_options(var_options=task_vars)
+            except ConnectionError:
+                raise
         # This allows us to exclude specific argspec keys from being included by
         # the rest data that don't follow the qradar_* naming convention
         if not_rest_data_keys:
@@ -119,7 +183,7 @@ class QRadarRequest(object):
                 )
             )
 
-        return response
+        return code, response
 
     def get(self, url, **kwargs):
         return self._httpapi_error_handle("GET", url, **kwargs)

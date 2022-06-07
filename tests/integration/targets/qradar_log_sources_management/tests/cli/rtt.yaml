@@ -1,0 +1,76 @@
+---
+- debug:
+    msg: START qradar_log_sources_management round trip integration tests on connection={{ ansible_connection
+      }}
+
+- include_tasks: _remove_log_sources_config.yaml
+
+- block:
+
+    - name: Apply the provided configuration (base config)
+      register: base_config
+      ibm.qradar.qradar_log_sources_management: &id001
+        state: merged
+        config:
+          - name: "Snort logs"
+            type_name: "Snort Open Source IDS"
+            description: "Snort IDS remote logs from rsyslog"
+            identifier: "192.0.2.1"
+          - name: "Apache HTTP Server logs"
+            type_name: "Apache HTTP Server"
+            description: "Apache HTTP Server remote logs from rsyslog"
+            identifier: "198.51.100.1"
+
+    - name: Gather Qradar Log Sources Management facts
+      register: gather_result
+      ibm.qradar.qradar_log_sources_management:
+        config:
+          - name: "Snort logs"
+          - name: "Apache HTTP Server logs"
+        state: gathered
+
+    - name: Apply the configuration which need to be reverted
+      register: result
+      ibm.qradar.qradar_log_sources_management:
+        config:
+          - name: "Snort logs"
+            type_name: "Snort Open Source IDS"
+            description: "REPLACED Snort IDS remote logs from rsyslog"
+            identifier: "198.51.100.1"
+        state: replaced
+
+    - debug:
+        msg:
+          - "{{ merged['before'] | symmetric_difference(result['qradar_log_sources_management']['before']) |\
+              \ length }}"
+          - "{{ replaced['after'] | symmetric_difference(result['qradar_log_sources_management']['after']) |\
+            \ length }}"
+
+    - assert:
+        that:
+          - result.changed == true
+          - "{{ merged['before'] | symmetric_difference(result['qradar_log_sources_management']['before']) |\
+            \ length == 1 }}"
+          - "{{ replaced['after'] | symmetric_difference(result['qradar_log_sources_management']['after']) |\
+            \ length == 3 }}"
+
+    - name: Revert back to base config using facts round trip
+      register: revert
+      ibm.qradar.qradar_log_sources_management:
+        config: "{{ gather_result['gathered'] }}"
+        state: replaced
+    
+    - debug:
+        msg:
+          - "{{ merged['after'] | symmetric_difference(revert['qradar_log_sources_management']['after']) |\
+            \ length }}"
+
+    - assert:
+        that:
+          - revert['changed'] == true
+          - "{{ merged['after'] | symmetric_difference(revert['qradar_log_sources_management']['after']) |\
+            \ length == 3 }}"
+
+  always:
+
+    - include_tasks: _remove_log_sources_config.yaml

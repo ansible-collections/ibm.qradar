@@ -1,0 +1,7 @@
+---
+- name: Remove already configured Log Sources Management by Name
+  ibm.qradar.qradar_log_sources_management:
+    state: deleted
+    config:
+      - name: "Snort logs"
+      - name: "Apache HTTP Server logs"
