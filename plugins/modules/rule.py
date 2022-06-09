@@ -131,7 +131,7 @@ def main():
                 # Not enabled, enable It
                 module.params["rule"]["enabled"] = True
 
-                code, qradar_return_data = qradar_request.post_by_path(
+                qradar_return_data = qradar_request.post_by_path(
                     "api/analytics/rules/{0}".format(
                         module.params["rule"]["id"]
                     ),
@@ -191,7 +191,7 @@ def main():
                 # Not disabled, disable It
                 module.params["rule"]["enabled"] = False
 
-                code, qradar_return_data = qradar_request.post_by_path(
+                qradar_return_data = qradar_request.post_by_path(
                     "api/analytics/rules/{0}".format(
                         module.params["rule"]["id"]
                     ),

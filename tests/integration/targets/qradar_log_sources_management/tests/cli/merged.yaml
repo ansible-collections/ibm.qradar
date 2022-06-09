@@ -43,13 +43,6 @@
       with_dict: "{{ dict }}"
       loop: "{{ result['qradar_log_sources_management']['after'] }}"
 
-    - debug:
-        msg:
-          - "{{ result['qradar_log_sources_management']['after'] }}"
-          - "{{ merged['after'] | symmetric_difference(result['qradar_log_sources_management']['after']) |\
-            \ length }}"
-          - "{{ merged['after'] | symmetric_difference(result['qradar_log_sources_management']['after']) }}"
-
     - name: Assert that task reports change and after dict is correctly generated
       assert:
         that:

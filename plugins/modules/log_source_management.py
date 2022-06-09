@@ -83,17 +83,19 @@ import json
 
 def set_log_source_values(module, qradar_request):
     if module.params["type_name"]:
-        code, log_source_type_found = qradar_request.get(
+        code, query_response = qradar_request.get(
             "/api/config/event_sources/log_source_management/log_source_types?filter={0}".format(
                 quote('name="{0}"'.format(module.params["type_name"]))
             )
-        )[0]
+        )
+        log_source_type_found = query_response[0]
     if module.params["type_id"]:
-        code, log_source_type_found = qradar_request.get(
-            "api/config/event_sources/log_source_management/log_source_types?filter={0}".format(
-                quote('id="{0}"'.format(module.params["type_id"]))
+        code, query_response = qradar_request.get(
+            "/api/config/event_sources/log_source_management/log_source_types?filter={0}".format(
+                quote('name="{0}"'.format(module.params["type_name"]))
             )
-        )[0]
+        )
+        code, log_source_type_found = query_response[0]
     if log_source_type_found:
         if not module.params["type_id"]:
             module.params["type_id"] = log_source_type_found["id"]

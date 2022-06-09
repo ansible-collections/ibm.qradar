@@ -90,6 +90,7 @@ options:
           - The set of log source group IDs this log source is a member of.
             Each ID must correspond to an existing log source group.
         type: list
+        elements: str
       requires_deploy:
         description:
           - Set to 'true' if you need to deploy changes to enable the log source for use;
@@ -130,16 +131,374 @@ author: Ansible Security Automation Team (@justjais) <https://github.com/ansible
 """
 
 EXAMPLES = """
-- name: Add Snort n CrowdStrike Falcon log sources to IBM QRadar
+
+# Using MERGED state
+# -------------------
+
+- name: Add Snort n Apache log sources to IBM QRadar
   ibm.qradar.qradar_log_sources_management:
     config:
-      - name: "Snort Priority logs"
+      - name: "Snort logs"
         type_name: "Snort Open Source IDS"
         description: "Snort IDS remote logs from rsyslog"
         identifier: "192.0.2.1"
-      - name: "CrowdStrike Falcon logs"
-        type_name: "CrowdStrike Falcon IDS"
-        description: "CrowdStrike Falcon IDS remote logs from rsyslog"
-        identifier: "192.51.1.110"
+      - name: "Apache HTTP Server logs"
+        type_name: "Apache HTTP Server"
+        description: "Apache HTTP Server remote logs from rsyslog"
+        identifier: "198.51.100.1"
     state: merged
+
+# RUN output:
+# -----------
+
+#   qradar_log_sources_management:
+#     after:
+#     - auto_discovered: false
+#       average_eps: 0
+#       coalesce_events: true
+#       creation_date: 1654727311444
+#       credibility: 5
+#       description: Snort IDS remote logs from rsyslog
+#       enabled: true
+#       gateway: false
+#       group_ids:
+#       - 0
+#       id: 181
+#       internal: false
+#       language_id: 1
+#       last_event_time: 0
+#       log_source_extension_id: null
+#       modified_date: 1654727311444
+#       name: Snort logs
+#       protocol_parameters:
+#       - id: 1
+#         name: incomingPayloadEncoding
+#         value: UTF-8
+#       - id: 0
+#         name: identifier
+#         value: 192.0.2.1
+#       protocol_type_id: 0
+#       requires_deploy: true
+#       status:
+#         last_updated: 0
+#         messages: null
+#         status: NA
+#       store_event_payload: true
+#       target_event_collector_id: 7
+#       type_id: 2
+#       wincollect_external_destination_ids: null
+#       wincollect_internal_destination_id: null
+#     - auto_discovered: false
+#       average_eps: 0
+#       coalesce_events: true
+#       creation_date: 1654727311462
+#       credibility: 5
+#       description: Apache HTTP Server remote logs from rsyslog
+#       enabled: true
+#       gateway: false
+#       group_ids:
+#       - 0
+#       id: 182
+#       internal: false
+#       language_id: 1
+#       last_event_time: 0
+#       log_source_extension_id: null
+#       modified_date: 1654727311462
+#       name: Apache HTTP Server logs
+#       protocol_parameters:
+#       - id: 1
+#         name: incomingPayloadEncoding
+#         value: UTF-8
+#       - id: 0
+#         name: identifier
+#         value: 198.51.100.1
+#       protocol_type_id: 0
+#       requires_deploy: true
+#       status:
+#         last_updated: 0
+#         messages: null
+#         status: NA
+#       store_event_payload: true
+#       target_event_collector_id: 7
+#       type_id: 10
+#       wincollect_external_destination_ids: null
+#       wincollect_internal_destination_id: null
+#     before: []
+
+# Using REPLACED state
+# --------------------
+
+- name: Replace existing Log sources to IBM QRadar
+  ibm.qradar.qradar_log_sources_management:
+    state: replaced
+    config:
+      - name: "Apache HTTP Server logs"
+        type_name: "Apache HTTP Server"
+        description: "REPLACED Apache HTTP Server remote logs from rsyslog"
+        identifier:  "192.0.2.1"
+
+# RUN output:
+# -----------
+
+#   qradar_log_sources_management:
+#     after:
+#     - auto_discovered: false
+#       average_eps: 0
+#       coalesce_events: true
+#       creation_date: 1654727944017
+#       credibility: 5
+#       description: REPLACED Apache HTTP Server remote logs from rsyslog
+#       enabled: true
+#       gateway: false
+#       group_ids:
+#       - 0
+#       id: 183
+#       internal: false
+#       language_id: 1
+#       last_event_time: 0
+#       log_source_extension_id: null
+#       modified_date: 1654727944017
+#       name: Apache HTTP Server logs
+#       protocol_parameters:
+#       - id: 1
+#         name: incomingPayloadEncoding
+#         value: UTF-8
+#       - id: 0
+#         name: identifier
+#         value: 192.0.2.1
+#       protocol_type_id: 0
+#       requires_deploy: true
+#       status:
+#         last_updated: 0
+#         messages: null
+#         status: NA
+#       store_event_payload: true
+#       target_event_collector_id: 7
+#       type_id: 10
+#       wincollect_external_destination_ids: null
+#       wincollect_internal_destination_id: null
+#     before:
+#     - auto_discovered: false
+#       average_eps: 0
+#       coalesce_events: true
+#       creation_date: 1654727311462
+#       credibility: 5
+#       description: Apache HTTP Server remote logs from rsyslog
+#       enabled: true
+#       gateway: false
+#       group_ids:
+#       - 0
+#       id: 182
+#       internal: false
+#       language_id: 1
+#       last_event_time: 0
+#       log_source_extension_id: null
+#       modified_date: 1654727311462
+#       name: Apache HTTP Server logs
+#       protocol_parameters:
+#       - name: identifier
+#         value: 198.51.100.1
+#       - name: incomingPayloadEncoding
+#         value: UTF-8
+#       protocol_type_id: 0
+#       requires_deploy: true
+#       status:
+#         last_updated: 0
+#         messages: null
+#         status: NA
+#       store_event_payload: true
+#       target_event_collector_id: 7
+#       type_id: 10
+#       wincollect_external_destination_ids: null
+#       wincollect_internal_destination_id: null
+
+# Using GATHERED state
+# --------------------
+
+- name: Gather Snort n Apache log source from IBM QRadar
+  ibm.qradar.qradar_log_sources_management:
+    config:
+      - name: "Snort logs"
+      - name: "Apache HTTP Server logs"
+    state: gathered
+
+# RUN output:
+# -----------
+
+# gathered:
+#   - auto_discovered: false
+#     average_eps: 0
+#     coalesce_events: true
+#     creation_date: 1654727311444
+#     credibility: 5
+#     description: Snort IDS remote logs from rsyslog
+#     enabled: true
+#     gateway: false
+#     group_ids:
+#     - 0
+#     id: 181
+#     internal: false
+#     language_id: 1
+#     last_event_time: 0
+#     log_source_extension_id: null
+#     modified_date: 1654728103340
+#     name: Snort logs
+#     protocol_parameters:
+#     - id: 0
+#       name: identifier
+#       value: 192.0.2.1
+#     - id: 1
+#       name: incomingPayloadEncoding
+#       value: UTF-8
+#     protocol_type_id: 0
+#     requires_deploy: true
+#     status:
+#       last_updated: 0
+#       messages: null
+#       status: NA
+#     store_event_payload: true
+#     target_event_collector_id: 7
+#     type_id: 2
+#     wincollect_external_destination_ids: null
+#     wincollect_internal_destination_id: null
+#   - auto_discovered: false
+#     average_eps: 0
+#     coalesce_events: true
+#     creation_date: 1654727944017
+#     credibility: 5
+#     description: Apache HTTP Server remote logs from rsyslog
+#     enabled: true
+#     gateway: false
+#     group_ids:
+#     - 0
+#     id: 183
+#     internal: false
+#     language_id: 1
+#     last_event_time: 0
+#     log_source_extension_id: null
+#     modified_date: 1654728103353
+#     name: Apache HTTP Server logs
+#     protocol_parameters:
+#     - id: 0
+#       name: identifier
+#       value: 192.0.2.1
+#     - id: 1
+#       name: incomingPayloadEncoding
+#       value: UTF-8
+#     protocol_type_id: 0
+#     requires_deploy: true
+#     status:
+#       last_updated: 0
+#       messages: null
+#       status: NA
+#     store_event_payload: true
+#     target_event_collector_id: 7
+#     type_id: 10
+#     wincollect_external_destination_ids: null
+#     wincollect_internal_destination_id: null
+
+- name: TO Gather ALL log sources from IBM QRadar
+  tags: gather_log_all
+  ibm.qradar.qradar_log_sources_management:
+    state: gathered
+
+# Using DELETED state
+# -------------------
+
+- name: Delete Snort n Apache log source from IBM QRadar
+  ibm.qradar.qradar_log_sources_management:
+    config:
+      - name: "Snort logs"
+      - name: "Apache HTTP Server logs"
+    state: deleted
+
+# RUN output:
+# -----------
+
+#   qradar_log_sources_management:
+#     after: []
+#     before:
+#     - auto_discovered: false
+#       average_eps: 0
+#       coalesce_events: true
+#       creation_date: 1654727311444
+#       credibility: 5
+#       description: Snort IDS remote logs from rsyslog
+#       enabled: true
+#       gateway: false
+#       group_ids:
+#       - 0
+#       id: 181
+#       internal: false
+#       language_id: 1
+#       last_event_time: 0
+#       log_source_extension_id: null
+#       modified_date: 1654728103340
+#       name: Snort logs
+#       protocol_parameters:
+#       - id: 0
+#         name: identifier
+#         value: 192.0.2.1
+#       - id: 1
+#         name: incomingPayloadEncoding
+#         value: UTF-8
+#       protocol_type_id: 0
+#       requires_deploy: true
+#       status:
+#         last_updated: 0
+#         messages: null
+#         status: NA
+#       store_event_payload: true
+#       target_event_collector_id: 7
+#       type_id: 2
+#       wincollect_external_destination_ids: null
+#       wincollect_internal_destination_id: null
+#     - auto_discovered: false
+#       average_eps: 0
+#       coalesce_events: true
+#       creation_date: 1654727944017
+#       credibility: 5
+#       description: Apache HTTP Server remote logs from rsyslog
+#       enabled: true
+#       gateway: false
+#       group_ids:
+#       - 0
+#       id: 183
+#       internal: false
+#       language_id: 1
+#       last_event_time: 0
+#       log_source_extension_id: null
+#       modified_date: 1654728103353
+#       name: Apache HTTP Server logs
+#       protocol_parameters:
+#       - id: 0
+#         name: identifier
+#         value: 192.0.2.1
+#       - id: 1
+#         name: incomingPayloadEncoding
+#         value: UTF-8
+#       protocol_type_id: 0
+#       requires_deploy: true
+#       status:
+#         last_updated: 0
+#         messages: null
+#         status: NA
+#       store_event_payload: true
+#       target_event_collector_id: 7
+#       type_id: 10
+#       wincollect_external_destination_ids: null
+#       wincollect_internal_destination_id: null
+"""
+
+RETURN = """
+before:
+  description: The configuration as structured data prior to module invocation.
+  returned: always
+  type: list
+  sample: The configuration returned will always be in the same format of the parameters above.
+after:
+  description: The configuration as structured data after module completion.
+  returned: when changed
+  type: list
+  sample: The configuration returned will always be in the same format of the parameters above.
 """

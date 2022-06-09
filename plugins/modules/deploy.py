@@ -62,7 +62,7 @@ def main():
         not_rest_data_keys=["state", "type_name", "identifier"],
     )
 
-    code, qradar_return_data = qradar_request.post_by_path(
+    qradar_return_data = qradar_request.post_by_path(
         "api/staged_config/deploy_status"
     )
 

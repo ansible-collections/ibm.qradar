@@ -78,7 +78,7 @@ class ActionModule(ActionBase):
             "group_ids",
             "requires_deploy",
             "status",
-            "average_eps"
+            "average_eps",
         ]
 
     def _check_argspec(self):
@@ -108,7 +108,7 @@ class ActionModule(ActionBase):
             config_params.pop("type_name")
         else:
             raise AnsibleActionFail(
-                "Incompatible type provided, please consult QRadar Documentation for Log Source Types"
+                "Incompatible type provided, please consult QRadar Documentation for Log Source Types!"
             )
 
         if log_source_type_found:
@@ -254,10 +254,13 @@ class ActionModule(ActionBase):
     def run(self, tmp=None, task_vars=None):
         self._supports_check_mode = True
         self._result = super(ActionModule, self).run(tmp, task_vars)
-        self._task.args["config"] = remove_unsupported_keys_from_payload_dict(
-            self._task.args["config"], self.supported_params
-        )
-        self._check_argspec()
+        if self._task.args.get("config"):
+            self._task.args[
+                "config"
+            ] = remove_unsupported_keys_from_payload_dict(
+                self._task.args["config"], self.supported_params
+            )
+            self._check_argspec()
         if self._result.get("failed"):
             return self._result
         conn = Connection(self._connection.socket_path)

@@ -39,13 +39,6 @@
             identifier: "198.51.100.1"
         state: replaced
 
-    - debug:
-        msg:
-          - "{{ merged['before'] | symmetric_difference(result['qradar_log_sources_management']['before']) |\
-              \ length }}"
-          - "{{ replaced['after'] | symmetric_difference(result['qradar_log_sources_management']['after']) |\
-            \ length }}"
-
     - assert:
         that:
           - result.changed == true
@@ -59,11 +52,6 @@
       ibm.qradar.qradar_log_sources_management:
         config: "{{ gather_result['gathered'] }}"
         state: replaced
-    
-    - debug:
-        msg:
-          - "{{ merged['after'] | symmetric_difference(revert['qradar_log_sources_management']['after']) |\
-            \ length }}"
 
     - assert:
         that:

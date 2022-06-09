@@ -173,7 +173,7 @@ def main():
                     changed=True,
                 )
 
-            code, qradar_return_data = qradar_request.post_by_path(
+            qradar_return_data = qradar_request.post_by_path(
                 "api/siem/offenses/{0}?{1}".format(
                     module.params["id"], "&".join(post_strs)
                 )

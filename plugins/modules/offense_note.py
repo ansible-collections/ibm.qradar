@@ -124,7 +124,7 @@ def main():
                     changed=True,
                 )
 
-            code, qradar_return_data = qradar_request.post_by_path(
+            qradar_return_data = qradar_request.post_by_path(
                 "api/siem/offenses/{0}/notes?note_text={1}".format(
                     module.params["id"],
                     quote("{0}".format(module.params["note_text"])),
@@ -146,7 +146,7 @@ def main():
                 changed=True,
             )
 
-        code, qradar_return_data = qradar_request.post_by_path(
+        qradar_return_data = qradar_request.post_by_path(
             "api/siem/offenses/{0}/notes?note_text={1}".format(
                 module.params["id"],
                 quote("{0}".format(module.params["note_text"])),
