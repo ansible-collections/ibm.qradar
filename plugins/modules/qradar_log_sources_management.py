@@ -9,7 +9,7 @@ __metaclass__ = type
 DOCUMENTATION = """
 ---
 module: qradar_log_sources_management
-short_description: Qradar Log Sources Management resource module 
+short_description: Qradar Log Sources Management resource module
 description:
   - This module allows for addition, deletion, or modification of Log Sources in QRadar
 version_added: "1.1.0"
@@ -54,12 +54,12 @@ options:
             otherwise, the condition is set to 'false'. A gateway log source is a stand-alone
             protocol configuration. The log source receives no events itself, and serves as a
             host for a protocol configuration that retrieves event data to feed other log sources.
-            It acts as a "gateway" for events from multiple systems to enter the event pipeline. 
+            It acts as a "gateway" for events from multiple systems to enter the event pipeline.
         type: bool
       internal:
         description:
           - If the log source is internal (when the log source type is defined as internal),
-            the condition is set to 'true'. 
+            the condition is set to 'true'.
         type: bool
       target_event_collector_id:
         description:

@@ -22,7 +22,6 @@ The module file for qradar_log_sources_management
 """
 
 from __future__ import absolute_import, division, print_function
-from urllib import response
 
 __metaclass__ = type
 
@@ -79,9 +78,7 @@ class ActionModule(ActionBase):
             "group_ids",
             "requires_deploy",
             "status",
-            "average_eps",
-            # "protocol_parameters",
-            # "id",
+            "average_eps"
         ]
 
     def _check_argspec(self):
@@ -95,21 +92,6 @@ class ActionModule(ActionBase):
         if not valid:
             self._result["failed"] = True
             self._result["msg"] = errors
-
-    def _check_for_response_code(self, response_code, response):
-        if response_code >= 400:
-            if response.get("errors"):
-                raise AnsibleActionFail(
-                    "Request failed with HTTPerror code: {0}, and with a response: {1}".format(
-                        response_code, response["errors"]
-                    )
-                )
-            elif response.get("message"):
-                raise AnsibleActionFail(
-                    "Request failed with HTTPerror code: {0}, and with a response: {1}".format(
-                        response_code, response["message"]
-                    )
-                )
 
     def set_log_source_values(self, qradar_request, config_params):
         # find log source types details
