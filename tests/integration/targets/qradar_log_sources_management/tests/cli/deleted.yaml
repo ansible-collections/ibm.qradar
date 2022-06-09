@@ -1,0 +1,38 @@
+---
+- debug:
+    msg: Start Deleted integration state for qradar_log_sources_management ansible_connection={{ ansible_connection
+      }}
+
+- include_tasks: _remove_log_sources_config.yaml
+
+- include_tasks: _populate_log_sources_config.yaml
+
+- block:
+
+    - name: Delete attributes of provided configured Log Sources Management
+      register: result
+      ibm.qradar.qradar_log_sources_management: &id001
+        config:
+          - name: "Snort logs"
+          - name: "Apache HTTP Server logs"
+        state: deleted
+
+    - assert:
+        that:
+          - result.changed == true
+          - "{{ merged['after'] | symmetric_difference(result['qradar_log_sources_management']['before']) |\
+            \ length == 4 }}"
+          - merged['before'] == result['qradar_log_sources_management']['after']
+
+    - name: Delete attributes of all configured Log Sources Management (IDEMPOTENT)
+      register: result
+      ibm.qradar.qradar_log_sources_management: *id001
+
+    - name: Assert that the previous delete task was idempotent
+      assert:
+        that:
+          - result.changed == false
+
+  always:
+
+    - include_tasks: _remove_log_sources_config.yaml

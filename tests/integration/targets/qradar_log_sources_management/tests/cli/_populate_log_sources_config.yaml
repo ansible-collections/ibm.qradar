@@ -1,0 +1,14 @@
+---
+- name: Populate Log Sources Management for tests
+  tags: merged
+  ibm.qradar.qradar_log_sources_management: &id001
+    state: merged
+    config:
+      - name: "Snort logs"
+        type_name: "Snort Open Source IDS"
+        description: "Snort IDS remote logs from rsyslog"
+        identifier: "192.0.2.1"
+      - name: "Apache HTTP Server logs"
+        type_name: "Apache HTTP Server"
+        description: "Apache HTTP Server remote logs from rsyslog"
+        identifier: "198.51.100.1"

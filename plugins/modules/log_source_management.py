@@ -83,17 +83,19 @@ import json
 
 def set_log_source_values(module, qradar_request):
     if module.params["type_name"]:
-        log_source_type_found = qradar_request.get(
+        code, query_response = qradar_request.get(
             "/api/config/event_sources/log_source_management/log_source_types?filter={0}".format(
                 quote('name="{0}"'.format(module.params["type_name"]))
             )
-        )[0]
+        )
+        log_source_type_found = query_response[0]
     if module.params["type_id"]:
-        log_source_type_found = qradar_request.get(
-            "api/config/event_sources/log_source_management/log_source_types?filter={0}".format(
-                quote('id="{0}"'.format(module.params["type_id"]))
+        code, query_response = qradar_request.get(
+            "/api/config/event_sources/log_source_management/log_source_types?filter={0}".format(
+                quote('name="{0}"'.format(module.params["type_name"]))
             )
-        )[0]
+        )
+        code, log_source_type_found = query_response[0]
     if log_source_type_found:
         if not module.params["type_id"]:
             module.params["type_id"] = log_source_type_found["id"]
@@ -151,7 +153,7 @@ def main():
         not_rest_data_keys=["state", "type_name", "identifier"],
     )
 
-    log_source_exists = qradar_request.get(
+    code, log_source_exists = qradar_request.get(
         "/api/config/event_sources/log_source_management/log_sources?filter={0}".format(
             quote('name="{0}"'.format(module.params["name"]))
         )
@@ -196,7 +198,7 @@ def main():
                         "EMPTY": "IN CHECK MODE, NO TRANSACTION TOOK PLACE"
                     }
                 else:
-                    qradar_return_data = qradar_request.create_update(
+                    code, qradar_return_data = qradar_request.create_update(
                         "api/config/event_sources/log_source_management/log_sources",
                         data=json.dumps(log_source_exists),
                     )
@@ -215,7 +217,7 @@ def main():
                     "EMPTY": "IN CHECK MODE, NO TRANSACTION TOOK PLACE"
                 }
             else:
-                qradar_return_data = qradar_request.delete(
+                code, qradar_return_data = qradar_request.delete(
                     "/api/config/event_sources/log_source_management/log_sources/{0}".format(
                         log_source_exists[0]["id"]
                     )
@@ -236,7 +238,7 @@ def main():
                     "EMPTY": "IN CHECK MODE, NO TRANSACTION TOOK PLACE"
                 }
             else:
-                qradar_return_data = qradar_request.create_update(
+                code, qradar_return_data = qradar_request.create_update(
                     "api/config/event_sources/log_source_management/log_sources",
                     data=json.dumps([qradar_request.get_data()]),
                 )

@@ -157,7 +157,7 @@ def main():
     set_offense_values(module, qradar_request)
 
     if module.params["id"]:
-        offenses = qradar_request.get(
+        code, offenses = qradar_request.get(
             "/api/siem/offenses/{0}".format(module.params["id"])
         )
 
@@ -194,11 +194,11 @@ def main():
             )
 
         if query_strs:
-            offenses = qradar_request.get(
+            code, offenses = qradar_request.get(
                 "/api/siem/offenses?filter={0}".format("&".join(query_strs))
             )
         else:
-            offenses = qradar_request.get("/api/siem/offenses")
+            code, offenses = qradar_request.get("/api/siem/offenses")
 
         if module.params["name"]:
             named_offense = find_dict_in_list(

@@ -1,0 +1,45 @@
+---
+- debug:
+    msg: START Replaced qradar_log_sources_management state for integration tests on connection={{ ansible_connection
+      }}
+
+- include_tasks: _remove_log_sources_config.yaml
+- include_tasks: _populate_log_sources_config.yaml
+
+- block:
+
+    - name: Replace existing Log Sources Management
+      register: result
+      ibm.qradar.qradar_log_sources_management: &id001
+        state: replaced
+        config:
+          - name: "Snort logs"
+            type_name: "Snort Open Source IDS"
+            description: "REPLACED Snort IDS remote logs from rsyslog"
+            identifier: "198.51.100.1"
+          - name: "Apache HTTP Server logs"
+            type_name: "Apache HTTP Server"
+            description: "REPLACED Apache HTTP Server remote logs from rsyslog"
+            identifier:  "192.0.2.1"
+
+    - assert:
+        that:
+          - result.changed == true
+          - "{{ merged['after'] | symmetric_difference(result['qradar_log_sources_management']['before']) |\
+            \ length == 4 }}"
+          - "{{ replaced['after'] | symmetric_difference(result['qradar_log_sources_management']['after']) |\
+            \ length == 4 }}"
+
+    - name: Replaces device configuration of listed Log Sources Management with provided configuration
+        (IDEMPOTENT)
+      register: result
+      ibm.qradar.qradar_log_sources_management: *id001
+
+    - name: Assert that task was idempotent
+      assert:
+        that:
+          - result['changed'] == false
+
+  always:
+
+    - include_tasks: _remove_log_sources_config.yaml

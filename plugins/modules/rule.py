@@ -93,12 +93,12 @@ def main():
     module.params["rule"] = {}
 
     if module.params["id"]:
-        module.params["rule"] = qradar_request.get(
+        code, module.params["rule"] = qradar_request.get(
             "/api/analytics/rules/{0}".format(module.params["id"])
         )
 
     elif module.params["name"]:
-        rules = qradar_request.get(
+        code, rules = qradar_request.get(
             "/api/analytics/rules?filter={0}".format(
                 quote('"{0}"'.format(module.params["name"]))
             )
@@ -229,7 +229,7 @@ def main():
 
     elif module.params["state"] == "absent":
         if module.params["rule"]:
-            qradar_return_data = qradar_request.delete(
+            code, qradar_return_data = qradar_request.delete(
                 "/api/analytics/rules/{0}".format(module.params["rule"]["id"])
             )
             if module.params["id"]:

@@ -1,0 +1,69 @@
+---
+- debug:
+    msg: START Merged qradar_log_sources_management state for integration tests on connection={{
+      ansible_connection }}
+
+- include_tasks: _remove_log_sources_config.yaml
+
+- block:
+
+    - name: Merge and Create new Log Sources Management
+      tags: merged
+      register: result
+      ibm.qradar.qradar_log_sources_management: &id001
+        state: merged
+        config:
+          - name: "Snort logs"
+            type_name: "Snort Open Source IDS"
+            description: "Snort IDS remote logs from rsyslog"
+            identifier: "192.0.2.1"
+          - name: "Apache HTTP Server logs"
+            type_name: "Apache HTTP Server"
+            description: "Apache HTTP Server remote logs from rsyslog"
+            identifier: "198.51.100.1"
+
+    - name: To remove creation_date from the after dict
+      set_fact:
+        after: "{{ after | default([]) | combine({ item.key : item.value }) }}"
+      when: "{{item.key not in ['creation_date']}}"
+      with_dict: "{{ dict }}"
+      loop: "{{ result['qradar_log_sources_management']['after'] }}"
+    
+    - name: To remove modified_date from the after dict
+      set_fact:
+        after: "{{ after | default([]) | combine({ item.key : item.value }) }}"
+      when: "{{item.key not in ['modified_date']}}"
+      with_dict: "{{ dict }}"
+      loop: "{{ result['qradar_log_sources_management']['after'] }}"
+
+    - name: To remove ID from the after dict
+      set_fact:
+        after: "{{ after | default([]) | combine({ item.key : item.value }) }}"
+      when: "{{item.key not in ['id']}}"
+      with_dict: "{{ dict }}"
+      loop: "{{ result['qradar_log_sources_management']['after'] }}"
+
+    - name: Assert that task reports change and after dict is correctly generated
+      assert:
+        that:
+          - result['changed'] == true
+          - "{{ merged['after'] | symmetric_difference(result['qradar_log_sources_management']['after']) |\
+            \ length == 4 }}"
+
+    - name: Assert that before dicts are correctly generated
+      assert:
+        that:
+          - merged['before'] == result['qradar_log_sources_management']['before']
+
+    - name: Merge provided configuration with Log Sources Management (IDEMPOTENT)
+      register: result
+      ibm.qradar.qradar_log_sources_management: *id001
+
+    - name: Assert that the previous task was idempotent
+      assert:
+        that:
+          - result['changed'] == false
+
+  always:
+
+    - include_tasks: _remove_log_sources_config.yaml
