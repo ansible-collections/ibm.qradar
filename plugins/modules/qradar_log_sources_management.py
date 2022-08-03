@@ -15,7 +15,7 @@ description:
 version_added: "1.1.0"
 options:
   config:
-    description: A dictionary of AntiMalware Rule Rules options
+    description: A dictionary of Qradar Log Sources options
     type: list
     elements: dict
     suboptions:

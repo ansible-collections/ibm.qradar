@@ -1,0 +1,25 @@
+---
+merged:
+  before:
+    average_capacity: null
+    base_capacity: null
+    base_host_id: null
+    capacity_timestamp: null
+    enabled: false
+    id: 100439
+    name: Potential DDoS Against Single Host (TCP)
+    origin: OVERRIDE
+    owner: admin
+    type: FLOW
+
+  after:
+    average_capacity: null
+    base_capacity: null
+    base_host_id: null
+    capacity_timestamp: null
+    enabled: true
+    id: 100439
+    name: Potential DDoS Against Single Host (TCP)
+    origin: OVERRIDE
+    owner: admin
+    type: FLOW

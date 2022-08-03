@@ -96,11 +96,11 @@ class ActionModule(ActionBase):
     def set_log_source_values(self, qradar_request, config_params):
         # find log source types details
         if config_params.get("type_name"):
-            code, log_source_type_found = qradar_request.get(
-                "/api/config/event_sources/log_source_management/log_source_types?filter={0}".format(
-                    quote('name="{0}"'.format(config_params["type_name"]))
-                )
+
+            api_object = self.api_object_search + "{0}".format(
+                quote('name="{0}"'.format(config_params["type_name"]))
             )
+            code, log_source_type_found = qradar_request.get(api_object)
         if config_params.get("type_id"):
             log_source_type_found = []
         elif log_source_type_found and not config_params.get("type_id"):

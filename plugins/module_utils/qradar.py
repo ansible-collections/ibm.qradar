@@ -61,6 +61,12 @@ def set_offense_values(module, qradar_request):
 
 
 def remove_unsupported_keys_from_payload_dict(payload, supported_key_list):
+    """The fn to remove the unsupported keys from payload
+    :param payload: Payload from response
+    :param supported_key_list: Module supported params
+    :rtype: A dict
+    :returns: payload with only supported and module expected params
+    """
     temp_payload = []
     for each in payload:
         temp_dict = copy(each)
@@ -75,6 +81,11 @@ def remove_unsupported_keys_from_payload_dict(payload, supported_key_list):
 
 
 def list_to_dict(input_dict):
+    """The fn to convert list of dict to dict
+    :param input_dict: input list having list of dict
+    :rtype: A dict
+    :returns: dict with converted all list to dict type
+    """
     if isinstance(input_dict, dict):
         for k, v in iteritems(input_dict):
             if isinstance(v, dict):
@@ -126,7 +137,8 @@ class QRadarRequest(object):
     def _httpapi_error_handle(self, method, uri, payload=None):
         # FIXME - make use of handle_httperror(self, exception) where applicable
         #   https://docs.ansible.com/ansible/latest/network/dev_guide/developing_plugins_network.html#developing-plugins-httpapi
-
+        code = 99999
+        response = {}
         try:
             code, response = self.connection.send_request(
                 method, uri, payload=payload, headers=self.headers
@@ -140,7 +152,12 @@ class QRadarRequest(object):
                 msg="certificate error occurred: {0}".format(e)
             )
         except ValueError as e:
-            self.module.fail_json(msg="certificate not found: {0}".format(e))
+            try:
+                self.module.fail_json(
+                    msg="certificate not found: {0}".format(e)
+                )
+            except AttributeError:
+                pass
 
         if code == 404:
             if (
@@ -149,6 +166,8 @@ class QRadarRequest(object):
                 or to_text("No offense was found") in to_text(response)
             ):
                 return {}
+            if (to_text("The rule does not exist.") in to_text(response['description'])):
+                return code, {}
 
         if code == 409:
             if "code" in response:
@@ -163,11 +182,14 @@ class QRadarRequest(object):
                         )
                     )
         elif not (code >= 200 and code < 300):
-            self.module.fail_json(
-                msg="qradar httpapi returned error {0} with message {1}".format(
-                    code, response
+            try:
+                self.module.fail_json(
+                    msg="qradar httpapi returned error {0} with message {1}".format(
+                        code, response
+                    )
                 )
-            )
+            except AttributeError:
+                pass
 
         return code, response
 
