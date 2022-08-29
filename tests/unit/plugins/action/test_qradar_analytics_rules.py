@@ -108,7 +108,7 @@ class TestQradarAnalyticsRules(unittest.TestCase):
             "config": {
                 "enabled": False,
                 "name": "Ansible Example DDOS Rule",
-            }
+            },
         }
         result = self._plugin.run(task_vars=self._task_vars)
         self.assertFalse(result["changed"])
@@ -126,7 +126,7 @@ class TestQradarAnalyticsRules(unittest.TestCase):
             "state": "deleted",
             "config": {
                 "name": "Ansible Example DDOS Rule",
-            }
+            },
         }
         result = self._plugin.run(task_vars=self._task_vars)
         self.assertTrue(result["changed"])
@@ -143,7 +143,7 @@ class TestQradarAnalyticsRules(unittest.TestCase):
             "state": "deleted",
             "config": {
                 "name": "Ansible Example DDOS Rule",
-            }
+            },
         }
         result = self._plugin.run(task_vars=self._task_vars)
         self.assertFalse(result["changed"])

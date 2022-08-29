@@ -166,7 +166,9 @@ class QRadarRequest(object):
                 or to_text("No offense was found") in to_text(response)
             ):
                 return {}
-            if (to_text("The rule does not exist.") in to_text(response['description'])):
+            if to_text("The rule does not exist.") in to_text(
+                response["description"]
+            ):
                 return code, {}
 
         if code == 409:
