@@ -116,11 +116,12 @@ def main():
     # if module.params['name']:
     #    # FIXME - QUERY HERE BY NAME
     #    found_offense = qradar_request.get('/api/siem/offenses?filter={0}'.format(module.params['name']))
-
+    import q
+    q("START!!")
     code, found_offense = qradar_request.get(
         "/api/siem/offenses/{0}".format(module.params["id"])
     )
-
+    q(code, found_offense)
     if found_offense:
         set_offense_values(module, qradar_request)
 
