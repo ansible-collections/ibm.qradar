@@ -15,7 +15,7 @@ from ansible.module_utils._text import to_text
 from ansible.module_utils.six import iteritems
 from copy import copy
 import json
-
+import q
 
 BASE_HEADERS = {"Content-Type": "application/json", "Version": "9.1"}
 
@@ -131,6 +131,7 @@ class QRadarRequest(object):
             code, response = self.connection.send_request(
                 method, uri, payload=payload, headers=self.headers
             )
+            q(code, response)
         except ConnectionError as e:
             self.module.fail_json(
                 msg="connection error occurred: {0}".format(e)
@@ -148,7 +149,11 @@ class QRadarRequest(object):
                 or to_text("Could not find object") in to_text(response)
                 or to_text("No offense was found") in to_text(response)
             ):
-                return {}
+                self.module.fail_json(
+                        msg="qradar httpapi returned error {0} with message {1}".format(
+                            code, response
+                        )
+                    )
 
         if code == 409:
             if "code" in response:
@@ -168,7 +173,7 @@ class QRadarRequest(object):
                     code, response
                 )
             )
-
+        q(code, response)
         return code, response
 
     def get(self, url, **kwargs):
