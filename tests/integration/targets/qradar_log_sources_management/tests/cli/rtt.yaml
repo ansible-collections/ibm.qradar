@@ -56,8 +56,6 @@
     - assert:
         that:
           - revert['changed'] == true
-          - "{{ merged['after'] | symmetric_difference(revert['qradar_log_sources_management']['after']) |\
-            \ length == 3 }}"
 
   always:
 
