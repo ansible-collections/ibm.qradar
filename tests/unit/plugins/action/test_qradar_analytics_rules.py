@@ -162,4 +162,4 @@ class TestQradarAnalyticsRules(unittest.TestCase):
             "config": {"name": "Ansible Example DDOS Rule"},
         }
         result = self._plugin.run(task_vars=self._task_vars)
-        self.assertEqual(result, RESPONSE_PAYLOAD)
+        self.assertEqual(result["gathered"], RESPONSE_PAYLOAD)

@@ -114,6 +114,24 @@ options:
         description:
           - The average events per second (EPS) rate of the log source over the last 60 seconds.
         type: int
+      protocol_parameters:
+        description:
+          - The set of protocol parameters
+          - If not provided module will set the protocol parameters by itself
+          - Note, parameter will come to use mostly in case when facts are gathered and fired
+            with some modifications to params or in case of round trip scenarios.
+        type: list
+        elements: dict
+        suboptions:
+          id:
+            description: The ID of the protocol type.
+            type: int
+          name:
+            description: The unique name of the protocol type.
+            type: str
+          value:
+            description: The allowed protocol value.
+            type: str
   state:
     description:
       - The state the configuration should be left in

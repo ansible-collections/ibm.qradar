@@ -58,6 +58,7 @@ class ActionModule(ActionBase):
         self.api_object = (
             "/api/config/event_sources/log_source_management/log_sources"
         )
+        self.api_object_types = "/api/config/event_sources/log_source_management/log_source_types?filter="
         self.api_object_search = "/api/config/event_sources/log_source_management/log_sources?filter="
         self.api_return = "log_sources_management"
         self.module_return = "qradar_log_sources_management"
@@ -79,6 +80,7 @@ class ActionModule(ActionBase):
             "requires_deploy",
             "status",
             "average_eps",
+            "protocol_parameters",
         ]
 
     def _check_argspec(self):
@@ -97,12 +99,14 @@ class ActionModule(ActionBase):
         # find log source types details
         if config_params.get("type_name"):
 
-            api_object = self.api_object_search + "{0}".format(
+            api_object = self.api_object_types + "{0}".format(
                 quote('name="{0}"'.format(config_params["type_name"]))
             )
             code, log_source_type_found = qradar_request.get(api_object)
         if config_params.get("type_id"):
             log_source_type_found = []
+            if config_params.get("group_ids"):
+                del config_params["group_ids"]
         elif log_source_type_found and not config_params.get("type_id"):
             config_params["type_id"] = log_source_type_found[0]["id"]
             config_params.pop("type_name")
@@ -245,9 +249,16 @@ class ActionModule(ActionBase):
                         if each["name"] == every["name"]:
                             after.append(every)
                             break
-        if not changed:
-            after = []
-        config.update({"before": before, "after": after})
+            elif code >= 400:
+                raise AnsibleActionFail(
+                    "Failed with http_response: {0} and message: {1}".format(
+                        response["http_response"]["message"],
+                        response["message"],
+                    )
+                )
+            config.update({"before": before, "after": after})
+        else:
+            config.update({"before": before})
 
         return config, changed
 
