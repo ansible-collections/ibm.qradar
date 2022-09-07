@@ -1,0 +1,6 @@
+plugins/modules/log_source_management.py validate-modules:deprecation-mismatch
+plugins/modules/log_source_management.py validate-modules:invalid-documentation
+plugins/modules/rule.py validate-modules:deprecation-mismatch
+plugins/modules/rule.py validate-modules:invalid-documentation
+plugins/modules/rule_info.py validate-modules:deprecation-mismatch
+plugins/modules/rule_info.py validate-modules:invalid-documentation

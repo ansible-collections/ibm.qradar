@@ -15,6 +15,10 @@ short_description: Obtain information about one or many QRadar Rules, with filte
 description:
   - This module obtains information about one or many QRadar Rules, with filter options
 version_added: "1.0.0"
+deprecated:
+  alternative: qradar_analytics_rules
+  why: Newer and updated modules released with more functionality.
+  removed_at_date: '2024-09-01'
 options:
   id:
     description:
