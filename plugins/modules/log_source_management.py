@@ -15,6 +15,10 @@ short_description: Manage Log Sources in QRadar
 description:
   - This module allows for addition, deletion, or modification of Log Sources in QRadar
 version_added: "1.0.0"
+deprecated:
+  alternative: qradar_log_sources_management
+  why: Newer and updated modules released with more functionality.
+  removed_at_date: '2024-09-01'
 options:
   name:
     description:
