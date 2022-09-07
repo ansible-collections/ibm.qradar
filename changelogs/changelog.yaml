@@ -58,6 +58,7 @@ releases:
     - doc_update_for_deprecation.yaml
     - fix_doc_for_sanity_failures.yaml
     - doc_update_with_correct_version.yaml
+    - undo_changelog_override.yaml
     modules:
     - description: Qradar Analytics Rules Management resource module
       name: qradar_analytics_rules
