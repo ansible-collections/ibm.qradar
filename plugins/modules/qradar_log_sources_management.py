@@ -12,7 +12,7 @@ module: qradar_log_sources_management
 short_description: Qradar Log Sources Management resource module
 description:
   - This module allows for addition, deletion, or modification of Log Sources in QRadar
-version_added: "1.1.0"
+version_added: "2.1.0"
 options:
   config:
     description: A dictionary of Qradar Log Sources options
