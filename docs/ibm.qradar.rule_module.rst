@@ -14,6 +14,13 @@ Version added: 1.0.0
    :local:
    :depth: 1
 
+DEPRECATED
+----------
+:Removed in collection release after 2024-09-01
+:Why: Newer and updated modules released with more functionality.
+:Alternative: qradar_analytics_rules
+
+
 
 Synopsis
 --------
@@ -120,6 +127,10 @@ Examples
 
 Status
 ------
+
+
+- This module will be removed in a release after 2024-09-01. *[deprecated]*
+- For more information see `DEPRECATED`_.
 
 
 Authors

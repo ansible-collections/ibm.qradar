@@ -8,7 +8,7 @@ ibm.qradar.qradar
 **HttpApi Plugin for IBM QRadar**
 
 
-Version added: 1.0
+Version added: 1.0.0
 
 .. contents::
    :local:
@@ -36,7 +36,7 @@ Status
 Authors
 ~~~~~~~
 
-- Ansible Security Automation Team
+- Ansible Security Team (@ansible-security)
 
 
 .. hint::
