@@ -4,6 +4,21 @@ IBM Qradar Collection Release Notes
 
 .. contents:: Topics
 
+v2.1.0
+======
+
+Minor Changes
+-------------
+
+- Add Qradar Analytics rules resource module.
+- Add Qradar Log Sources Management resource module.
+
+New Modules
+-----------
+
+- qradar_analytics_rules - Qradar Analytics Rules Management resource module
+- qradar_log_sources_management - Qradar Log Sources Management resource module
+
 v2.0.0
 ======
 
