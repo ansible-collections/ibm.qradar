@@ -16,7 +16,7 @@ and provide feedback about.
 <!--start requires_ansible-->
 ## Ansible version compatibility
 
-This collection has been tested against following Ansible versions: **>=2.9.10,<2.11**.
+This collection has been tested against following Ansible versions: **>=2.9.10**.
 
 Plugins and modules within a collection may be tested with only specific Ansible versions.
 A collection may contain metadata that identifies these versions.
@@ -38,6 +38,8 @@ Name | Description
 [ibm.qradar.offense_action](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.offense_action_module.rst)|Take action on a QRadar Offense
 [ibm.qradar.offense_info](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.offense_info_module.rst)|Obtain information about one or many QRadar Offenses, with filter options
 [ibm.qradar.offense_note](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.offense_note_module.rst)|Create or update a QRadar Offense Note
+[ibm.qradar.qradar_analytics_rules](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.qradar_analytics_rules_module.rst)|Qradar Analytics Rules Management resource module
+[ibm.qradar.qradar_log_sources_management](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.qradar_log_sources_management_module.rst)|Qradar Log Sources Management resource module
 [ibm.qradar.rule](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.rule_module.rst)|Manage state of QRadar Rules, with filter options
 [ibm.qradar.rule_info](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.rule_info_module.rst)|Obtain information about one or many QRadar Rules, with filter options
 
