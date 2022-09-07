@@ -12,7 +12,7 @@ module: qradar_analytics_rules
 short_description: Qradar Analytics Rules Management resource module
 description:
   - This module allows for modification, deletion, and checking of Analytics Rules in QRadar
-version_added: "1.1.0"
+version_added: "2.1.0"
 options:
   config:
     description: A dictionary of Qradar Analytics Rules options
