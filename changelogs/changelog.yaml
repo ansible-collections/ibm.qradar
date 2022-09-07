@@ -31,24 +31,6 @@ releases:
   1.0.2:
     release_date: '2020-08-27'
   1.0.3: {}
-  1.1.0:
-    changes:
-      minor_changes:
-      - Add Qradar Analytics rules resource module.
-      - Add Qradar Log Sources Management resource module.
-    fragments:
-    - add_qradar_analytics_rules_module.yaml
-    - add_qradar_log_sources_management_module.yaml
-    - doc_update_for_deprecation.yaml
-    - fix_doc_for_sanity_failures.yaml
-    modules:
-    - description: Qradar Analytics Rules Management resource module
-      name: qradar_analytics_rules
-      namespace: private.var.folders._0.m716s5gx1g3d5j1dw_s2w1ph0000gn.T.antsibull-changelog9yvlq4ax.collections.ansible_collections.ibm.qradar.plugins.modules
-    - description: Qradar Log Sources Management resource module
-      name: qradar_log_sources_management
-      namespace: private.var.folders._0.m716s5gx1g3d5j1dw_s2w1ph0000gn.T.antsibull-changelog9yvlq4ax.collections.ansible_collections.ibm.qradar.plugins.modules
-    release_date: '2022-09-07'
   2.0.0:
     changes:
       major_changes:
@@ -58,3 +40,22 @@ releases:
     - netcommon_ref_update.yaml
     - update_tests_unit_black_requirements.yaml
     release_date: '2022-04-29'
+  2.1.0:
+    changes:
+      minor_changes:
+      - Add Qradar Analytics rules resource module.
+      - Add Qradar Log Sources Management resource module.
+    fragments:
+    - add_qradar_analytics_rules_module.yaml
+    - add_qradar_log_sources_management_module.yaml
+    - doc_update_for_deprecation.yaml
+    - fix_doc_for_sanity_failures.yaml
+    - doc_update_with_correct_version.yaml
+    modules:
+    - description: Qradar Analytics Rules Management resource module
+      name: qradar_analytics_rules
+      namespace: private.var.folders._0.m716s5gx1g3d5j1dw_s2w1ph0000gn.T.antsibull-changelog9yvlq4ax.collections.ansible_collections.ibm.qradar.plugins.modules
+    - description: Qradar Log Sources Management resource module
+      name: qradar_log_sources_management
+      namespace: private.var.folders._0.m716s5gx1g3d5j1dw_s2w1ph0000gn.T.antsibull-changelog9yvlq4ax.collections.ansible_collections.ibm.qradar.plugins.modules
+    release_date: '2022-09-07'

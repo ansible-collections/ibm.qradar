@@ -8,7 +8,7 @@ ibm.qradar.qradar_log_sources_management
 **Qradar Log Sources Management resource module**
 
 
-Version added: 1.1.0
+Version added: 2.1.0
 
 .. contents::
    :local:

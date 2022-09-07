@@ -8,7 +8,7 @@ ibm.qradar.qradar_analytics_rules
 **Qradar Analytics Rules Management resource module**
 
 
-Version added: 1.1.0
+Version added: 2.1.0
 
 .. contents::
    :local:

@@ -5,16 +5,7 @@ IBM Qradar Collection Release Notes
 .. contents:: Topics
 
 
-v2.0.0
-======
-
-Major Changes
--------------
-
-- Minimum required ansible.netcommon version is 2.5.1.
-- Updated base plugin references to ansible.netcommon.
-
-v1.1.0
+v2.1.0
 ======
 
 Minor Changes
@@ -26,14 +17,17 @@ Minor Changes
 New Modules
 -----------
 
-Private
-~~~~~~~
-
-var.folders._0.m716s5gx1g3d5j1dw_s2w1ph0000gn.T.antsibull-changelog9yvlq4ax.collections.ansible_collections.ibm.qradar.plugins.modules
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 - qradar_analytics_rules - Qradar Analytics Rules Management resource module
 - qradar_log_sources_management - Qradar Log Sources Management resource module
+
+v2.0.0
+======
+
+Major Changes
+-------------
+
+- Minimum required ansible.netcommon version is 2.5.1.
+- Updated base plugin references to ansible.netcommon.
 
 v1.0.3
 ======
