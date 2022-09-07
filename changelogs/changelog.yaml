@@ -28,18 +28,15 @@ releases:
     release_date: '2020-06-22'
   1.0.1:
     changes:
-      release_summary:
-      - Removed tech preview from collection Readme file.
+      release_summary: Removed tech preview from collection Readme file.
     release_date: '2020-06-23'
   1.0.2:
     changes:
-      release_summary:
-      - Releasing 1.0.2 with updated changelog.
+      release_summary: Releasing 1.0.2 with updated changelog.
     release_date: '2020-08-27'
   1.0.3:
     changes:
-      release_summary:
-      - Re-releasing 1.0.2 with updated galaxy file.
+      release_summary: Re-releasing 1.0.2 with updated galaxy file.
     release_date: '2020-09-1'
   2.0.0:
     changes:
