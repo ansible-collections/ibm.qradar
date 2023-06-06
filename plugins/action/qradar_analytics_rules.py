@@ -73,6 +73,7 @@ class ActionModule(ActionBase):
             name=self._task.action,
         )
         valid, errors, self._task.args = aav.validate()
+        print(valid, errors)
         if not valid:
             self._result["failed"] = True
             self._result["msg"] = errors
