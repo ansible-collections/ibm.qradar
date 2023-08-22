@@ -14,7 +14,7 @@ dependencies:
 description: Ansible Security Collection for IBM Qradar SIEM
 # a valid SPDX license identifier https://spdx.org/licenses/
 license:
-  - 'GPL-3.0-or-later'
+  - "GPL-3.0-or-later"
 # list of keywords you want to associate the collection with for indexing/search systems
 tags:
   - security
@@ -33,3 +33,4 @@ homepage: https://github.com/ansible-collections/ibm.qradar
 issues: https://github.com/ansible-collections/ibm.qradar/issues
 
 readme: README.md
+version: 2.1.0
