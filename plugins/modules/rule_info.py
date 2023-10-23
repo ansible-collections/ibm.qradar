@@ -80,7 +80,6 @@ from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
 
 
 def main():
-
     argspec = dict(
         id=dict(required=False, type="int"),
         name=dict(required=False, type="str"),
@@ -90,9 +89,7 @@ def main():
             choices=["EVENT", "FLOW", "COMMON", "USER"],
             type="str",
         ),
-        origin=dict(
-            required=False, choices=["SYSTEM", "OVERRIDE", "USER"], type="str"
-        ),
+        origin=dict(required=False, choices=["SYSTEM", "OVERRIDE", "USER"], type="str"),
     )
 
     module = AnsibleModule(argument_spec=argspec, supports_check_mode=True)
@@ -104,30 +101,22 @@ def main():
     #    found_offense = qradar_request.get('/api/analytics/rules?filter={0}'.format(module.params['name']))
 
     if module.params["id"]:
-        code, rules = qradar_request.get(
-            "/api/analytics/rules/{0}".format(module.params["id"])
-        )
+        code, rules = qradar_request.get("/api/analytics/rules/{0}".format(module.params["id"]))
 
     else:
         query_strs = []
 
         if module.params["name"]:
-            query_strs.append(
-                quote('name="{0}"'.format(to_text(module.params["name"])))
-            )
+            query_strs.append(quote('name="{0}"'.format(to_text(module.params["name"]))))
 
         if module.params["owner"]:
-            query_strs.append(
-                quote("owner={0}".format(module.params["owner"]))
-            )
+            query_strs.append(quote("owner={0}".format(module.params["owner"])))
 
         if module.params["type"]:
             query_strs.append(quote("type={0}".format(module.params["type"])))
 
         if module.params["origin"]:
-            query_strs.append(
-                quote("origin={0}".format(module.params["origin"]))
-            )
+            query_strs.append(quote("origin={0}".format(module.params["origin"])))
 
         if query_strs:
             code, rules = qradar_request.get(

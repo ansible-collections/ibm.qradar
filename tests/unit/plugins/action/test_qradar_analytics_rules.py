@@ -83,9 +83,7 @@ class TestQradarAnalyticsRules(unittest.TestCase):
     def test_qradar_analytics_rules_merged(self, connection):
         self._plugin.search_for_resource = MagicMock()
         self._plugin.search_for_resource.return_value = RESPONSE_PAYLOAD
-        self._plugin._connection.socket_path = (
-            tempfile.NamedTemporaryFile().name
-        )
+        self._plugin._connection.socket_path = tempfile.NamedTemporaryFile().name
         self._plugin._connection._shell = MagicMock()
         self._plugin._task.args = {
             "state": "merged",
@@ -96,9 +94,7 @@ class TestQradarAnalyticsRules(unittest.TestCase):
 
     @patch("ansible.module_utils.connection.Connection.__rpc__")
     def test_qradar_analytics_rules_merged_idempotent(self, connection):
-        self._plugin._connection.socket_path = (
-            tempfile.NamedTemporaryFile().name
-        )
+        self._plugin._connection.socket_path = tempfile.NamedTemporaryFile().name
         self._plugin._connection._shell = MagicMock()
         self._plugin.search_for_resource = MagicMock()
         self._plugin.search_for_resource.return_value = RESPONSE_PAYLOAD
@@ -115,9 +111,7 @@ class TestQradarAnalyticsRules(unittest.TestCase):
 
     @patch("ansible.module_utils.connection.Connection.__rpc__")
     def test_qradar_analytics_rules_deleted(self, connection):
-        self._plugin._connection.socket_path = (
-            tempfile.NamedTemporaryFile().name
-        )
+        self._plugin._connection.socket_path = tempfile.NamedTemporaryFile().name
         self._plugin._connection._shell = MagicMock()
         self._plugin.search_for_resource = MagicMock()
         self._plugin.search_for_resource.return_value = RESPONSE_PAYLOAD
@@ -135,9 +129,7 @@ class TestQradarAnalyticsRules(unittest.TestCase):
     def test_qradar_analytics_rules_deleted_idempotent(self, connection):
         self._plugin.search_for_resource = MagicMock()
         self._plugin.search_for_resource.return_value = {}
-        self._plugin._connection.socket_path = (
-            tempfile.NamedTemporaryFile().name
-        )
+        self._plugin._connection.socket_path = tempfile.NamedTemporaryFile().name
         self._plugin._connection._shell = MagicMock()
         self._plugin._task.args = {
             "state": "deleted",
@@ -150,9 +142,7 @@ class TestQradarAnalyticsRules(unittest.TestCase):
 
     @patch("ansible.module_utils.connection.Connection.__rpc__")
     def test_qradar_analytics_rules_gathered(self, connection):
-        self._plugin._connection.socket_path = (
-            tempfile.NamedTemporaryFile().name
-        )
+        self._plugin._connection.socket_path = tempfile.NamedTemporaryFile().name
         self._plugin._connection._shell = MagicMock()
         self._plugin.search_for_resource = MagicMock()
         self._plugin.search_for_resource.return_value = RESPONSE_PAYLOAD

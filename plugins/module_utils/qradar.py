@@ -42,18 +42,14 @@ def set_offense_values(module, qradar_request):
     if module.params["closing_reason"]:
         found_closing_reason = qradar_request.get_by_path(
             "api/siem/offense_closing_reasons?filter={0}".format(
-                quote_plus(
-                    'text="{0}"'.format(module.params["closing_reason"])
-                )
+                quote_plus('text="{0}"'.format(module.params["closing_reason"]))
             )
         )
         if found_closing_reason:
             module.params["closing_reason_id"] = found_closing_reason[0]["id"]
         else:
             module.fail_json(
-                "Unable to find closing_reason text: {0}".format(
-                    module.params["closing_reason"]
-                )
+                "Unable to find closing_reason text: {0}".format(module.params["closing_reason"])
             )
 
     if module.params["status"]:
@@ -96,9 +92,7 @@ def list_to_dict(input_dict):
                     if isinstance(each, dict):
                         if each.get("id") or each.get("id") == 0:
                             each.pop("id")
-                        each_key_values = "_".join(
-                            [str(x) for x in each.values()]
-                        )
+                        each_key_values = "_".join([str(x) for x in each.values()])
                         temp_dict.update({each_key_values: each})
                         input_dict[k] = temp_dict
 
@@ -144,18 +138,12 @@ class QRadarRequest(object):
                 method, uri, payload=payload, headers=self.headers
             )
         except ConnectionError as e:
-            self.module.fail_json(
-                msg="connection error occurred: {0}".format(e)
-            )
+            self.module.fail_json(msg="connection error occurred: {0}".format(e))
         except CertificateError as e:
-            self.module.fail_json(
-                msg="certificate error occurred: {0}".format(e)
-            )
+            self.module.fail_json(msg="certificate error occurred: {0}".format(e))
         except ValueError as e:
             try:
-                self.module.fail_json(
-                    msg="certificate not found: {0}".format(e)
-                )
+                self.module.fail_json(msg="certificate not found: {0}".format(e))
             except AttributeError:
                 pass
 
@@ -166,9 +154,7 @@ class QRadarRequest(object):
                 or to_text("No offense was found") in to_text(response)
             ):
                 return {}
-            if to_text("The rule does not exist.") in to_text(
-                response["description"]
-            ):
+            if to_text("The rule does not exist.") in to_text(response["description"]):
                 return code, {}
 
         if code == 409:
@@ -186,9 +172,7 @@ class QRadarRequest(object):
         elif not (code >= 200 and code < 300):
             try:
                 self.module.fail_json(
-                    msg="qradar httpapi returned error {0} with message {1}".format(
-                        code, response
-                    )
+                    msg="qradar httpapi returned error {0} with message {1}".format(code, response)
                 )
             except AttributeError:
                 pass
@@ -228,9 +212,7 @@ class QRadarRequest(object):
             return qradar_data
 
         except TypeError as e:
-            self.module.fail_json(
-                msg="invalid data type provided: {0}".format(e)
-            )
+            self.module.fail_json(msg="invalid data type provided: {0}".format(e))
 
     def post_by_path(self, rest_path, data=None):
         """

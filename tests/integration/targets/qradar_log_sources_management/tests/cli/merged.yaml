@@ -28,7 +28,7 @@
       when: "{{item.key not in ['creation_date']}}"
       with_dict: "{{ dict }}"
       loop: "{{ result['qradar_log_sources_management']['after'] }}"
-    
+
     - name: To remove modified_date from the after dict
       set_fact:
         after: "{{ after | default([]) | combine({ item.key : item.value }) }}"

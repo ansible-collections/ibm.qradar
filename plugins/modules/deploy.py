@@ -46,7 +46,6 @@ from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
 
 
 def main():
-
     argspec = dict(
         type=dict(
             choices=["INCREMENTAL", "FULL"],
@@ -62,13 +61,10 @@ def main():
         not_rest_data_keys=["state", "type_name", "identifier"],
     )
 
-    qradar_return_data = qradar_request.post_by_path(
-        "api/staged_config/deploy_status"
-    )
+    qradar_return_data = qradar_request.post_by_path("api/staged_config/deploy_status")
 
     if "message" in qradar_return_data and (
-        to_text("No changes to deploy")
-        in to_text(qradar_return_data["message"])
+        to_text("No changes to deploy") in to_text(qradar_return_data["message"])
     ):
         module.exit_json(
             msg="No changes to deploy",
@@ -77,9 +73,7 @@ def main():
         )
     else:
         module.exit_json(
-            msg="Successfully initiated {0} deployment.".format(
-                module.params["type"]
-            ),
+            msg="Successfully initiated {0} deployment.".format(module.params["type"]),
             qradar_return_data=qradar_return_data,
             changed=True,
         )

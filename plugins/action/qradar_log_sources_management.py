@@ -55,11 +55,13 @@ class ActionModule(ActionBase):
     def __init__(self, *args, **kwargs):
         super(ActionModule, self).__init__(*args, **kwargs)
         self._result = None
-        self.api_object = (
-            "/api/config/event_sources/log_source_management/log_sources"
+        self.api_object = "/api/config/event_sources/log_source_management/log_sources"
+        self.api_object_types = (
+            "/api/config/event_sources/log_source_management/log_source_types?filter="
         )
-        self.api_object_types = "/api/config/event_sources/log_source_management/log_source_types?filter="
-        self.api_object_search = "/api/config/event_sources/log_source_management/log_sources?filter="
+        self.api_object_search = (
+            "/api/config/event_sources/log_source_management/log_sources?filter="
+        )
         self.api_return = "log_sources_management"
         self.module_return = "qradar_log_sources_management"
         self.supported_params = [
@@ -98,7 +100,6 @@ class ActionModule(ActionBase):
     def set_log_source_values(self, qradar_request, config_params):
         # find log source types details
         if config_params.get("type_name"):
-
             api_object = self.api_object_types + "{0}".format(
                 quote('name="{0}"'.format(config_params["type_name"]))
             )
@@ -147,9 +148,7 @@ class ActionModule(ActionBase):
             config_params.pop("identifier")
         return config_params
 
-    def search_for_resource_name(
-        self, qradar_request, search_resource_by_names=None
-    ):
+    def search_for_resource_name(self, qradar_request, search_resource_by_names=None):
         search_result = []
         if isinstance(search_resource_by_names, list):
             for each in search_resource_by_names:
@@ -181,14 +180,10 @@ class ActionModule(ActionBase):
         changed = False
         for each in module_config_params:
             each = utils.remove_empties(each)
-            log_source_exists = self.search_for_resource_name(
-                qradar_request, each["name"]
-            )
+            log_source_exists = self.search_for_resource_name(qradar_request, each["name"])
             if log_source_exists:
                 before.append(log_source_exists)
-                query_object = self.api_object + "/{0}".format(
-                    log_source_exists["id"]
-                )
+                query_object = self.api_object + "/{0}".format(log_source_exists["id"])
                 code, qradar_return_data = qradar_request.delete(query_object)
                 if code >= 200 and code < 300:
                     changed = True
@@ -206,9 +201,7 @@ class ActionModule(ActionBase):
         for each in module_config_params:
             each = utils.remove_empties(each)
             each = self.set_log_source_values(conn_request, each)
-            search_result = self.search_for_resource_name(
-                conn_request, each["name"]
-            )
+            search_result = self.search_for_resource_name(conn_request, each["name"])
             if search_result:
                 if search_result["name"] == each["name"]:
                     temp_each = copy(each)
@@ -218,17 +211,11 @@ class ActionModule(ActionBase):
                     diff = utils.dict_diff(temp_search_result, temp_each)
                 if diff:
                     if self._task.args["state"] == "merged":
-                        each = utils.remove_empties(
-                            utils.dict_merge(search_result, each)
-                        )
+                        each = utils.remove_empties(utils.dict_merge(search_result, each))
                         temp_request_param.append(each)
                     elif self._task.args["state"] == "replaced":
-                        query_object = self.api_object + "/{0}".format(
-                            search_result["id"]
-                        )
-                        code, qradar_return_data = conn_request.delete(
-                            query_object
-                        )
+                        query_object = self.api_object + "/{0}".format(search_result["id"])
+                        code, qradar_return_data = conn_request.delete(query_object)
                         temp_request_param.append(each)
                 else:
                     after.append(search_result)
@@ -266,9 +253,7 @@ class ActionModule(ActionBase):
         self._supports_check_mode = True
         self._result = super(ActionModule, self).run(tmp, task_vars)
         if self._task.args.get("config"):
-            self._task.args[
-                "config"
-            ] = remove_unsupported_keys_from_payload_dict(
+            self._task.args["config"] = remove_unsupported_keys_from_payload_dict(
                 self._task.args["config"], self.supported_params
             )
             self._check_argspec()
@@ -283,24 +268,17 @@ class ActionModule(ActionBase):
                 )
             else:
                 self._result["gathered"] = conn_request.get(self.api_object)
-        elif (
-            self._task.args["state"] == "merged"
-            or self._task.args["state"] == "replaced"
-        ):
+        elif self._task.args["state"] == "merged" or self._task.args["state"] == "replaced":
             if self._task.args.get("config"):
                 (
                     self._result[self.module_return],
                     self._result["changed"],
-                ) = self.configure_module_api(
-                    conn_request, self._task.args["config"]
-                )
+                ) = self.configure_module_api(conn_request, self._task.args["config"])
         elif self._task.args["state"] == "deleted":
             if self._task.args.get("config"):
                 (
                     self._result[self.module_return],
                     self._result["changed"],
-                ) = self.delete_module_api_config(
-                    conn_request, self._task.args["config"]
-                )
+                ) = self.delete_module_api_config(conn_request, self._task.args["config"])
 
         return self._result

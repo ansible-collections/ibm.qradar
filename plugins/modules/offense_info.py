@@ -125,7 +125,6 @@ from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
 
 
 def main():
-
     argspec = dict(
         id=dict(required=False, type="int"),
         name=dict(required=False, type="str"),
@@ -157,41 +156,27 @@ def main():
     set_offense_values(module, qradar_request)
 
     if module.params["id"]:
-        code, offenses = qradar_request.get(
-            "/api/siem/offenses/{0}".format(module.params["id"])
-        )
+        code, offenses = qradar_request.get("/api/siem/offenses/{0}".format(module.params["id"]))
 
     else:
         query_strs = []
 
         if module.params["status"]:
-            query_strs.append(
-                quote("status={0}".format(to_text(module.params["status"])))
-            )
+            query_strs.append(quote("status={0}".format(to_text(module.params["status"]))))
 
         if module.params["assigned_to"]:
-            query_strs.append(
-                quote("assigned_to={0}".format(module.params["assigned_to"]))
-            )
+            query_strs.append(quote("assigned_to={0}".format(module.params["assigned_to"])))
 
         if module.params["closing_reason_id"]:
             query_strs.append(
-                quote(
-                    "closing_reason_id={0}".format(
-                        module.params["closing_reason_id"]
-                    )
-                )
+                quote("closing_reason_id={0}".format(module.params["closing_reason_id"]))
             )
 
         if module.params["follow_up"] is not None:
-            query_strs.append(
-                quote("follow_up={0}".format(module.params["follow_up"]))
-            )
+            query_strs.append(quote("follow_up={0}".format(module.params["follow_up"])))
 
         if module.params["protected"] is not None:
-            query_strs.append(
-                quote("protected={0}".format(module.params["protected"]))
-            )
+            query_strs.append(quote("protected={0}".format(module.params["protected"])))
 
         if query_strs:
             code, offenses = qradar_request.get(
@@ -201,9 +186,7 @@ def main():
             code, offenses = qradar_request.get("/api/siem/offenses")
 
         if module.params["name"]:
-            named_offense = find_dict_in_list(
-                offenses, "description", module.params["name"]
-            )
+            named_offense = find_dict_in_list(offenses, "description", module.params["name"])
             if named_offense:
                 offenses = named_offense
             else:

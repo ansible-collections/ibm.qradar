@@ -85,14 +85,10 @@ class ActionModule(ActionBase):
         :returns: dict with module prams transformed having API expected params
         """
         if search_for_resource.get("id"):
-            api_obj_url = self.api_object + "/{0}".format(
-                search_for_resource["id"]
-            )
+            api_obj_url = self.api_object + "/{0}".format(search_for_resource["id"])
         elif search_for_resource.get("name"):
             api_obj_url = self.api_object + "?filter={0}".format(
-                quote(
-                    'name="{0}"'.format(to_text(search_for_resource["name"]))
-                )
+                quote('name="{0}"'.format(to_text(search_for_resource["name"])))
             )
         elif search_for_resource.get("range"):
             api_obj_url = self.api_object
@@ -104,10 +100,7 @@ class ActionModule(ActionBase):
         if (
             rule_source_exists
             and len(rule_source_exists) == 1
-            and (
-                search_for_resource.get("name")
-                and not search_for_resource.get("id")
-            )
+            and (search_for_resource.get("name") and not search_for_resource.get("id"))
         ):
             rule_source_exists = rule_source_exists[0]
         return rule_source_exists
@@ -123,9 +116,7 @@ class ActionModule(ActionBase):
         before = {}
         after = {}
         changed = False
-        rule_exists = self.search_for_resource(
-            qradar_request, module_config_params
-        )
+        rule_exists = self.search_for_resource(qradar_request, module_config_params)
         if rule_exists:
             changed = True
             before = rule_exists
@@ -148,9 +139,7 @@ class ActionModule(ActionBase):
         before = {}
         changed = False
 
-        rule_exists = self.search_for_resource(
-            qradar_request, module_config_params
-        )
+        rule_exists = self.search_for_resource(qradar_request, module_config_params)
         if rule_exists:
             if isinstance(rule_exists, list):
                 for each in rule_exists:
@@ -167,9 +156,7 @@ class ActionModule(ActionBase):
                     data=json.dumps(diff),
                 )
                 if qradar_return_data[0] >= 200:
-                    config.update(
-                        {"before": before, "after": qradar_return_data[1]}
-                    )
+                    config.update({"before": before, "after": qradar_return_data[1]})
             else:
                 config.update({"before": before})
         return config, changed
@@ -179,9 +166,7 @@ class ActionModule(ActionBase):
         self._result = super(ActionModule, self).run(tmp, task_vars)
         headers = None
         if self._task.args.get("config"):
-            self._task.args[
-                "config"
-            ] = remove_unsupported_keys_from_payload_dict(
+            self._task.args["config"] = remove_unsupported_keys_from_payload_dict(
                 self._task.args["config"], self.supported_params
             )
             self._check_argspec()
@@ -190,15 +175,11 @@ class ActionModule(ActionBase):
         if self._task.args["config"].get("range"):
             headers = {
                 "Content-Type": "application/json",
-                "Range": "items={0}".format(
-                    self._task.args["config"]["range"]
-                ),
+                "Range": "items={0}".format(self._task.args["config"]["range"]),
             }
         conn = Connection(self._connection.socket_path)
         if headers:
-            conn_request = QRadarRequest(
-                connection=conn, headers=headers, task_vars=task_vars
-            )
+            conn_request = QRadarRequest(connection=conn, headers=headers, task_vars=task_vars)
         else:
             conn_request = QRadarRequest(connection=conn, task_vars=task_vars)
         if self._task.args["state"] == "gathered":
@@ -211,16 +192,12 @@ class ActionModule(ActionBase):
                 (
                     self._result[self.module_return],
                     self._result["changed"],
-                ) = self.configure_module_api(
-                    conn_request, self._task.args["config"]
-                )
+                ) = self.configure_module_api(conn_request, self._task.args["config"])
         elif self._task.args["state"] == "deleted":
             if self._task.args.get("config"):
                 (
                     self._result[self.module_return],
                     self._result["changed"],
-                ) = self.delete_module_api_config(
-                    conn_request, self._task.args["config"]
-                )
+                ) = self.delete_module_api_config(conn_request, self._task.args["config"])
 
         return self._result

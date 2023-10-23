@@ -71,9 +71,7 @@ def set_offense_values(module, qradar_request):
             module.params["closing_reason_id"] = found_closing_reason[0]["id"]
         else:
             module.fail_json(
-                "Unable to find closing_reason text: {0}".format(
-                    module.params["closing_reason"]
-                )
+                "Unable to find closing_reason text: {0}".format(module.params["closing_reason"])
             )
 
     if module.params["status"]:
@@ -81,7 +79,6 @@ def set_offense_values(module, qradar_request):
 
 
 def main():
-
     argspec = dict(
         #        state=dict(required=False, choices=["present", "absent"], type='str', default="present"),
         id=dict(required=True, type="int"),
@@ -114,9 +111,7 @@ def main():
 
         note = found_notes[0]
         if note["note_text"] == module.params["note_text"]:
-            module.exit_json(
-                msg="No changes necessary. Nothing to do.", changed=False
-            )
+            module.exit_json(msg="No changes necessary. Nothing to do.", changed=False)
         else:
             if module.check_mode:
                 module.exit_json(
@@ -132,9 +127,7 @@ def main():
                 data=False,
             )
             module.exit_json(
-                msg="Successfully created Offense Note ID: {0}".format(
-                    qradar_return_data["id"]
-                ),
+                msg="Successfully created Offense Note ID: {0}".format(qradar_return_data["id"]),
                 qradar_return_data=qradar_return_data,
                 changed=False,
             )
@@ -154,9 +147,7 @@ def main():
             data=False,
         )
         module.exit_json(
-            msg="Successfully created Offense Note ID: {0}".format(
-                qradar_return_data["id"]
-            ),
+            msg="Successfully created Offense Note ID: {0}".format(qradar_return_data["id"]),
             qradar_return_data=qradar_return_data,
             changed=True,
         )
