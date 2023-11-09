@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -70,17 +71,14 @@ EXAMPLES = """
     var: custom_ddos_rule_info
 """
 
-from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils._text import to_text
-
+from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six.moves.urllib.parse import quote
-from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
-    QRadarRequest,
-)
+
+from ansible_collections.ibm.qradar.plugins.module_utils.qradar import QRadarRequest
 
 
 def main():
-
     argspec = dict(
         id=dict(required=False, type="int"),
         name=dict(required=False, type="str"),
@@ -91,7 +89,9 @@ def main():
             type="str",
         ),
         origin=dict(
-            required=False, choices=["SYSTEM", "OVERRIDE", "USER"], type="str"
+            required=False,
+            choices=["SYSTEM", "OVERRIDE", "USER"],
+            type="str",
         ),
     )
 
@@ -105,7 +105,7 @@ def main():
 
     if module.params["id"]:
         code, rules = qradar_request.get(
-            "/api/analytics/rules/{0}".format(module.params["id"])
+            "/api/analytics/rules/{0}".format(module.params["id"]),
         )
 
     else:
@@ -113,12 +113,12 @@ def main():
 
         if module.params["name"]:
             query_strs.append(
-                quote('name="{0}"'.format(to_text(module.params["name"])))
+                quote('name="{0}"'.format(to_text(module.params["name"]))),
             )
 
         if module.params["owner"]:
             query_strs.append(
-                quote("owner={0}".format(module.params["owner"]))
+                quote("owner={0}".format(module.params["owner"])),
             )
 
         if module.params["type"]:
@@ -126,12 +126,12 @@ def main():
 
         if module.params["origin"]:
             query_strs.append(
-                quote("origin={0}".format(module.params["origin"]))
+                quote("origin={0}".format(module.params["origin"])),
             )
 
         if query_strs:
             code, rules = qradar_request.get(
-                "/api/analytics/rules?filter={0}".format("&".join(query_strs))
+                "/api/analytics/rules?filter={0}".format("&".join(query_strs)),
             )
         else:
             code, rules = qradar_request.get("/api/analytics/rules")

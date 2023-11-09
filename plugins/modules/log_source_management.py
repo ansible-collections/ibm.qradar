@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -73,31 +74,31 @@ EXAMPLES = """
     identifier: "192.168.1.101"
 """
 
-from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils._text import to_text
+import json
 
+from ansible.module_utils._text import to_text
+from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six.moves.urllib.parse import quote
+
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
     QRadarRequest,
     find_dict_in_list,
 )
-
-import json
 
 
 def set_log_source_values(module, qradar_request):
     if module.params["type_name"]:
         code, query_response = qradar_request.get(
             "/api/config/event_sources/log_source_management/log_source_types?filter={0}".format(
-                quote('name="{0}"'.format(module.params["type_name"]))
-            )
+                quote('name="{0}"'.format(module.params["type_name"])),
+            ),
         )
         log_source_type_found = query_response[0]
     if module.params["type_id"]:
         code, query_response = qradar_request.get(
             "/api/config/event_sources/log_source_management/log_source_types?filter={0}".format(
-                quote('name="{0}"'.format(module.params["type_name"]))
-            )
+                quote('name="{0}"'.format(module.params["type_name"])),
+            ),
         )
         code, log_source_type_found = query_response[0]
     if log_source_type_found:
@@ -105,7 +106,7 @@ def set_log_source_values(module, qradar_request):
             module.params["type_id"] = log_source_type_found["id"]
     else:
         module.fail_json(
-            msg="Incompatible type provided, please consult QRadar Documentation for Log Source Types"
+            msg="Incompatible type provided, please consult QRadar Documentation for Log Source Types",
         )
 
     if module.params["protocol_type_id"]:
@@ -116,25 +117,24 @@ def set_log_source_values(module, qradar_request):
         )
         if not found_dict_in_list:
             module.fail_json(
-                msg="Incompatible protocol_type_id provided, please consult QRadar Documentation for Log Source Types"
+                msg="Incompatible protocol_type_id provided, please consult QRadar Documentation for Log Source Types",
             )
     else:
         # Set it to the default as provided by the QRadar Instance
-        module.params["protocol_type_id"] = log_source_type_found[
-            "protocol_types"
-        ][0]["protocol_id"]
+        module.params["protocol_type_id"] = log_source_type_found["protocol_types"][0][
+            "protocol_id"
+        ]
 
     module.params["protocol_parameters"] = [
         {
             "id": module.params["protocol_type_id"],
             "name": "identifier",
             "value": module.params["identifier"],
-        }
+        },
     ]
 
 
 def main():
-
     argspec = dict(
         name=dict(required=True, type="str"),
         state=dict(choices=["present", "absent"], required=True),
@@ -159,12 +159,11 @@ def main():
 
     code, log_source_exists = qradar_request.get(
         "/api/config/event_sources/log_source_management/log_sources?filter={0}".format(
-            quote('name="{0}"'.format(module.params["name"]))
-        )
+            quote('name="{0}"'.format(module.params["name"])),
+        ),
     )
 
     if log_source_exists:
-
         if module.params["state"] == "present":
             (
                 existing_log_source_protocol_identifier,
@@ -178,8 +177,7 @@ def main():
             set_log_source_values(module, qradar_request)
 
             comparison_map = [
-                existing_log_source_protocol_identifier["value"]
-                == module.params["identifier"],
+                existing_log_source_protocol_identifier["value"] == module.params["identifier"],
                 log_source_exists[0]["name"] == module.params["name"],
                 log_source_exists[0]["type_id"] == module.params["type_id"],
                 to_text(log_source_exists[0]["description"])
@@ -189,17 +187,15 @@ def main():
             if all(comparison_map):
                 module.exit_json(changed=False, msg="Nothing to do.")
             else:
-                log_source_exists[0]["protocol_parameters"][
-                    _elspi_index
-                ] = module.params["protocol_parameters"][0]
+                log_source_exists[0]["protocol_parameters"][_elspi_index] = module.params[
+                    "protocol_parameters"
+                ][0]
                 log_source_exists[0]["name"] = module.params["name"]
                 log_source_exists[0]["type_id"] = module.params["type_id"]
-                log_source_exists[0]["description"] = module.params[
-                    "description"
-                ]
+                log_source_exists[0]["description"] = module.params["description"]
                 if module.check_mode:
                     qradar_return_data = {
-                        "EMPTY": "IN CHECK MODE, NO TRANSACTION TOOK PLACE"
+                        "EMPTY": "IN CHECK MODE, NO TRANSACTION TOOK PLACE",
                     }
                 else:
                     code, qradar_return_data = qradar_request.create_update(
@@ -209,7 +205,7 @@ def main():
 
                 module.exit_json(
                     msg="Successfully updated log source: {0}".format(
-                        module.params["name"]
+                        module.params["name"],
                     ),
                     qradar_return_data=qradar_return_data,
                     changed=True,
@@ -218,18 +214,18 @@ def main():
         if module.params["state"] == "absent":
             if module.check_mode:
                 qradar_return_data = {
-                    "EMPTY": "IN CHECK MODE, NO TRANSACTION TOOK PLACE"
+                    "EMPTY": "IN CHECK MODE, NO TRANSACTION TOOK PLACE",
                 }
             else:
                 code, qradar_return_data = qradar_request.delete(
                     "/api/config/event_sources/log_source_management/log_sources/{0}".format(
-                        log_source_exists[0]["id"]
-                    )
+                        log_source_exists[0]["id"],
+                    ),
                 )
 
             module.exit_json(
                 msg="Successfully deleted log source: {0}".format(
-                    module.params["name"]
+                    module.params["name"],
                 ),
                 qradar_return_data=qradar_return_data,
                 changed=True,
@@ -239,7 +235,7 @@ def main():
             set_log_source_values(module, qradar_request)
             if module.check_mode:
                 qradar_return_data = {
-                    "EMPTY": "IN CHECK MODE, NO TRANSACTION TOOK PLACE"
+                    "EMPTY": "IN CHECK MODE, NO TRANSACTION TOOK PLACE",
                 }
             else:
                 code, qradar_return_data = qradar_request.create_update(
@@ -249,7 +245,7 @@ def main():
 
             module.exit_json(
                 msg="Successfully created log source: {0}".format(
-                    module.params["name"]
+                    module.params["name"],
                 ),
                 qradar_return_data=qradar_return_data,
                 changed=True,

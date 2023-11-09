@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -37,22 +38,19 @@ EXAMPLES = """
     type: INCREMENTAL
 """
 
-from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils._text import to_text
+from ansible.module_utils.basic import AnsibleModule
 
-from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
-    QRadarRequest,
-)
+from ansible_collections.ibm.qradar.plugins.module_utils.qradar import QRadarRequest
 
 
 def main():
-
     argspec = dict(
         type=dict(
             choices=["INCREMENTAL", "FULL"],
             required=False,
             default="INCREMENTAL",
-        )
+        ),
     )
 
     module = AnsibleModule(argument_spec=argspec, supports_check_mode=False)
@@ -63,12 +61,11 @@ def main():
     )
 
     qradar_return_data = qradar_request.post_by_path(
-        "api/staged_config/deploy_status"
+        "api/staged_config/deploy_status",
     )
 
     if "message" in qradar_return_data and (
-        to_text("No changes to deploy")
-        in to_text(qradar_return_data["message"])
+        to_text("No changes to deploy") in to_text(qradar_return_data["message"])
     ):
         module.exit_json(
             msg="No changes to deploy",
@@ -78,7 +75,7 @@ def main():
     else:
         module.exit_json(
             msg="Successfully initiated {0} deployment.".format(
-                module.params["type"]
+                module.params["type"],
             ),
             qradar_return_data=qradar_return_data,
             changed=True,

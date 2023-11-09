@@ -1,7 +1,6 @@
 ---
 merged:
   before: []
-
   after:
     - auto_discovered: false
       average_eps: 0
@@ -11,30 +10,30 @@ merged:
       enabled: true
       gateway: false
       group_ids:
-      - 0
+        - 0
       internal: false
       language_id: 1
       last_event_time: 0
-      log_source_extension_id: null
+      log_source_extension_id:
       name: Snort logs
       protocol_parameters:
-      - id: 1
-        name: incomingPayloadEncoding
-        value: UTF-8
-      - id: 0
-        name: identifier
-        value: 192.0.2.1
+        - id: 1
+          name: incomingPayloadEncoding
+          value: UTF-8
+        - id: 0
+          name: identifier
+          value: 192.0.2.1
       protocol_type_id: 0
       requires_deploy: true
       status:
         last_updated: 0
-        messages: null
+        messages:
         status: NA
       store_event_payload: true
       target_event_collector_id: 7
       type_id: 2
-      wincollect_external_destination_ids: null
-      wincollect_internal_destination_id: null
+      wincollect_external_destination_ids:
+      wincollect_internal_destination_id:
     - auto_discovered: false
       average_eps: 0
       coalesce_events: true
@@ -43,30 +42,30 @@ merged:
       enabled: true
       gateway: false
       group_ids:
-      - 0
+        - 0
       internal: false
       language_id: 1
       last_event_time: 0
-      log_source_extension_id: null
+      log_source_extension_id:
       name: Apache HTTP Server logs
       protocol_parameters:
-      - id: 1
-        name: incomingPayloadEncoding
-        value: UTF-8
-      - id: 0
-        name: identifier
-        value: 198.51.100.1
+        - id: 1
+          name: incomingPayloadEncoding
+          value: UTF-8
+        - id: 0
+          name: identifier
+          value: 198.51.100.1
       protocol_type_id: 0
       requires_deploy: true
       status:
         last_updated: 0
-        messages: null
+        messages:
         status: NA
       store_event_payload: true
       target_event_collector_id: 7
       type_id: 10
-      wincollect_external_destination_ids: null
-      wincollect_internal_destination_id: null
+      wincollect_external_destination_ids:
+      wincollect_internal_destination_id:
 
 replaced:
   after:
@@ -78,30 +77,30 @@ replaced:
       enabled: true
       gateway: false
       group_ids:
-      - 0
+        - 0
       internal: false
       language_id: 1
       last_event_time: 0
-      log_source_extension_id: null
+      log_source_extension_id:
       name: Snort logs
       protocol_parameters:
-      - id: 1
-        name: incomingPayloadEncoding
-        value: UTF-8
-      - id: 0
-        name: identifier
-        value: 198.51.100.1
+        - id: 1
+          name: incomingPayloadEncoding
+          value: UTF-8
+        - id: 0
+          name: identifier
+          value: 198.51.100.1
       protocol_type_id: 0
       requires_deploy: true
       status:
         last_updated: 0
-        messages: null
+        messages:
         status: NA
       store_event_payload: true
       target_event_collector_id: 7
       type_id: 2
-      wincollect_external_destination_ids: null
-      wincollect_internal_destination_id: null
+      wincollect_external_destination_ids:
+      wincollect_internal_destination_id:
     - auto_discovered: false
       average_eps: 0
       coalesce_events: true
@@ -110,27 +109,27 @@ replaced:
       enabled: true
       gateway: false
       group_ids:
-      - 0
+        - 0
       internal: false
       language_id: 1
       last_event_time: 0
-      log_source_extension_id: null
+      log_source_extension_id:
       name: Apache HTTP Server logs
       protocol_parameters:
-      - id: 1
-        name: incomingPayloadEncoding
-        value: UTF-8
-      - id: 0
-        name: identifier
-        value: 192.0.2.1
+        - id: 1
+          name: incomingPayloadEncoding
+          value: UTF-8
+        - id: 0
+          name: identifier
+          value: 192.0.2.1
       protocol_type_id: 0
       requires_deploy: true
       status:
         last_updated: 0
-        messages: null
+        messages:
         status: NA
       store_event_payload: true
       target_event_collector_id: 7
       type_id: 10
-      wincollect_external_destination_ids: null
-      wincollect_internal_destination_id: null
+      wincollect_external_destination_ids:
+      wincollect_internal_destination_id:
