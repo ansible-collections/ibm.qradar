@@ -76,8 +76,8 @@ qradar.example.com
 ansible_network_os=ibm.qradar.qradar
 ansible_user=admin
 ansible_httpapi_pass=SuperSekretPassword
-ansible_httpapi_use_ssl=yes
-ansible_httpapi_validate_certs=yes
+ansible_httpapi_use_ssl=true
+ansible_httpapi_validate_certs=true
 ansible_connection=httpapi
 ```
 
