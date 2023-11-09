@@ -606,7 +606,7 @@ Examples
           - name: "Apache HTTP Server logs"
             type_name: "Apache HTTP Server"
             description: "REPLACED Apache HTTP Server remote logs from rsyslog"
-            identifier:  "192.0.2.1"
+            identifier: "192.0.2.1"
 
     # RUN output:
     # -----------

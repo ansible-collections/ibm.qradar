@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -72,9 +73,8 @@ author: Ansible Security Automation Team (@maxamillion) <https://github.com/ansi
 EXAMPLES = """
 """
 
-from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils._text import to_text
-
+from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
     QRadarRequest,
     set_offense_values,
@@ -82,7 +82,6 @@ from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
 
 
 def main():
-
     argspec = dict(
         # name=dict(required=False, type='str'),
         # id=dict(required=False, type='str'),
@@ -118,7 +117,7 @@ def main():
     #    found_offense = qradar_request.get('/api/siem/offenses?filter={0}'.format(module.params['name']))
 
     code, found_offense = qradar_request.get(
-        "/api/siem/offenses/{0}".format(module.params["id"])
+        "/api/siem/offenses/{0}".format(module.params["id"]),
     )
 
     if found_offense:
@@ -127,43 +126,40 @@ def main():
         post_strs = []
 
         if module.params["status"] and (
-            to_text(found_offense["status"])
-            != to_text(module.params["status"])
+            to_text(found_offense["status"]) != to_text(module.params["status"])
         ):
             post_strs.append(
-                "status={0}".format(to_text(module.params["status"]))
+                "status={0}".format(to_text(module.params["status"])),
             )
 
         if module.params["assigned_to"] and (
-            to_text(found_offense["assigned_to"])
-            != to_text(module.params["assigned_to"])
+            to_text(found_offense["assigned_to"]) != to_text(module.params["assigned_to"])
         ):
             post_strs.append(
-                "assigned_to={0}".format(module.params["assigned_to"])
+                "assigned_to={0}".format(module.params["assigned_to"]),
             )
 
         if module.params["closing_reason_id"] and (
-            found_offense["closing_reason_id"]
-            != module.params["closing_reason_id"]
+            found_offense["closing_reason_id"] != module.params["closing_reason_id"]
         ):
             post_strs.append(
                 "closing_reason_id={0}".format(
-                    module.params["closing_reason_id"]
-                )
+                    module.params["closing_reason_id"],
+                ),
             )
 
         if module.params["follow_up"] and (
             found_offense["follow_up"] != module.params["follow_up"]
         ):
             post_strs.append(
-                "follow_up={0}".format(module.params["follow_up"])
+                "follow_up={0}".format(module.params["follow_up"]),
             )
 
         if module.params["protected"] and (
             found_offense["protected"] != module.params["protected"]
         ):
             post_strs.append(
-                "protected={0}".format(module.params["protected"])
+                "protected={0}".format(module.params["protected"]),
             )
 
         if post_strs:
@@ -175,25 +171,27 @@ def main():
 
             qradar_return_data = qradar_request.post_by_path(
                 "api/siem/offenses/{0}?{1}".format(
-                    module.params["id"], "&".join(post_strs)
-                )
+                    module.params["id"],
+                    "&".join(post_strs),
+                ),
             )
             # FIXME - handle the scenario in which we can search by name and this isn't a required param anymore
             module.exit_json(
                 msg="Successfully updated Offense ID: {0}".format(
-                    module.params["id"]
+                    module.params["id"],
                 ),
                 qradar_return_data=qradar_return_data,
                 changed=True,
             )
         else:
             module.exit_json(
-                msg="No changes necessary. Nothing to do.", changed=False
+                msg="No changes necessary. Nothing to do.",
+                changed=False,
             )
     else:
         # FIXME - handle the scenario in which we can search by name and this isn't a required param anymore
         module.fail_json(
-            msg="Unable to find Offense ID: {0}".format(module.params["id"])
+            msg="Unable to find Offense ID: {0}".format(module.params["id"]),
         )
 
 

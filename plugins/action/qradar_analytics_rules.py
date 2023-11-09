@@ -23,27 +23,24 @@ The module file for qradar_analytics_rules
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 import json
-from ansible.plugins.action import ActionBase
-from ansible.module_utils.connection import Connection
-from ansible.module_utils._text import to_text
-from ansible.module_utils.six.moves.urllib.parse import quote
 
-from ansible_collections.ansible.netcommon.plugins.module_utils.network.common import (
-    utils,
+from ansible.module_utils._text import to_text
+from ansible.module_utils.connection import Connection
+from ansible.module_utils.six.moves.urllib.parse import quote
+from ansible.plugins.action import ActionBase
+from ansible_collections.ansible.netcommon.plugins.module_utils.network.common import utils
+from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate import (
+    AnsibleArgSpecValidator,
 )
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
     QRadarRequest,
     remove_unsupported_keys_from_payload_dict,
 )
-from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate import (
-    AnsibleArgSpecValidator,
-)
-from ansible_collections.ibm.qradar.plugins.modules.qradar_analytics_rules import (
-    DOCUMENTATION,
-)
+from ansible_collections.ibm.qradar.plugins.modules.qradar_analytics_rules import DOCUMENTATION
 
 
 class ActionModule(ActionBase):
@@ -86,13 +83,13 @@ class ActionModule(ActionBase):
         """
         if search_for_resource.get("id"):
             api_obj_url = self.api_object + "/{0}".format(
-                search_for_resource["id"]
+                search_for_resource["id"],
             )
         elif search_for_resource.get("name"):
             api_obj_url = self.api_object + "?filter={0}".format(
                 quote(
-                    'name="{0}"'.format(to_text(search_for_resource["name"]))
-                )
+                    'name="{0}"'.format(to_text(search_for_resource["name"])),
+                ),
             )
         elif search_for_resource.get("range"):
             api_obj_url = self.api_object
@@ -104,10 +101,7 @@ class ActionModule(ActionBase):
         if (
             rule_source_exists
             and len(rule_source_exists) == 1
-            and (
-                search_for_resource.get("name")
-                and not search_for_resource.get("id")
-            )
+            and (search_for_resource.get("name") and not search_for_resource.get("id"))
         ):
             rule_source_exists = rule_source_exists[0]
         return rule_source_exists
@@ -124,13 +118,14 @@ class ActionModule(ActionBase):
         after = {}
         changed = False
         rule_exists = self.search_for_resource(
-            qradar_request, module_config_params
+            qradar_request,
+            module_config_params,
         )
         if rule_exists:
             changed = True
             before = rule_exists
             code, qradar_return_data = qradar_request.delete(
-                self.api_object + "/{0}".format(rule_exists["id"])
+                self.api_object + "/{0}".format(rule_exists["id"]),
             )
             config.update({"before": before, "after": after})
         else:
@@ -149,7 +144,8 @@ class ActionModule(ActionBase):
         changed = False
 
         rule_exists = self.search_for_resource(
-            qradar_request, module_config_params
+            qradar_request,
+            module_config_params,
         )
         if rule_exists:
             if isinstance(rule_exists, list):
@@ -168,7 +164,7 @@ class ActionModule(ActionBase):
                 )
                 if qradar_return_data[0] >= 200:
                     config.update(
-                        {"before": before, "after": qradar_return_data[1]}
+                        {"before": before, "after": qradar_return_data[1]},
                     )
             else:
                 config.update({"before": before})
@@ -179,10 +175,9 @@ class ActionModule(ActionBase):
         self._result = super(ActionModule, self).run(tmp, task_vars)
         headers = None
         if self._task.args.get("config"):
-            self._task.args[
-                "config"
-            ] = remove_unsupported_keys_from_payload_dict(
-                self._task.args["config"], self.supported_params
+            self._task.args["config"] = remove_unsupported_keys_from_payload_dict(
+                self._task.args["config"],
+                self.supported_params,
             )
             self._check_argspec()
         if self._result.get("failed"):
@@ -191,20 +186,23 @@ class ActionModule(ActionBase):
             headers = {
                 "Content-Type": "application/json",
                 "Range": "items={0}".format(
-                    self._task.args["config"]["range"]
+                    self._task.args["config"]["range"],
                 ),
             }
         conn = Connection(self._connection.socket_path)
         if headers:
             conn_request = QRadarRequest(
-                connection=conn, headers=headers, task_vars=task_vars
+                connection=conn,
+                headers=headers,
+                task_vars=task_vars,
             )
         else:
             conn_request = QRadarRequest(connection=conn, task_vars=task_vars)
         if self._task.args["state"] == "gathered":
             if self._task.args.get("config"):
                 self._result["gathered"] = self.search_for_resource(
-                    conn_request, self._task.args["config"]
+                    conn_request,
+                    self._task.args["config"],
                 )
         elif self._task.args["state"] == "merged":
             if self._task.args.get("config"):
@@ -212,7 +210,8 @@ class ActionModule(ActionBase):
                     self._result[self.module_return],
                     self._result["changed"],
                 ) = self.configure_module_api(
-                    conn_request, self._task.args["config"]
+                    conn_request,
+                    self._task.args["config"],
                 )
         elif self._task.args["state"] == "deleted":
             if self._task.args.get("config"):
@@ -220,7 +219,8 @@ class ActionModule(ActionBase):
                     self._result[self.module_return],
                     self._result["changed"],
                 ) = self.delete_module_api_config(
-                    conn_request, self._task.args["config"]
+                    conn_request,
+                    self._task.args["config"],
                 )
 
         return self._result
