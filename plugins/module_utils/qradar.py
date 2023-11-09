@@ -11,12 +11,12 @@ __metaclass__ = type
 import json
 
 from copy import copy
+from ssl import CertificateError
 
 from ansible.module_utils._text import to_text
 from ansible.module_utils.connection import Connection, ConnectionError
 from ansible.module_utils.six import iteritems
 from ansible.module_utils.six.moves.urllib.parse import quote_plus
-from ansible.module_utils.urls import CertificateError
 
 
 BASE_HEADERS = {"Content-Type": "application/json", "Version": "9.1"}
