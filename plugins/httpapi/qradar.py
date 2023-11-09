@@ -23,6 +23,7 @@ from ansible.module_utils.basic import to_text
 from ansible.module_utils.connection import ConnectionError
 from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible_collections.ansible.netcommon.plugins.plugin_utils.httpapi_base import HttpApiBase
+
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import BASE_HEADERS
 
 

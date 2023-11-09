@@ -27,6 +27,7 @@ import unittest
 from ansible.playbook.task import Task
 from ansible.template import Templar
 from ansible_collections.ansible.utils.tests.unit.compat.mock import MagicMock, patch
+
 from ansible_collections.ibm.qradar.plugins.action.qradar_analytics_rules import ActionModule
 
 

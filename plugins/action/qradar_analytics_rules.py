@@ -36,6 +36,7 @@ from ansible_collections.ansible.netcommon.plugins.module_utils.network.common i
 from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate import (
     AnsibleArgSpecValidator,
 )
+
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
     QRadarRequest,
     remove_unsupported_keys_from_payload_dict,
