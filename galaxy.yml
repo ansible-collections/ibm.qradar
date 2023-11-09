@@ -1,35 +1,18 @@
 ---
-### requried
-# this can be a company/brand or product namespace under which all content lives
 namespace: ibm
-# the designation of this specific collection
 name: qradar
-# a list of the collection's content authors: 'Full Name <email> (http://site) @nicks:irc/im/site#channel'
 authors:
   - Ansible Security Team (https://github.com/ansible-security)
 dependencies:
-  "ansible.netcommon": ">=2.5.1"
-### optional but strongly advised
-# short summary of the collection
+  ansible.netcommon: ">=2.5.1"
 description: Ansible Security Collection for IBM Qradar SIEM
-# a valid SPDX license identifier https://spdx.org/licenses/
-license:
-  - 'GPL-3.0-or-later'
-# list of keywords you want to associate the collection with for indexing/search systems
+license_file: LICENSE
 tags:
   - security
   - qradar
-# list of dependencies, other collections this collection requires to be installed for it to be usable
-#dependencies:
-
-### urls
-# url of originating SCM repository
 repository: https://github.com/ansible-collections/ibm.qradar
-# url to online docs
 documentation: https://github.com/ansible-collections/ibm.qradar
-# homepage of the collection/project
 homepage: https://github.com/ansible-collections/ibm.qradar
-# issue tracker url
 issues: https://github.com/ansible-collections/ibm.qradar/issues
-
 readme: README.md
+version: 2.1.1-devel

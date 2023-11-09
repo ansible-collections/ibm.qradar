@@ -4,6 +4,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -123,7 +124,7 @@ EXAMPLES = """
 # Using GATHERED state
 # --------------------
 
-- name:  Get information about the Rule named "Ansible Example DDOS Rule"
+- name: Get information about the Rule named "Ansible Example DDOS Rule"
   ibm.qradar.qradar_analytics_rules:
     config:
       name: "Ansible Example DDOS Rule"
@@ -148,7 +149,7 @@ EXAMPLES = """
 #     owner: admin
 #     type: EVENT
 
-- name:  Get information about the Rule with ID 100443
+- name: Get information about the Rule with ID 100443
   ibm.qradar.qradar_analytics_rules:
     config:
       id: 100443
@@ -262,7 +263,6 @@ EXAMPLES = """
 #       origin: USER
 #       owner: admin
 #       type: EVENT
-
 """
 
 RETURN = """

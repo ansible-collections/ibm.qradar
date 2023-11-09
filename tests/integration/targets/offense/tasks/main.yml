@@ -1,19 +1,18 @@
 ---
-
-#- qradar_offense_action:
-#    id: 1
-#    status: "hidden"
-#    assigned_to: "admin"
-#    protected: false
+# - qradar_offense_action:
+#     id: 1
+#     status: "hidden"
+#     assigned_to: "admin"
+#     protected: false
 #
-#- qradar_offense_note:
-#   offense_id: 2
-#   note_text: "testing note text from playbook - modified"
+# - qradar_offense_note:
+#     offense_id: 2
+#     note_text: "testing note text from playbook - modified"
 #
-#- name: get info about qradar offense
-#  qradar_offense_info:
-#    protected: true
-#    status: "HIDDEN"
-#  register: offense_info
+# - name: get info about qradar offense
+#   qradar_offense_info:
+#     protected: true
+#     status: "HIDDEN"
+#   register: offense_info
 #
-#- debug: var=offense_info
+# - debug: var=offense_info

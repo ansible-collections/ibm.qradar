@@ -3,6 +3,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -19,14 +20,11 @@ version_added: "1.0.0"
 import json
 
 from ansible.module_utils.basic import to_text
-from ansible.module_utils.six.moves.urllib.error import HTTPError
-from ansible_collections.ansible.netcommon.plugins.plugin_utils.httpapi_base import (
-    HttpApiBase,
-)
 from ansible.module_utils.connection import ConnectionError
-from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
-    BASE_HEADERS,
-)
+from ansible.module_utils.six.moves.urllib.error import HTTPError
+from ansible_collections.ansible.netcommon.plugins.plugin_utils.httpapi_base import HttpApiBase
+
+from ansible_collections.ibm.qradar.plugins.module_utils.qradar import BASE_HEADERS
 
 
 class HttpApi(HttpApiBase):
@@ -36,7 +34,10 @@ class HttpApi(HttpApiBase):
         try:
             self._display_request(request_method)
             response, response_data = self.connection.send(
-                path, payload, method=request_method, headers=headers
+                path,
+                payload,
+                method=request_method,
+                headers=headers,
             )
             value = self._get_response_value(response_data)
 

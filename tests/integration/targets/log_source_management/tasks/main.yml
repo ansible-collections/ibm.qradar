@@ -1,60 +1,60 @@
 ---
 - name: Create Testing Apache HTTP Server log source
   log_source_management:
-    name: "Testing Collections PB - 192.168.1.112"
-    type_name: "Apache HTTP Server"
+    name: Testing Collections PB - 192.168.1.112
+    type_name: Apache HTTP Server
     state: present
-    description: "Testing Collection PB Description"
-    identifier: "192.168.1.112"
+    description: Testing Collection PB Description
+    identifier: 192.168.1.112
   register: snort_log_source_create
 
 - name: Assert Create Test Apache HTTP Server log source changed
-  assert:
+  ansible.builtin.assert:
     that:
       - snort_log_source_create is changed
       - snort_log_source_create is not failed
 
 - name: Create Testing Apache HTTP Server log source RERUN
   log_source_management:
-    name: "Testing Collections PB - 192.168.1.112"
-    type_name: "Apache HTTP Server"
+    name: Testing Collections PB - 192.168.1.112
+    type_name: Apache HTTP Server
     state: present
-    description: "Testing Collection PB Description"
-    identifier: "192.168.1.112"
+    description: Testing Collection PB Description
+    identifier: 192.168.1.112
   register: snort_log_source_create_rerun
 
 - name: Assert Create Test Apache HTTP Server log source is not changed on RERUN
-  assert:
+  ansible.builtin.assert:
     that:
       - snort_log_source_create_rerun is not changed
       - snort_log_source_create_rerun is not failed
 
 - name: Delete Testing Apache HTTP Server log source
   log_source_management:
-    name: "Testing Collections PB - 192.168.1.112"
-    type_name: "Apache HTTP Server"
+    name: Testing Collections PB - 192.168.1.112
+    type_name: Apache HTTP Server
     state: absent
-    description: "Testing Collection PB Description"
-    identifier: "192.168.1.112"
+    description: Testing Collection PB Description
+    identifier: 192.168.1.112
   register: snort_log_source_delete
 
 - name: Assert Delete Test Apache HTTP Server log source changed
-  assert:
+  ansible.builtin.assert:
     that:
       - snort_log_source_delete is changed
       - snort_log_source_delete is not failed
 
 - name: Delete Testing Apache HTTP Server log source RERUN
   log_source_management:
-    name: "Testing Collections PB - 192.168.1.112"
-    type_name: "Apache HTTP Server"
+    name: Testing Collections PB - 192.168.1.112
+    type_name: Apache HTTP Server
     state: absent
-    description: "Testing Collection PB Description"
-    identifier: "192.168.1.112"
+    description: Testing Collection PB Description
+    identifier: 192.168.1.112
   register: snort_log_source_delete_rerun
 
 - name: Assert Delete Test Apache HTTP Server log source is not changed on RERUN
-  assert:
+  ansible.builtin.assert:
     that:
       - snort_log_source_delete_rerun is not changed
       - snort_log_source_delete_rerun is not failed

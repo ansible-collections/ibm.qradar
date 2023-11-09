@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -53,27 +54,25 @@ EXAMPLES = """
 """
 
 from ansible.module_utils.basic import AnsibleModule
-
 from ansible.module_utils.six.moves.urllib.parse import quote
-from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
-    QRadarRequest,
-)
+
+from ansible_collections.ibm.qradar.plugins.module_utils.qradar import QRadarRequest
 
 
 def set_offense_values(module, qradar_request):
     if module.params["closing_reason"]:
         code, found_closing_reason = qradar_request.get(
             "/api/siem/offense_closing_reasons?filter={0}".format(
-                quote('text="{0}"'.format(module.params["closing_reason"]))
-            )
+                quote('text="{0}"'.format(module.params["closing_reason"])),
+            ),
         )
         if found_closing_reason:
             module.params["closing_reason_id"] = found_closing_reason[0]["id"]
         else:
             module.fail_json(
                 "Unable to find closing_reason text: {0}".format(
-                    module.params["closing_reason"]
-                )
+                    module.params["closing_reason"],
+                ),
             )
 
     if module.params["status"]:
@@ -81,7 +80,6 @@ def set_offense_values(module, qradar_request):
 
 
 def main():
-
     argspec = dict(
         #        state=dict(required=False, choices=["present", "absent"], type='str', default="present"),
         id=dict(required=True, type="int"),
@@ -104,7 +102,7 @@ def main():
         "/api/siem/offenses/{0}/notes?filter={1}".format(
             module.params["id"],
             quote('note_text="{0}"'.format(module.params["note_text"])),
-        )
+        ),
     )
 
     # if module.params['state'] == 'present':
@@ -115,7 +113,8 @@ def main():
         note = found_notes[0]
         if note["note_text"] == module.params["note_text"]:
             module.exit_json(
-                msg="No changes necessary. Nothing to do.", changed=False
+                msg="No changes necessary. Nothing to do.",
+                changed=False,
             )
         else:
             if module.check_mode:
@@ -133,7 +132,7 @@ def main():
             )
             module.exit_json(
                 msg="Successfully created Offense Note ID: {0}".format(
-                    qradar_return_data["id"]
+                    qradar_return_data["id"],
                 ),
                 qradar_return_data=qradar_return_data,
                 changed=False,
@@ -155,7 +154,7 @@ def main():
         )
         module.exit_json(
             msg="Successfully created Offense Note ID: {0}".format(
-                qradar_return_data["id"]
+                qradar_return_data["id"],
             ),
             qradar_return_data=qradar_return_data,
             changed=True,

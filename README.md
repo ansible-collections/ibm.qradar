@@ -1,6 +1,8 @@
 # IBM QRadar Ansible Collection
 
-[![CI](https://zuul-ci.org/gated.svg)](https://dashboard.zuul.ansible.com/t/ansible/project/github.com/ansible-collections/ibm.qradar) <!--[![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/ibm.qradar)](https://codecov.io/gh/ansible-collections/ibm.qradar)-->
+[![CI](https://zuul-ci.org/gated.svg)](https://dashboard.zuul.ansible.com/t/ansible/project/github.com/ansible-collections/ibm.qradar) <!--[![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/vyos)](https://codecov.io/gh/ansible-collections/ibm.qradar)-->
+[![Codecov](https://codecov.io/gh/ansible-collections/ibm.qradar/branch/main/graph/badge.svg)](https://codecov.io/gh/ansible-collections/ibm.qradar)
+[![CI](https://github.com/ansible-collections/ibm.qradar/actions/workflows/tests.yml/badge.svg?branch=main&event=schedule)](https://github.com/ansible-collections/ibm.qradar/actions/workflows/tests.yml)
 
 This is the [Ansible
 Collection](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html)
@@ -18,6 +20,8 @@ and provide feedback about.
 
 This collection has been tested against following Ansible versions: **>=2.9.10**.
 
+For collections that support Ansible 2.9, please ensure you update your `network_os` to use the
+fully qualified collection name (for example, `cisco.ios.ios`).
 Plugins and modules within a collection may be tested with only specific Ansible versions.
 A collection may contain metadata that identifies these versions.
 PEP440 is the schema used to describe the versions of Ansible.
@@ -72,8 +76,8 @@ qradar.example.com
 ansible_network_os=ibm.qradar.qradar
 ansible_user=admin
 ansible_httpapi_pass=SuperSekretPassword
-ansible_httpapi_use_ssl=yes
-ansible_httpapi_validate_certs=yes
+ansible_httpapi_use_ssl=true
+ansible_httpapi_validate_certs=true
 ansible_connection=httpapi
 ```
 

@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -113,10 +114,10 @@ EXAMPLES = """
     var: offense_list
 """
 
-from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils._text import to_text
-
+from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six.moves.urllib.parse import quote
+
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
     QRadarRequest,
     find_dict_in_list,
@@ -125,7 +126,6 @@ from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
 
 
 def main():
-
     argspec = dict(
         id=dict(required=False, type="int"),
         name=dict(required=False, type="str"),
@@ -158,7 +158,7 @@ def main():
 
     if module.params["id"]:
         code, offenses = qradar_request.get(
-            "/api/siem/offenses/{0}".format(module.params["id"])
+            "/api/siem/offenses/{0}".format(module.params["id"]),
         )
 
     else:
@@ -166,43 +166,45 @@ def main():
 
         if module.params["status"]:
             query_strs.append(
-                quote("status={0}".format(to_text(module.params["status"])))
+                quote("status={0}".format(to_text(module.params["status"]))),
             )
 
         if module.params["assigned_to"]:
             query_strs.append(
-                quote("assigned_to={0}".format(module.params["assigned_to"]))
+                quote("assigned_to={0}".format(module.params["assigned_to"])),
             )
 
         if module.params["closing_reason_id"]:
             query_strs.append(
                 quote(
                     "closing_reason_id={0}".format(
-                        module.params["closing_reason_id"]
-                    )
-                )
+                        module.params["closing_reason_id"],
+                    ),
+                ),
             )
 
         if module.params["follow_up"] is not None:
             query_strs.append(
-                quote("follow_up={0}".format(module.params["follow_up"]))
+                quote("follow_up={0}".format(module.params["follow_up"])),
             )
 
         if module.params["protected"] is not None:
             query_strs.append(
-                quote("protected={0}".format(module.params["protected"]))
+                quote("protected={0}".format(module.params["protected"])),
             )
 
         if query_strs:
             code, offenses = qradar_request.get(
-                "/api/siem/offenses?filter={0}".format("&".join(query_strs))
+                "/api/siem/offenses?filter={0}".format("&".join(query_strs)),
             )
         else:
             code, offenses = qradar_request.get("/api/siem/offenses")
 
         if module.params["name"]:
             named_offense = find_dict_in_list(
-                offenses, "description", module.params["name"]
+                offenses,
+                "description",
+                module.params["name"],
             )
             if named_offense:
                 offenses = named_offense

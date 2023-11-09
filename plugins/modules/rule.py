@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -57,17 +58,15 @@ EXAMPLES = """
     state: enabled
 """
 
-from ansible.module_utils.basic import AnsibleModule
-
-from ansible.module_utils.six.moves.urllib.parse import quote
-from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
-    QRadarRequest,
-)
 import json
+
+from ansible.module_utils.basic import AnsibleModule
+from ansible.module_utils.six.moves.urllib.parse import quote
+
+from ansible_collections.ibm.qradar.plugins.module_utils.qradar import QRadarRequest
 
 
 def main():
-
     argspec = dict(
         id=dict(required=False, type="int"),
         name=dict(required=False, type="str"),
@@ -98,14 +97,14 @@ def main():
 
     if module.params["id"]:
         code, module.params["rule"] = qradar_request.get(
-            "/api/analytics/rules/{0}".format(module.params["id"])
+            "/api/analytics/rules/{0}".format(module.params["id"]),
         )
 
     elif module.params["name"]:
         code, rules = qradar_request.get(
             "/api/analytics/rules?filter={0}".format(
-                quote('"{0}"'.format(module.params["name"]))
-            )
+                quote('"{0}"'.format(module.params["name"])),
+            ),
         )
         if rules:
             module.params["rule"] = rules[0]
@@ -118,7 +117,7 @@ def main():
                 if module.params["id"]:
                     module.exit_json(
                         msg="No change needed for rule ID: {0}".format(
-                            module.params["id"]
+                            module.params["id"],
                         ),
                         qradar_return_data={},
                         changed=False,
@@ -126,7 +125,7 @@ def main():
                 if module.params["name"]:
                     module.exit_json(
                         msg="Successfully enabled rule named: {0}".format(
-                            module.params["name"]
+                            module.params["name"],
                         ),
                         qradar_return_data={},
                         changed=False,
@@ -137,14 +136,14 @@ def main():
 
                 qradar_return_data = qradar_request.post_by_path(
                     "api/analytics/rules/{0}".format(
-                        module.params["rule"]["id"]
+                        module.params["rule"]["id"],
                     ),
                     data=json.dumps(module.params["rule"]),
                 )
                 if module.params["id"]:
                     module.exit_json(
                         msg="Successfully enabled rule ID: {0}".format(
-                            module.params["id"]
+                            module.params["id"],
                         ),
                         qradar_return_data=qradar_return_data,
                         changed=True,
@@ -152,7 +151,7 @@ def main():
                 if module.params["name"]:
                     module.exit_json(
                         msg="Successfully enabled rule named: {0}".format(
-                            module.params["name"]
+                            module.params["name"],
                         ),
                         qradar_return_data=qradar_return_data,
                         changed=True,
@@ -161,14 +160,14 @@ def main():
             if module.params["id"]:
                 module.fail_json(
                     msg="Unable to find rule ID: {0}".format(
-                        module.params["id"]
-                    )
+                        module.params["id"],
+                    ),
                 )
             if module.params["name"]:
                 module.fail_json(
                     msg='Unable to find rule named: "{0}"'.format(
-                        module.params["name"]
-                    )
+                        module.params["name"],
+                    ),
                 )
 
     elif module.params["state"] == "disabled":
@@ -178,7 +177,7 @@ def main():
                 if module.params["id"]:
                     module.exit_json(
                         msg="No change needed for rule ID: {0}".format(
-                            module.params["id"]
+                            module.params["id"],
                         ),
                         qradar_return_data={},
                         changed=False,
@@ -186,7 +185,7 @@ def main():
                 if module.params["name"]:
                     module.exit_json(
                         msg="Successfully enabled rule named: {0}".format(
-                            module.params["name"]
+                            module.params["name"],
                         ),
                         qradar_return_data={},
                         changed=False,
@@ -197,14 +196,14 @@ def main():
 
                 qradar_return_data = qradar_request.post_by_path(
                     "api/analytics/rules/{0}".format(
-                        module.params["rule"]["id"]
+                        module.params["rule"]["id"],
                     ),
                     data=json.dumps(module.params["rule"]),
                 )
                 if module.params["id"]:
                     module.exit_json(
                         msg="Successfully disabled rule ID: {0}".format(
-                            module.params["id"]
+                            module.params["id"],
                         ),
                         qradar_return_data=qradar_return_data,
                         changed=True,
@@ -212,7 +211,7 @@ def main():
                 if module.params["name"]:
                     module.exit_json(
                         msg="Successfully disabled rule named: {0}".format(
-                            module.params["name"]
+                            module.params["name"],
                         ),
                         qradar_return_data=qradar_return_data,
                         changed=True,
@@ -221,25 +220,25 @@ def main():
             if module.params["id"]:
                 module.fail_json(
                     msg="Unable to find rule ID: {0}".format(
-                        module.params["id"]
-                    )
+                        module.params["id"],
+                    ),
                 )
             if module.params["name"]:
                 module.fail_json(
                     msg='Unable to find rule named: "{0}"'.format(
-                        module.params["name"]
-                    )
+                        module.params["name"],
+                    ),
                 )
 
     elif module.params["state"] == "absent":
         if module.params["rule"]:
             code, qradar_return_data = qradar_request.delete(
-                "/api/analytics/rules/{0}".format(module.params["rule"]["id"])
+                "/api/analytics/rules/{0}".format(module.params["rule"]["id"]),
             )
             if module.params["id"]:
                 module.exit_json(
                     msg="Successfully deleted rule ID: {0}".format(
-                        module.params["id"]
+                        module.params["id"],
                     ),
                     qradar_return_data=qradar_return_data,
                     changed=True,
@@ -247,7 +246,7 @@ def main():
             if module.params["name"]:
                 module.exit_json(
                     msg="Successfully deleted rule named: {0}".format(
-                        module.params["name"]
+                        module.params["name"],
                     ),
                     qradar_return_data=qradar_return_data,
                     changed=True,

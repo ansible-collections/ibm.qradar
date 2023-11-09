@@ -23,26 +23,27 @@ The module file for qradar_log_sources_management
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
-from copy import copy
 import json
-from ansible.plugins.action import ActionBase
+
+from copy import copy
+
 from ansible.errors import AnsibleActionFail
 from ansible.module_utils.connection import Connection
 from ansible.module_utils.six.moves.urllib.parse import quote
-
-from ansible_collections.ansible.netcommon.plugins.module_utils.network.common import (
-    utils,
+from ansible.plugins.action import ActionBase
+from ansible_collections.ansible.netcommon.plugins.module_utils.network.common import utils
+from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate import (
+    AnsibleArgSpecValidator,
 )
+
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import (
     QRadarRequest,
     find_dict_in_list,
     list_to_dict,
     remove_unsupported_keys_from_payload_dict,
-)
-from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate import (
-    AnsibleArgSpecValidator,
 )
 from ansible_collections.ibm.qradar.plugins.modules.qradar_log_sources_management import (
     DOCUMENTATION,
@@ -55,11 +56,13 @@ class ActionModule(ActionBase):
     def __init__(self, *args, **kwargs):
         super(ActionModule, self).__init__(*args, **kwargs)
         self._result = None
-        self.api_object = (
-            "/api/config/event_sources/log_source_management/log_sources"
+        self.api_object = "/api/config/event_sources/log_source_management/log_sources"
+        self.api_object_types = (
+            "/api/config/event_sources/log_source_management/log_source_types?filter="
         )
-        self.api_object_types = "/api/config/event_sources/log_source_management/log_source_types?filter="
-        self.api_object_search = "/api/config/event_sources/log_source_management/log_sources?filter="
+        self.api_object_search = (
+            "/api/config/event_sources/log_source_management/log_sources?filter="
+        )
         self.api_return = "log_sources_management"
         self.module_return = "qradar_log_sources_management"
         self.supported_params = [
@@ -98,9 +101,8 @@ class ActionModule(ActionBase):
     def set_log_source_values(self, qradar_request, config_params):
         # find log source types details
         if config_params.get("type_name"):
-
             api_object = self.api_object_types + "{0}".format(
-                quote('name="{0}"'.format(config_params["type_name"]))
+                quote('name="{0}"'.format(config_params["type_name"])),
             )
             code, log_source_type_found = qradar_request.get(api_object)
         if config_params.get("type_id"):
@@ -112,7 +114,7 @@ class ActionModule(ActionBase):
             config_params.pop("type_name")
         else:
             raise AnsibleActionFail(
-                "Incompatible type provided, please consult QRadar Documentation for Log Source Types!"
+                "Incompatible type provided, please consult QRadar Documentation for Log Source Types!",
             )
 
         if log_source_type_found:
@@ -124,7 +126,7 @@ class ActionModule(ActionBase):
                 )
                 if not found_dict_in_list:
                     config_params.fail_json(
-                        msg="Incompatible protocol_type_id provided, please consult QRadar Documentation for Log Source Types"
+                        msg="Incompatible protocol_type_id provided, please consult QRadar Documentation for Log Source Types",
                     )
             elif log_source_type_found[0].get("protocol_types"):
                 # Set it to the default as provided by the QRadar Instance
@@ -142,27 +144,29 @@ class ActionModule(ActionBase):
                     "id": config_params["protocol_type_id"],
                     "name": "identifier",
                     "value": config_params["identifier"],
-                }
+                },
             ]
             config_params.pop("identifier")
         return config_params
 
     def search_for_resource_name(
-        self, qradar_request, search_resource_by_names=None
+        self,
+        qradar_request,
+        search_resource_by_names=None,
     ):
         search_result = []
         if isinstance(search_resource_by_names, list):
             for each in search_resource_by_names:
                 each = utils.remove_empties(each)
                 query_api_object = self.api_object_search + "{0}".format(
-                    quote('name="{0}"'.format(each["name"]))
+                    quote('name="{0}"'.format(each["name"])),
                 )
                 code, log_source_exists = qradar_request.get(query_api_object)
                 if log_source_exists and (code >= 200 and code < 300):
                     search_result.append(log_source_exists[0])
         elif isinstance(search_resource_by_names, str):
             query_api_object = self.api_object_search + "{0}".format(
-                quote('name="{0}"'.format(search_resource_by_names))
+                quote('name="{0}"'.format(search_resource_by_names)),
             )
             code, log_source_exists = qradar_request.get(query_api_object)
             if log_source_exists and (code >= 200 and code < 300):
@@ -182,12 +186,13 @@ class ActionModule(ActionBase):
         for each in module_config_params:
             each = utils.remove_empties(each)
             log_source_exists = self.search_for_resource_name(
-                qradar_request, each["name"]
+                qradar_request,
+                each["name"],
             )
             if log_source_exists:
                 before.append(log_source_exists)
                 query_object = self.api_object + "/{0}".format(
-                    log_source_exists["id"]
+                    log_source_exists["id"],
                 )
                 code, qradar_return_data = qradar_request.delete(query_object)
                 if code >= 200 and code < 300:
@@ -207,7 +212,8 @@ class ActionModule(ActionBase):
             each = utils.remove_empties(each)
             each = self.set_log_source_values(conn_request, each)
             search_result = self.search_for_resource_name(
-                conn_request, each["name"]
+                conn_request,
+                each["name"],
             )
             if search_result:
                 if search_result["name"] == each["name"]:
@@ -219,15 +225,15 @@ class ActionModule(ActionBase):
                 if diff:
                     if self._task.args["state"] == "merged":
                         each = utils.remove_empties(
-                            utils.dict_merge(search_result, each)
+                            utils.dict_merge(search_result, each),
                         )
                         temp_request_param.append(each)
                     elif self._task.args["state"] == "replaced":
                         query_object = self.api_object + "/{0}".format(
-                            search_result["id"]
+                            search_result["id"],
                         )
                         code, qradar_return_data = conn_request.delete(
-                            query_object
+                            query_object,
                         )
                         temp_request_param.append(each)
                 else:
@@ -254,7 +260,7 @@ class ActionModule(ActionBase):
                     "Failed with http_response: {0} and message: {1}".format(
                         response["http_response"]["message"],
                         response["message"],
-                    )
+                    ),
                 )
             config.update({"before": before, "after": after})
         else:
@@ -266,10 +272,9 @@ class ActionModule(ActionBase):
         self._supports_check_mode = True
         self._result = super(ActionModule, self).run(tmp, task_vars)
         if self._task.args.get("config"):
-            self._task.args[
-                "config"
-            ] = remove_unsupported_keys_from_payload_dict(
-                self._task.args["config"], self.supported_params
+            self._task.args["config"] = remove_unsupported_keys_from_payload_dict(
+                self._task.args["config"],
+                self.supported_params,
             )
             self._check_argspec()
         if self._result.get("failed"):
@@ -279,20 +284,19 @@ class ActionModule(ActionBase):
         if self._task.args["state"] == "gathered":
             if self._task.args.get("config"):
                 self._result["gathered"] = self.search_for_resource_name(
-                    conn_request, self._task.args["config"]
+                    conn_request,
+                    self._task.args["config"],
                 )
             else:
                 self._result["gathered"] = conn_request.get(self.api_object)
-        elif (
-            self._task.args["state"] == "merged"
-            or self._task.args["state"] == "replaced"
-        ):
+        elif self._task.args["state"] == "merged" or self._task.args["state"] == "replaced":
             if self._task.args.get("config"):
                 (
                     self._result[self.module_return],
                     self._result["changed"],
                 ) = self.configure_module_api(
-                    conn_request, self._task.args["config"]
+                    conn_request,
+                    self._task.args["config"],
                 )
         elif self._task.args["state"] == "deleted":
             if self._task.args.get("config"):
@@ -300,7 +304,8 @@ class ActionModule(ActionBase):
                     self._result[self.module_return],
                     self._result["changed"],
                 ) = self.delete_module_api_config(
-                    conn_request, self._task.args["config"]
+                    conn_request,
+                    self._task.args["config"],
                 )
 
         return self._result

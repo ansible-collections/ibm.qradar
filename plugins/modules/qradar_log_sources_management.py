@@ -4,6 +4,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -253,7 +254,7 @@ EXAMPLES = """
       - name: "Apache HTTP Server logs"
         type_name: "Apache HTTP Server"
         description: "REPLACED Apache HTTP Server remote logs from rsyslog"
-        identifier:  "192.0.2.1"
+        identifier: "192.0.2.1"
 
 # RUN output:
 # -----------
