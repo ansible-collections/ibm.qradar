@@ -63,10 +63,10 @@ releases:
     modules:
       - description: Qradar Analytics Rules Management resource module
         name: qradar_analytics_rules
-        namespace: private.var.folders._0.m716s5gx1g3d5j1dw_s2w1ph0000gn.T.antsibull-changelog9yvlq4ax.collections.ansible_collections.ibm.qradar.plugins.modules
+        namespace: ""
       - description: Qradar Log Sources Management resource module
         name: qradar_log_sources_management
-        namespace: private.var.folders._0.m716s5gx1g3d5j1dw_s2w1ph0000gn.T.antsibull-changelog9yvlq4ax.collections.ansible_collections.ibm.qradar.plugins.modules
+        namespace: ""
     release_date: "2022-09-07"
   3.0.0:
     changes:
