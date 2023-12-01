@@ -1,3 +1,0 @@
----
-bugfixes:
-  - A bunch of ansible-lint and ansible-test sanity issues have been fixed.

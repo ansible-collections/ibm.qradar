@@ -39,7 +39,6 @@ releases:
   1.0.3:
     changes:
       release_summary: Re-releasing 1.0.2 with updated galaxy file.
-    release_date: "2020-09-1"
   2.0.0:
     changes:
       major_changes:
@@ -58,14 +57,30 @@ releases:
       - add_qradar_analytics_rules_module.yaml
       - add_qradar_log_sources_management_module.yaml
       - doc_update_for_deprecation.yaml
-      - fix_doc_for_sanity_failures.yaml
       - doc_update_with_correct_version.yaml
+      - fix_doc_for_sanity_failures.yaml
       - undo_changelog_override.yaml
     modules:
       - description: Qradar Analytics Rules Management resource module
         name: qradar_analytics_rules
-        namespace: private.var.folders._0.m716s5gx1g3d5j1dw_s2w1ph0000gn.T.antsibull-changelog9yvlq4ax.collections.ansible_collections.ibm.qradar.plugins.modules
+        namespace: ""
       - description: Qradar Log Sources Management resource module
         name: qradar_log_sources_management
-        namespace: private.var.folders._0.m716s5gx1g3d5j1dw_s2w1ph0000gn.T.antsibull-changelog9yvlq4ax.collections.ansible_collections.ibm.qradar.plugins.modules
+        namespace: ""
     release_date: "2022-09-07"
+  3.0.0:
+    changes:
+      bugfixes:
+        - A bunch of ansible-lint and ansible-test sanity issues have been fixed.
+      major_changes:
+        - Bumping `requires_ansible` to `>=2.14.0`, since previous ansible-core versions
+          are EoL now.
+      release_summary:
+        Starting from this release, the minimum `ansible-core` version
+        this collection requires is `2.14.0`. The last known version compatible with
+        ansible-core<2.14 is `v2.1.0`.
+    fragments:
+      - codecov_pr.yml
+      - prep_300.yaml
+      - updates.yaml
+    release_date: "2023-12-01"

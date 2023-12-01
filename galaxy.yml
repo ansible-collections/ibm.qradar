@@ -4,7 +4,7 @@ name: qradar
 authors:
   - Ansible Security Team (https://github.com/ansible-security)
 dependencies:
-  ansible.netcommon: ">=2.5.1"
+  ansible.netcommon: ">=6.0.0"
 description: Ansible Security Collection for IBM Qradar SIEM
 license_file: LICENSE
 tags:
@@ -15,4 +15,4 @@ documentation: https://github.com/ansible-collections/ibm.qradar
 homepage: https://github.com/ansible-collections/ibm.qradar
 issues: https://github.com/ansible-collections/ibm.qradar/issues
 readme: README.md
-version: 2.1.1-devel
+version: 3.0.0
