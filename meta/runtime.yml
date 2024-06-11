@@ -31,4 +31,4 @@ plugin_routing:
       redirect: ibm.qradar.qradar_log_source_management
     log_sources_management:
       redirect: ibm.qradar.qradar_log_sources_management
-requires_ansible: ">=2.14.0"
+requires_ansible: ">=2.15.0"
