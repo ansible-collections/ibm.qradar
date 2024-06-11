@@ -84,3 +84,17 @@ releases:
       - prep_300.yaml
       - updates.yaml
     release_date: "2023-12-01"
+  4.0.0:
+    changes:
+      major_changes:
+        - Bumping `requires_ansible` to `>=2.15.0`, since previous ansible-core versions
+          are EoL now.
+      release_summary:
+        "With this release, the minimum required version of `ansible-core`
+        for this collection is `2.15.0`. The last version known to be compatible with
+        `ansible-core` versions below `2.15` is v3.0.0.
+
+        "
+    fragments:
+      - bump215.yml
+    release_date: "2024-06-11"

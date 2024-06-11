@@ -13,4 +13,4 @@ documentation: https://github.com/ansible-collections/ibm.qradar
 homepage: https://github.com/ansible-collections/ibm.qradar
 issues: https://github.com/ansible-collections/ibm.qradar/issues
 readme: README.md
-version: 3.0.0
+version: 4.0.0
