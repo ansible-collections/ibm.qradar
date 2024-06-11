@@ -4,6 +4,19 @@ IBM Qradar Collection Release Notes
 
 .. contents:: Topics
 
+v4.0.0
+======
+
+Release Summary
+---------------
+
+With this release, the minimum required version of `ansible-core` for this collection is `2.15.0`. The last version known to be compatible with `ansible-core` versions below `2.15` is v3.0.0.
+
+Major Changes
+-------------
+
+- Bumping `requires_ansible` to `>=2.15.0`, since previous ansible-core versions are EoL now.
+
 v3.0.0
 ======
 
@@ -21,7 +34,6 @@ Bugfixes
 --------
 
 - A bunch of ansible-lint and ansible-test sanity issues have been fixed.
-
 
 v2.1.0
 ======
@@ -53,7 +65,7 @@ v1.0.3
 Release Summary
 ---------------
 
-- Re-releasing the 1.0.2 with updated galaxy file
+Re-releasing 1.0.2 with updated galaxy file.
 
 v1.0.2
 ======
@@ -61,7 +73,7 @@ v1.0.2
 Release Summary
 ---------------
 
-- Releasing 1.0.2 with updated changelog.
+Releasing 1.0.2 with updated changelog.
 
 v1.0.1
 ======
@@ -69,7 +81,7 @@ v1.0.1
 Release Summary
 ---------------
 
-- Releasing 1.0.2 with updated Readme file after removing tech preview description
+Removed tech preview from collection Readme file.
 
 v1.0.0
 ======
