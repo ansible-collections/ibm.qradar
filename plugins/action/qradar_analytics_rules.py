@@ -82,6 +82,8 @@ class ActionModule(ActionBase):
         :rtype: A dict
         :returns: dict with module prams transformed having API expected params
         """
+        api_obj_url = None
+
         if search_for_resource.get("id"):
             api_obj_url = self.api_object + "/{0}".format(
                 search_for_resource["id"],
