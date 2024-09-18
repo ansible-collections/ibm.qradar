@@ -26,6 +26,14 @@ and provide feedback about.
 
 For more information about communication, see the [Ansible communication guide](https://docs.ansible.com/ansible/devel/community/communication.html).
 
+## Support
+
+As a Red Hat Ansible [Certified Content](https://catalog.redhat.com/software/search?target_platforms=Red%20Hat%20Ansible%20Automation%20Platform), this collection is entitled to [support](https://access.redhat.com/support/) through [Ansible Automation Platform](https://www.redhat.com/en/technologies/management/ansible) (AAP).
+
+If a support case cannot be opened with Red Hat and the collection has been obtained either from [Galaxy](https://galaxy.ansible.com/ui/) or [GitHub](https://github.com/ansible-collections/ibm.qradar), there is community support available at no charge.
+
+You can join us on [#network:ansible.com](https://matrix.to/#/#network:ansible.com) room or the [Ansible Forum Network Working Group](https://forum.ansible.com/g/network-wg).
+
 <!--start requires_ansible-->
 ## Ansible version compatibility
 
@@ -202,10 +210,6 @@ Please read and familiarize yourself with this document.
 ## Release notes
 
 Release notes are available [here](https://github.com/ansible-collections/ibm.qradar/blob/main/changelogs/CHANGELOG.rst).
-
-## Roadmap
-
-<!-- Optional. Include the roadmap for this collection, and the proposed release/versioning strategy so users can anticipate the upgrade/update cycle. -->
 
 ## More information
 
