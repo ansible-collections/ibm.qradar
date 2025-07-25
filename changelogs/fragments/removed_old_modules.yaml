@@ -1,0 +1,7 @@
+---
+breaking_changes:
+  - "This release removes the deprecated rule, rule_info, and log_source_management modules from this collection in favour of their respective ibm.qradar counterparts."
+removed_features:
+  - "The rule module has been removed with this release."
+  - "The rule_info module has been removed with this release."
+  - "The log_source_management module has been removed with this release."
