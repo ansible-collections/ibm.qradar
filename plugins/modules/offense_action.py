@@ -16,6 +16,9 @@ short_description: Take action on a QRadar Offense
 description:
   - This module allows to assign, protect, follow up, set status, and assign closing reason to QRadar Offenses
 version_added: "1.0.0"
+deprecated:
+  why: The ibm.qradar collection is no longer maintained and supported. The collection will be removed from Ansible Galaxy.
+  removed_at_date: '2027-07-27'
 options:
   id:
     description:

@@ -15,4 +15,23 @@ plugin_routing:
       redirect: ibm.qradar.qradar_analytics_rules
     log_sources_management:
       redirect: ibm.qradar.qradar_log_sources_management
+    deploy:
+      deprecation:
+        removal_date: '2025-12-31'
+        warning_text: Please use `ibm.qradar.deployment` instead.
+
+    offense_action:
+      deprecation:
+        removal_date: '2025-12-31'
+        warning_text: Please use `ibm.qradar.offense_management` instead.
+
+    offense_info:
+      deprecation:
+        removal_date: '2025-12-31'
+        warning_text: Please use `ibm.qradar.offense_facts` instead.
+
+    offense_note:
+      deprecation:
+        removal_date: '2025-12-31'
+        warning_text: Please use `ibm.qradar.offense_note_v2` instead.
 requires_ansible: ">=2.15.0"

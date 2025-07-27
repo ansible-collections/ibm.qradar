@@ -16,6 +16,9 @@ short_description: Create or update a QRadar Offense Note
 description:
   - This module allows to create a QRadar Offense note
 version_added: "1.0.0"
+deprecated:
+  why: The ibm.qradar collection is no longer maintained and supported. The collection will be removed from Ansible Galaxy.
+  removed_at_date: '2027-07-27'
 options:
   id:
     description:

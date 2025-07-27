@@ -16,6 +16,9 @@ short_description: Trigger a qradar configuration deployment
 description:
   - This module allows for INCREMENTAL or FULL deployments
 version_added: "1.0.0"
+deprecated:
+  why: The ibm.qradar collection is no longer maintained and supported. The collection will be removed from Ansible Galaxy.
+  removed_at_date: '2027-07-27'
 options:
   type:
     description:

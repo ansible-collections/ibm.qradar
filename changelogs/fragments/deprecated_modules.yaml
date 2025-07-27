@@ -1,0 +1,5 @@
+---
+deprecated_features:
+  - Deprecated `deploy`, `offense_action`, `offense_info`, `offense_note`, `qradar_analytics_rules`, and `qradar_log_sources_management` modules.
+removed_features:
+  - Removed deprecated `rule`, `rule_info`, and `log_source_management` modules as the deprecation period ended.

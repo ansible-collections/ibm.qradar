@@ -14,6 +14,9 @@ short_description: Qradar Log Sources Management resource module
 description:
   - This module allows for addition, deletion, or modification of Log Sources in QRadar
 version_added: "2.1.0"
+deprecated:
+  why: The ibm.qradar collection is no longer maintained and supported. The collection will be removed from Ansible Galaxy.
+  removed_at_date: '2027-07-27'
 options:
   config:
     description: A dictionary of Qradar Log Sources options
@@ -145,6 +148,9 @@ options:
       - replaced
       - gathered
       - deleted
+
+notes:
+  - DEPRECATED. Use C(ibm.qradar.log_source_v2) module instead.
 
 author: Ansible Security Automation Team (@justjais) <https://github.com/ansible-security>
 """

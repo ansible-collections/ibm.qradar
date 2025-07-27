@@ -16,6 +16,9 @@ short_description: Obtain information about one or many QRadar Offenses, with fi
 description:
   - This module allows to obtain information about one or many QRadar Offenses, with filter options
 version_added: "1.0.0"
+deprecated:
+  why: The ibm.qradar collection is no longer maintained and supported. The collection will be removed from Ansible Galaxy.
+  removed_at_date: '2027-07-27'
 options:
   id:
     description:
