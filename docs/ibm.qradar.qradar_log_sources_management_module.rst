@@ -14,6 +14,13 @@ Version added: 2.1.0
    :local:
    :depth: 1
 
+DEPRECATED
+----------
+:Removed in collection release after 2027-07-27
+:Why: The ibm.qradar collection is no longer maintained and supported. The collection will be removed from Ansible Galaxy.
+:Alternative:
+
+
 
 Synopsis
 --------
@@ -496,6 +503,12 @@ Parameters
     <br/>
 
 
+Notes
+-----
+
+.. note::
+   - DEPRECATED. Use ``ibm.qradar.log_source_v2`` module instead.
+
 
 
 Examples
@@ -914,6 +927,10 @@ Common return values are documented `here <https://docs.ansible.com/ansible/late
 
 Status
 ------
+
+
+- This module will be removed in a release after 2027-07-27. *[deprecated]*
+- For more information see `DEPRECATED`_.
 
 
 Authors
