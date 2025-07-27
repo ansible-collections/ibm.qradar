@@ -16,7 +16,7 @@ Version added: 1.0.0
 
 DEPRECATED
 ----------
-:Removed in collection release after 2027-07-27
+:Removed in collection release after
 :Why: The ibm.qradar collection is no longer maintained and supported. The collection will be removed from Ansible Galaxy.
 :Alternative:
 
@@ -87,7 +87,7 @@ Status
 ------
 
 
-- This module will be removed in a release after 2027-07-27. *[deprecated]*
+- This module will be removed in version 4.0.0. *[deprecated]*
 - For more information see `DEPRECATED`_.
 
 
