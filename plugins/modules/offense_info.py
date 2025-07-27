@@ -12,10 +12,14 @@ __metaclass__ = type
 DOCUMENTATION = """
 ---
 module: offense_info
-short_description: Obtain information about one or many QRadar Offenses, with filter options
+short_description: (deprecated, removed after 2027-07-27) Obtain information about one or many QRadar Offenses, with filter options.
 description:
   - This module allows to obtain information about one or many QRadar Offenses, with filter options
 version_added: "1.0.0"
+deprecated:
+  why: The ibm.qradar collection is deprecated and is no longer maintained.
+  alternative: There is no direct replacement for this module.
+  removed_at_date: "2027-07-27"
 options:
   id:
     description:

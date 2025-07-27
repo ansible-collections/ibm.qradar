@@ -10,10 +10,14 @@ __metaclass__ = type
 DOCUMENTATION = """
 ---
 module: qradar_log_sources_management
-short_description: Qradar Log Sources Management resource module
+short_description: (deprecated, removed after 2027-07-27) Qradar Log Sources Management resource module
 description:
   - This module allows for addition, deletion, or modification of Log Sources in QRadar
 version_added: "2.1.0"
+deprecated:
+  why: The ibm.qradar collection is deprecated and is no longer maintained.
+  alternative: There is no direct replacement for this module.
+  removed_at_date: "2027-07-27"
 options:
   config:
     description: A dictionary of Qradar Log Sources options

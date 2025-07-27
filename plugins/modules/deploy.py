@@ -12,10 +12,14 @@ __metaclass__ = type
 DOCUMENTATION = """
 ---
 module: deploy
-short_description: Trigger a qradar configuration deployment
+short_description: (deprecated, removed after 2027-07-27) Trigger a qradar configuration deployment
 description:
   - This module allows for INCREMENTAL or FULL deployments
 version_added: "1.0.0"
+deprecated:
+  why: The ibm.qradar collection is deprecated and is no longer maintained.
+  alternative: There is no direct replacement for this module.
+  removed_at_date: "2027-07-27"
 options:
   type:
     description:

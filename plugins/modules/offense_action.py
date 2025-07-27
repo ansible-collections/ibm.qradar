@@ -12,10 +12,14 @@ __metaclass__ = type
 DOCUMENTATION = """
 ---
 module: offense_action
-short_description: Take action on a QRadar Offense
+short_description: (deprecated, removed after 2027-07-27) Take action on a QRadar Offense
 description:
   - This module allows to assign, protect, follow up, set status, and assign closing reason to QRadar Offenses
 version_added: "1.0.0"
+deprecated:
+  why: The ibm.qradar collection is deprecated and is no longer maintained.
+  alternative: There is no direct replacement for this module.
+  removed_at_date: "2027-07-27"
 options:
   id:
     description:

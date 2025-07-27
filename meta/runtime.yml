@@ -1,5 +1,30 @@
 ---
 plugin_routing:
+  modules:
+    deploy:
+      deprecation:
+        removal_date: "2027-07-27"
+        warning_text: "The ibm.qradar.deploy module is deprecated because the entire ibm.qradar collection is no longer maintained. It will be removed in a future release after 2027-07-27."
+    offense_action:
+      deprecation:
+        removal_date: "2027-07-27"
+        warning_text: "The ibm.qradar.deploy module is deprecated because the entire ibm.qradar collection is no longer maintained. It will be removed in a future release after 2027-07-27."
+    offense_info:
+      deprecation:
+        removal_date: "2027-07-27"
+        warning_text: "The ibm.qradar.offense_info module is deprecated because the entire ibm.qradar collection is no longer maintained. It will be removed in a future release after 2027-07-27."
+    offense_note:
+      deprecation:
+        removal_date: "2027-07-27"
+        warning_text: "The ibm.qradar.offense_note module is deprecated because the entire ibm.qradar collection is no longer maintained. It will be removed in a future release after 2027-07-27."
+    qradar_analytics_rules:
+      deprecation:
+        removal_date: "2027-07-27"
+        warning_text: "The ibm.qradar.qradar_analytics_rules module is deprecated because the entire ibm.qradar collection is no longer maintained. It will be removed in a future release after 2027-07-27."
+    qradar_log_sources_management:
+      deprecation:
+        removal_date: "2027-07-27"
+        warning_text: "The ibm.qradar.qradar_log_sources_management module is deprecated because the entire ibm.qradar collection is no longer maintained. It will be removed in a future release after 2027-07-27."
   action:
     rule:
       redirect: ibm.qradar.qradar

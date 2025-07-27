@@ -12,10 +12,14 @@ __metaclass__ = type
 DOCUMENTATION = """
 ---
 module: offense_note
-short_description: Create or update a QRadar Offense Note
+short_description: (deprecated, removed after 2027-07-27) Create or update a QRadar Offense Note.
 description:
   - This module allows to create a QRadar Offense note
 version_added: "1.0.0"
+deprecated:
+  why: The ibm.qradar collection is deprecated and is no longer maintained.
+  alternative: There is no direct replacement for this module.
+  removed_at_date: "2027-07-27"
 options:
   id:
     description:
