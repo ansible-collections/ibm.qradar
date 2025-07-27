@@ -15,23 +15,29 @@ plugin_routing:
       redirect: ibm.qradar.qradar_analytics_rules
     log_sources_management:
       redirect: ibm.qradar.qradar_log_sources_management
+  modules:
     deploy:
       deprecation:
-        removal_date: "2025-12-31"
-        warning_text: Please use `ibm.qradar.deployment` instead.
-
+        removal_date: "2027-07-27"
+        warning_text: The ibm.qradar collection is no longer maintained and will be removed from Ansible Galaxy.
     offense_action:
       deprecation:
-        removal_date: "2025-12-31"
-        warning_text: Please use `ibm.qradar.offense_management` instead.
-
+        removal_date: "2027-07-27"
+        warning_text: The ibm.qradar collection is no longer maintained and will be removed from Ansible Galaxy.
     offense_info:
       deprecation:
-        removal_date: "2025-12-31"
-        warning_text: Please use `ibm.qradar.offense_facts` instead.
-
+        removal_date: "2027-07-27"
+        warning_text: The ibm.qradar collection is no longer maintained and will be removed from Ansible Galaxy.
     offense_note:
       deprecation:
-        removal_date: "2025-12-31"
-        warning_text: Please use `ibm.qradar.offense_note_v2` instead.
+        removal_date: "2027-07-27"
+        warning_text: The ibm.qradar collection is no longer maintained and will be removed from Ansible Galaxy.
+    qradar_analytics_rules:
+      deprecation:
+        removal_date: "2027-07-27"
+        warning_text: The ibm.qradar collection is no longer maintained and will be removed from Ansible Galaxy.
+    qradar_log_sources_management:
+      deprecation:
+        removal_date: "2027-07-27"
+        warning_text: The ibm.qradar collection is no longer maintained and will be removed from Ansible Galaxy.
 requires_ansible: ">=2.15.0"
