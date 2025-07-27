@@ -18,7 +18,7 @@ description:
 version_added: "1.0.0"
 deprecated:
   why: The ibm.qradar collection is no longer maintained and supported. The collection will be removed from Ansible Galaxy.
-  removed_in: '4.0.0'
+  removed_in: '4.0.1'
 options:
   type:
     description:

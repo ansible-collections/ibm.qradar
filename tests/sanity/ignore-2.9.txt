@@ -4,3 +4,13 @@ plugins/modules/rule.py validate-modules:deprecation-mismatch
 plugins/modules/rule.py validate-modules:invalid-documentation
 plugins/modules/rule_info.py validate-modules:deprecation-mismatch
 plugins/modules/rule_info.py validate-modules:invalid-documentation
+plugins/modules/deploy.py validate-modules:deprecation-mismatch
+plugins/modules/deploy.py validate-modules:invalid-documentation
+plugins/modules/offense_action.py validate-modules:deprecation-mismatch
+plugins/modules/offense_action.py validate-modules:invalid-documentation
+plugins/modules/offense_info.py validate-modules:deprecation-mismatch
+plugins/modules/offense_info.py validate-modules:invalid-documentation
+plugins/modules/offense_note.py validate-modules:deprecation-mismatch
+plugins/modules/offense_note.py validate-modules:invalid-documentation
+plugins/modules/qradar_analytics_rules.py validate-modules:deprecation-mismatch
+plugins/modules/qradar_analytics_rules.py validate-modules:invalid-documentation
