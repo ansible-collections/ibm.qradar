@@ -16,7 +16,7 @@ description:
 version_added: "2.1.0"
 deprecated:
   why: The ibm.qradar collection is no longer maintained and supported. The collection will be removed from Ansible Galaxy.
-  removed_at_date: '2027-07-27'
+  removed_in: '4.0.0'
 options:
   config:
     description: A dictionary of Qradar Analytics Rules options
