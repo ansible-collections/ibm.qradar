@@ -54,12 +54,12 @@ Name | Description
 ### Modules
 Name | Description
 --- | ---
-[ibm.qradar.deploy](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.deploy_module.rst)|Trigger a qradar configuration deployment
-[ibm.qradar.offense_action](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.offense_action_module.rst)|Take action on a QRadar Offense
-[ibm.qradar.offense_info](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.offense_info_module.rst)|Obtain information about one or many QRadar Offenses, with filter options
-[ibm.qradar.offense_note](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.offense_note_module.rst)|Create or update a QRadar Offense Note
-[ibm.qradar.qradar_analytics_rules](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.qradar_analytics_rules_module.rst)|Qradar Analytics Rules Management resource module
-[ibm.qradar.qradar_log_sources_management](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.qradar_log_sources_management_module.rst)|Qradar Log Sources Management resource module
+[ibm.qradar.deploy](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.deploy_module.rst)|(deprecated, removed after 2027-07-27) Trigger a qradar configuration deployment
+[ibm.qradar.offense_action](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.offense_action_module.rst)|(deprecated, removed after 2027-07-27) Take action on a QRadar Offense
+[ibm.qradar.offense_info](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.offense_info_module.rst)|(deprecated, removed after 2027-07-27) Obtain information about one or many QRadar Offenses, with filter options.
+[ibm.qradar.offense_note](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.offense_note_module.rst)|(deprecated, removed after 2027-07-27) Create or update a QRadar Offense Note.
+[ibm.qradar.qradar_analytics_rules](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.qradar_analytics_rules_module.rst)|(deprecated, removed after 2027-07-27) Qradar Analytics Rules Management resource module.
+[ibm.qradar.qradar_log_sources_management](https://github.com/ansible-collections/ibm.qradar/blob/main/docs/ibm.qradar.qradar_log_sources_management_module.rst)|(deprecated, removed after 2027-07-27) Qradar Log Sources Management resource module
 
 <!--end collection content-->
 

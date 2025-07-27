@@ -5,7 +5,7 @@
 ibm.qradar.offense_note
 ***********************
 
-**Create or update a QRadar Offense Note**
+**(deprecated, removed after 2027-07-27) Create or update a QRadar Offense Note.**
 
 
 Version added: 1.0.0
@@ -13,6 +13,13 @@ Version added: 1.0.0
 .. contents::
    :local:
    :depth: 1
+
+DEPRECATED
+----------
+:Removed in collection release after 2027-07-27
+:Why: The ibm.qradar collection is deprecated and is no longer maintained.
+:Alternative: There is no direct replacement for this module.
+
 
 
 Synopsis
@@ -86,6 +93,10 @@ Examples
 
 Status
 ------
+
+
+- This module will be removed in a release after 2027-07-27. *[deprecated]*
+- For more information see `DEPRECATED`_.
 
 
 Authors
