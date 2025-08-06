@@ -1,10 +1,39 @@
 # IBM QRadar Ansible Collection
 
-[![CI](https://zuul-ci.org/gated.svg)](https://dashboard.zuul.ansible.com/t/ansible/project/github.com/ansible-collections/ibm.qradar)
+[![CI](https://zuul-ci.org/gated.svg)](https://dashboard.zuul.ansible.com/t/ansible/project/github.com/ansible-collections/ibm.qradar) <!--[![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/vyos)](https://codecov.io/gh/ansible-collections/ibm.qradar)-->
+⚠️ **The ibm.qradar collection has been [deprecated]() and will reach it's end-of-life on December, 2026. We are no longer accepting new pull requests, except for ones that fix critical bugs or security vulnerabilities. Compatibility with ansible-core>2.17 is not guaranteed.**
+[![Codecov](https://codecov.io/gh/ansible-collections/ibm.qradar/branch/main/graph/badge.svg)](https://codecov.io/gh/ansible-collections/ibm.qradar)
+[![CI](https://github.com/ansible-collections/ibm.qradar/actions/workflows/tests.yml/badge.svg?branch=main&event=schedule)](https://github.com/ansible-collections/ibm.qradar/actions/workflows/tests.yml)
 
-⚠️ **The ibm.qradar collection has been [deprecated](https://forum.ansible.com/t/the-bullhorn-123/2568#project-updates-8) and will reach it's end-of-life on December, 2025. We are no longer accepting new pull requests, except for ones that fix critical bugs or security vulnerabilities. Compatibility with ansible-core>2.17 is not guaranteed.**
+This is the [Ansible
+Collection](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html)
+provided by the [Ansible Security Automation
+Team](https://github.com/ansible-security) for automating actions in [IBM
+QRadar SIEM](https://www.ibm.com/us-en/marketplace/ibm-qradar-siem).
 
-The IBM QRadar collection includes a variety of Ansible content to help automate security operations and SIEM management with IBM QRadar.
+This Collection is meant for distribution through
+[Ansible Galaxy](https://galaxy.ansible.com/) as is available for all
+[Ansible](https://github.com/ansible/ansible) users to utilize, contribute to,
+and provide feedback about.
+
+## Communication
+
+* Join the Ansible forum:
+  * [Get Help](https://forum.ansible.com/c/help/6): get help or help others.
+  * [Social Spaces](https://forum.ansible.com/c/chat/4): gather and interact with fellow enthusiasts.
+  * [News & Announcements](https://forum.ansible.com/c/news/5): track project-wide announcements including social events.
+
+* The Ansible [Bullhorn newsletter](https://docs.ansible.com/ansible/devel/community/communication.html#the-bullhorn): used to announce releases and important changes.
+
+For more information about communication, see the [Ansible communication guide](https://docs.ansible.com/ansible/devel/community/communication.html).
+
+## Support
+
+As a Red Hat Ansible [Certified Content](https://catalog.redhat.com/software/search?target_platforms=Red%20Hat%20Ansible%20Automation%20Platform), this collection is entitled to [support](https://access.redhat.com/support/) through [Ansible Automation Platform](https://www.redhat.com/en/technologies/management/ansible) (AAP).
+
+If a support case cannot be opened with Red Hat and the collection has been obtained either from [Galaxy](https://galaxy.ansible.com/ui/) or [GitHub](https://github.com/ansible-collections/ibm.qradar), there is community support available at no charge.
+
+You can join us on [#network:ansible.com](https://matrix.to/#/#network:ansible.com) room or the [Ansible Forum Network Working Group](https://forum.ansible.com/g/network-wg).
 
 <!--start requires_ansible-->
 ## Ansible version compatibility
@@ -16,17 +45,7 @@ A collection may contain metadata that identifies these versions.
 PEP440 is the schema used to describe the versions of Ansible.
 <!--end requires_ansible-->
 
-## Support
-
-As a Red Hat Ansible [Certified Content](https://catalog.redhat.com/software/search?target_platforms=Red%20Hat%20Ansible%20Automation%20Platform), this collection is entitled to [support](https://access.redhat.com/support/) through [Ansible Automation Platform](https://www.redhat.com/en/technologies/management/ansible) (AAP).
-
-If a support case cannot be opened with Red Hat and the collection has been obtained either from [Galaxy](https://galaxy.ansible.com/ui/) or [GitHub](https://github.com/ansible-collections/ibm.qradar), there is community support available at no charge.
-
-You can join us on [#network:ansible.com](https://matrix.to/#/#network:ansible.com) room or the [Ansible Forum Network Working Group](https://forum.ansible.com/g/network-wg).
-
-## Included content
-
-Click the ``Content`` button to see the list of content included in this collection.
+## Collection Content
 <!--start collection content-->
 ### Httpapi plugins
 Name | Description
@@ -62,7 +81,7 @@ collections:
   - name: ibm.qradar
 ```
 
-## Using this collection
+## Using the IBM QRadar Ansible Collection
 
 An example for using this collection to manage a log source with [IBM QRadar](https://www.ibm.com/security/security-intelligence/qradar) is as follows.
 
@@ -161,7 +180,6 @@ specifying at the Play level.
       collections:
         - ibm.qradar
 ```
-
 
 ### Directory Structure
 
