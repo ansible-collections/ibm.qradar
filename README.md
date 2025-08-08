@@ -1,6 +1,6 @@
 # IBM QRadar Ansible Collection
 
-⚠️ **The ibm.qradar collection has been [deprecated]() and will reach it's end-of-life on December, 2026. We are no longer accepting new pull requests, except for ones that fix critical bugs or security vulnerabilities. Compatibility with ansible-core>2.17 is not guaranteed.**
+⚠️ **The ibm.qradar collection has been [deprecated](https://forum.ansible.com/t/deprecation-announcement-for-the-ibm-qradar-ansible-collection/44248) and will reach it's end-of-life on December, 2026. We are no longer accepting new pull requests, except for ones that fix critical bugs or security vulnerabilities. Compatibility with ansible-core>2.17 is not guaranteed.**
 
 [![CI](https://zuul-ci.org/gated.svg)](https://dashboard.zuul.ansible.com/t/ansible/project/github.com/ansible-collections/ibm.qradar) <!--[![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/vyos)](https://codecov.io/gh/ansible-collections/ibm.qradar)-->
 [![Codecov](https://codecov.io/gh/ansible-collections/ibm.qradar/branch/main/graph/badge.svg)](https://codecov.io/gh/ansible-collections/ibm.qradar)
