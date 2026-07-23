@@ -12,11 +12,10 @@ import json
 
 from copy import copy
 from ssl import CertificateError
+from urllib.parse import quote_plus
 
 from ansible.module_utils._text import to_text
 from ansible.module_utils.connection import Connection, ConnectionError
-from ansible.module_utils.six import iteritems
-from ansible.module_utils.six.moves.urllib.parse import quote_plus
 
 
 BASE_HEADERS = {"Content-Type": "application/json", "Version": "9.1"}
@@ -89,7 +88,7 @@ def list_to_dict(input_dict):
     :returns: dict with converted all list to dict type
     """
     if isinstance(input_dict, dict):
-        for k, v in iteritems(input_dict):
+        for k, v in input_dict.items():
             if isinstance(v, dict):
                 list_to_dict(v)
             elif isinstance(v, list):
