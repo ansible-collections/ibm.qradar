@@ -60,8 +60,9 @@ EXAMPLES = """
 
 import json
 
+from urllib.parse import quote
+
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.six.moves.urllib.parse import quote
 
 from ansible_collections.ibm.qradar.plugins.module_utils.qradar import QRadarRequest
 

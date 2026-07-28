@@ -29,10 +29,10 @@ __metaclass__ = type
 import json
 
 from copy import copy
+from urllib.parse import quote
 
 from ansible.errors import AnsibleActionFail
 from ansible.module_utils.connection import Connection
-from ansible.module_utils.six.moves.urllib.parse import quote
 from ansible.plugins.action import ActionBase
 from ansible_collections.ansible.netcommon.plugins.module_utils.network.common import utils
 from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate import (
