@@ -18,7 +18,6 @@
 
 from __future__ import absolute_import, division, print_function
 
-
 __metaclass__ = type
 
 import tempfile
@@ -30,7 +29,6 @@ from ansible.playbook.task import Task
 from ansible.template import Templar
 
 from ansible_collections.ibm.qradar.plugins.action.qradar_analytics_rules import ActionModule
-
 
 RESPONSE_PAYLOAD = {
     "average_capacity": "null",
