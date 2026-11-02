@@ -23,7 +23,6 @@ The module file for qradar_log_sources_management
 
 from __future__ import absolute_import, division, print_function
 
-
 __metaclass__ = type
 
 import json
